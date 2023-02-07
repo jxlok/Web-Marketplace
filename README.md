@@ -1,3 +1,2 @@
-# AI Model Marketplace
-AI Model Marketplace
+# AI Model Marketplace - Pawn
 Web Development Group Project
