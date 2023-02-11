@@ -1,0 +1,95 @@
+html{
+    margin: 0;
+}
+
+
+header{
+    padding:30px;
+    border-bottom: 1px solid black
+}
+
+footer{
+    padding: 30px;
+    border-top: 1px solid black;
+}
+.analytics-col{
+    padding: 0;
+
+}
+
+#center-info{
+    margin: 10px;
+    border: 1px solid black;
+}
+
+#data-analytics{
+    border-bottom: 1px solid black;
+}
+
+#graph{
+    height: 50vh;
+    text-align: center;
+    border-right: 1px solid black
+}
+
+#total-sales{
+    height: 25vh;
+    border-bottom: 1px solid black;
+    text-align: center
+}
+
+#top-sellers{
+    height: 12.5vh;
+    border-bottom: 1px solid black;
+    text-align: center
+}
+
+#your-balance{
+    height: 12.5vh;
+    text-align: center
+}
+
+#inner-right-statistics{
+    padding: 0;
+}
+
+#order-history-header{
+    padding: 0;
+    font-size: 15px;
+}
+
+#order-history-header>ul{
+    list-style-type: none;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    padding: 0;
+}
+
+#order-history-header li, .order span{
+    display: inline-block;
+    border-right: 1px solid black;
+    padding: 0;
+    margin: 0;
+}
+
+#order_ID, .first-col{
+    width: 10%;
+}
+
+#item, .second-col{
+    width: 58%;
+}
+
+#total, .third-col{
+    width: 15%;
+}
+
+#date, .fourth-col{
+    width: 15%;
+}
+
+.order{
+    border-bottom: 1px solid gray;
+    width: 100%;
+    padding: 10px 0;
+}
