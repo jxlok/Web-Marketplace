@@ -14,12 +14,11 @@ footer{
 }
 .analytics-col{
     padding: 0;
-
 }
 
 #center-info{
-    margin: 10px;
     border: 1px solid black;
+    margin:10px 0;
 }
 
 #data-analytics{
@@ -92,4 +91,108 @@ footer{
     border-bottom: 1px solid gray;
     width: 100%;
     padding: 10px 0;
+}
+
+#tabs{
+    top: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+#tabs ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+#tabs li{
+    text-align: center;
+    padding: 10px;
+    border: 1px solid silver;
+    width: 100%;
+    cursor: pointer;
+}
+
+#items-for-sale{
+    margin: 10px 0;
+}
+
+.item{
+    width: 100%;
+    height: 150px;
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    padding: 0;
+    display: table;
+}
+
+.item-name{
+    display: inline-flex;
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid gray;
+    padding: 10px;
+    margin: 0;
+    justify-content: center;
+}
+
+.item-desc{
+    display: inline-flex;
+    width: 40%;
+    height: 100%;
+    border-right: 1px solid gray;
+    margin: 0;
+    padding: 10px;
+}
+
+.item-desc p{
+    text-overflow: fade;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin: 0;
+
+}
+
+.item-price{
+    width: 10%;
+    margin: 0;
+    height: 100%;
+    display: inline-flex;
+    border-right: 1px solid gray;
+    padding: 10px;
+    justify-content: center;
+}
+
+.item-quantity{
+    width: 10%;
+    height: 100%;
+    display: inline-flex;
+    border-right: 1px solid gray;
+    padding: 10px;
+    justify-content: center;
+    margin: 0;
+
+}
+
+.item-edit-icon{
+    width: 10%;
+    height: 100%;
+    display: inline-flex;
+    border-right: 1px solid gray;
+    padding: 10px;
+    justify-content: center;
+    margin: 0;
+
+}
+
+.item-delete-icon{
+    width: 10%;
+    height: 100%;
+    display: inline-flex;
+    padding: 10px;
+    justify-content: center;
+    color: red;
+    margin: 0;
+
 }

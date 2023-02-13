@@ -6,16 +6,20 @@
     <link rel="stylesheet" href="jason-stylesheet.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="admin-script.js"></script>
 </head>
 <body>
 <header><h3>Substitute Header</h3></header>
 
-<div class="container-fluid">
+<div class="container-fluid" style="width: 100%">
 
     <div class="row">
         <!--tabs on left-->
-        <div class="col-sm-1">
-
+        <div id="tabs" class="col-sm-1">
+            <ul>
+                <li onclick="analytics_tab()">Analytics & Orders</li>
+                <li onclick="items_tab()">Items for sale</li>
+            </ul>
         </div>
         <div id="center-info" class="col-sm-10">
             <div id="data-analytics" class="row">
@@ -36,7 +40,7 @@
             </div>
 
             <!--Order History-->
-            <div class="row">
+            <div id="order-history" class="row">
                 <div class="col-sm-12">
                     <div id="order-history-header">
                         <ul>
@@ -79,6 +83,48 @@
                         </div>
                     </div>
                     <br>
+                </div>
+            </div>
+
+            <div id="items-for-sale" class="row" hidden>
+                <div class="col-sm-12">
+                    <div>
+                        <h2>Items for sale</h2>
+                    </div>
+                    <div>
+                        <div class="item">
+                            <span class="item-name"><strong>Language Translator</strong></span>
+                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
+                            <span class="item-price">$2000.00</span>
+                            <span class="item-quantity">5</span>
+                            <span class="item-edit-icon">!</span>
+                            <span class="item-delete-icon">X</span>
+                        </div>
+                        <div class="item">
+                            <span class="item-name"><strong>Food Images Database</strong></span>
+                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
+                            <span class="item-price">$850.00</span>
+                            <span class="item-quantity">5</span>
+                            <span class="item-edit-icon">!</span>
+                            <span class="item-delete-icon">X</span>
+                        </div>
+                        <div class="item">
+                            <span class="item-name"><strong>Face Recognition AI</strong></span>
+                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
+                            <span class="item-price">$2000.00</span>
+                            <span class="item-quantity">5</span>
+                            <span class="item-edit-icon">!</span>
+                            <span class="item-delete-icon">X</span>
+                        </div>
+                        <div class="item">
+                            <span class="item-name"><strong>AI</strong></span>
+                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
+                            <span class="item-price">$2000.00</span>
+                            <span class="item-quantity">5</span>
+                            <span class="item-edit-icon">!</span>
+                            <span class="item-delete-icon">X</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
