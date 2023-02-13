@@ -11,17 +11,17 @@
 <body>
 <header><h3>Substitute Header</h3></header>
 
-<div class="container-fluid" style="width: 100%">
+<!--tabs on left-->
+<div id="tabs">
+    <ul>
+        <li onclick="analytics_tab()">Analytics & Orders</li>
+        <li onclick="items_tab()">Items for sale</li>
+    </ul>
+</div>
 
+<div class="container">
     <div class="row">
-        <!--tabs on left-->
-        <div id="tabs" class="col-sm-1">
-            <ul>
-                <li onclick="analytics_tab()">Analytics & Orders</li>
-                <li onclick="items_tab()">Items for sale</li>
-            </ul>
-        </div>
-        <div id="center-info" class="col-sm-10">
+        <div id="center-info" class="col-sm-12">
             <div id="data-analytics" class="row">
                 <div id="graph" class="col-sm-6">
                     Graph
