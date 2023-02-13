@@ -66,12 +66,14 @@ footer{
     border-bottom: 1px solid black;
     margin-top: 10px;
     padding: 0;
+    display: table;
+    width: 100%;
 }
 
-#order-history-header li, .order span{
-    display: inline-block;
-    border-right: 1px solid black;
-    padding: 0;
+#order-history-header li, .order>span, .order>div{
+    display: table-cell;
+    border-right: 1px solid silver;
+    padding: 10px;
     margin: 0;
 }
 
@@ -80,7 +82,7 @@ footer{
 }
 
 #item, .second-col{
-    width: 58%;
+    width: 60%;
 }
 
 #total, .third-col{
@@ -89,17 +91,23 @@ footer{
 
 #date, .fourth-col{
     width: 15%;
+    border-right: none;
 }
 
 .order{
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
     width: 100%;
-    padding: 10px 0;
+    display: table;
+    margin: 15px 0;
 }
 
+
 #tabs{
-    top: 20vh;
-    width: 11vw;
+    background-color: white;
+    z-index: 1;
+    top: 30vh;
+    left: -10px;
+    width: 12vw;
     margin: 0;
     padding: 0;
     position: fixed;
@@ -211,7 +219,6 @@ footer{
 .order-container{
     border: 1px solid gray;
     margin: 20px 0;
-
 }
 
 .order-header{
@@ -247,6 +254,7 @@ footer{
 
 .order-body{
     height: 85%;
+    width: 100%;
 }
 
 .order-item{
@@ -263,6 +271,8 @@ footer{
 }
 
 .order-item-price{
-    width: 20%;
+    width: 10%;
     border-right: none;
 }
+
+/*Items for sale edit and delete*/
