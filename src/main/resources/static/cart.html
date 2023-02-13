@@ -2,9 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cart</title>
+    <title>cart</title>
+    <link rel="stylesheet" href="cartstyle.css">
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 </head>
 <body>
+<header>
+    <div class="container" style="display: inline-block">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="logle" src="Screenshot%202023-02-13%20at%2016.08.55.png" style="height: 50px; width: 50px">
+            </div>
 
+            <div class="col-md-10">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control"/>
+                        <!--            <label class="form-label" for="form1">Search</label>-->
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div style="float: right;display: inline;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shopping cart</a>
+                        </li>
+                        <!-- dropdown item -->
+                        <li class="nav-item dropdown">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-mdb-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                Account
+                            </a>
+                            <!-- Dropdown menu -->
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Log in</a></li>
+                                <li><a class="dropdown-item" href="#">Log out</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</header>
+<div class="stands-out-background container">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h3><b>Shopping Cart</b></h3></div>
+                    <div class="col text-right text-muted align-self-center">? items</div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+                <div class="row items align-items-center">
+                    <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
+                                            src="Screenshot%202023-02-13%20at%2016.08.55.png"></div>
+                    <div class="col">
+                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row"> This a AI model</div>
+                    </div>
+                    <div class="col">
+                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                    </div>
+                    <div class="col"> &euro; 8.20 <span class=""> &#10005</span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row items align-items-center">
+                    <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
+                                            src="Screenshot%202023-02-13%20at%2016.08.55.png"></div>
+                    <div class="col">
+                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row"> This a AI model</div>
+                    </div>
+                    <div class="col">
+                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                    </div>
+                    <div class="col"> &euro; 8.20 <span class=""> &#10005</span></div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+                <div class="row items align-items-center">
+                    <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
+                                            src="Screenshot%202023-02-13%20at%2016.08.55.png"></div>
+                    <div class="col">
+                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row"> This a AI model</div>
+                    </div>
+                    <div class="col">
+                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                    </div>
+                    <div class="col"> &euro; 8.20 <span class=""> &#10005</span></div>
+                </div>
+            </div>
+            <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+        </div>
+        <div class="col-md-4 order-summary">
+            <div><h5><b>ORDER SUMMARY</b></h5></div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">ITEMS 3</div>
+                <div class="col text-right">&euro; 24.60</div>
+                <br>
+            </div>
+            <form>
+                <p>SHIPPING</p>
+                <select>
+                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                    <option>Free-Delivery</option>
+                </select>
+                <p>GIVE CODE</p>
+                <input id="code" placeholder="Enter your code">
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right">&euro; 137.00</div>
+            </div>
+            <button class="button">CHECKOUT</button>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+</div>
 </body>
 </html>

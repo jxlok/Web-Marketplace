@@ -1,0 +1,83 @@
+header{
+    border-bottom: 1px solid black;
+    padding: 50px;
+    margin-bottom: 10px;
+
+}
+
+body{
+    background-color: rgba(254,216,243,0.75);
+    min-height: 100vh;
+    vertical-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+}
+
+/*That piece of transparent background that stands out on the page*/
+.stands-out-background{
+    margin: auto;
+    max-width: 1000px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    border: transparent;
+}
+
+.title{
+    margin-bottom: 5vh;
+}
+.cart{
+    padding: 4vh;
+    border-bottom-left-radius: unset;
+    border-top-right-radius: 1rem;
+}
+.items{
+    margin: 0;
+    padding: 3vh 0;
+    width: 100%;
+}
+.order-summary{
+    background-color: rgba(215,220,255,0.78);
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65);
+}
+.back-to-shop{
+    margin-top: 5rem;
+}
+hr{
+    margin-top: 1.25rem;
+}
+select{
+    border: 1px solid rgba(0, 0, 0, 0);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: whitesmoke;
+}
+input{
+    border: 1px solid rgba(0, 0, 0, 0);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: whitesmoke;
+}
+.button{
+    margin-top: 4vh;
+    padding: 1vh;
+    width: 100%;
+    background-color: blanchedalmond;
+    border-radius: 0;
+}
+.button:hover{
+    color: coral;
+}
+.btn-primary{
+    width: 50px;
+    height: 40px;
+}
+
