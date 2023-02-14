@@ -1,5 +1,4 @@
 header{
-    border-bottom: 1px solid black;
     padding: 50px;
     margin-bottom: 10px;
 
@@ -45,7 +44,7 @@ body{
     color: rgb(65, 65, 65);
 }
 .back-to-shop{
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 hr{
     margin-top: 1.25rem;
@@ -67,7 +66,7 @@ input{
     background-color: whitesmoke;
 }
 .button{
-    margin-top: 4vh;
+    margin-top: 1vh;
     padding: 1vh;
     width: 100%;
     background-color: blanchedalmond;
