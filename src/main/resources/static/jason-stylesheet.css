@@ -134,13 +134,13 @@ footer{
     width: 100%;
     height: 150px;
     border: 1px solid gray;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding: 0;
     display: table;
 }
 
 .item-name{
-    display: inline-flex;
+    display: table-cell;
     width: 20%;
     height: 100%;
     border-right: 1px solid gray;
@@ -150,7 +150,7 @@ footer{
 }
 
 .item-desc{
-    display: inline-flex;
+    display: table-cell;
     width: 40%;
     height: 100%;
     border-right: 1px solid gray;
@@ -159,9 +159,11 @@ footer{
 }
 
 .item-desc p{
+    overflow-wrap: anywhere;
+    hyphens: manual;
     text-overflow: fade;
     overflow: hidden;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 8;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     margin: 0;
@@ -172,7 +174,7 @@ footer{
     width: 10%;
     margin: 0;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
@@ -181,7 +183,7 @@ footer{
 .item-quantity{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
@@ -192,7 +194,7 @@ footer{
 .item-edit-icon{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
@@ -203,7 +205,7 @@ footer{
 .item-delete-icon{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     padding: 10px;
     justify-content: center;
     color: red;
@@ -276,3 +278,47 @@ footer{
 }
 
 /*Items for sale edit and delete*/
+#addItem{
+    position: absolute;
+    top: 2vh;
+    left: 70vw;
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    font-size: 35px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.item input, .item textarea{
+    width: 100%;
+    display: block;
+}
+
+.item-price>input{
+    width: 90%;
+    display: inline;
+}
+
+.item-desc>textarea{
+    resize: none;
+    height: 100%;
+}
+
+#confirm-change, #delete-change{
+    cursor: pointer;
+}
+
+#confirm-change:hover{
+    color: green;
+}
+
+#confirm-change button{
+    border: 0;
+    background-color: transparent;
+    font-weight: bold;
+}
