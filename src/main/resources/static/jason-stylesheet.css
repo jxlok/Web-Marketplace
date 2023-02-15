@@ -191,7 +191,7 @@ footer{
 
 }
 
-.item-edit-icon{
+.item-edit-icon, .item-change-icon{
     width: 10%;
     height: 100%;
     display: table-cell;
@@ -199,10 +199,9 @@ footer{
     padding: 10px;
     justify-content: center;
     margin: 0;
-
 }
 
-.item-delete-icon{
+.item-delete-icon, .item-hide-icon{
     width: 10%;
     height: 100%;
     display: table-cell;
@@ -210,6 +209,10 @@ footer{
     justify-content: center;
     color: red;
     margin: 0;
+}
+
+.item-delete-icon>p, .item-hide-icon>p, .item-edit-icon>p{
+    cursor: pointer;
 }
 
 /*purchase history page*/

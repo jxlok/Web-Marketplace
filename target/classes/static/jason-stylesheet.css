@@ -66,12 +66,14 @@ footer{
     border-bottom: 1px solid black;
     margin-top: 10px;
     padding: 0;
+    display: table;
+    width: 100%;
 }
 
-#order-history-header li, .order span{
-    display: inline-block;
-    border-right: 1px solid black;
-    padding: 0;
+#order-history-header li, .order>span, .order>div{
+    display: table-cell;
+    border-right: 1px solid silver;
+    padding: 10px;
     margin: 0;
 }
 
@@ -80,7 +82,7 @@ footer{
 }
 
 #item, .second-col{
-    width: 58%;
+    width: 60%;
 }
 
 #total, .third-col{
@@ -89,17 +91,23 @@ footer{
 
 #date, .fourth-col{
     width: 15%;
+    border-right: none;
 }
 
 .order{
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
     width: 100%;
-    padding: 10px 0;
+    display: table;
+    margin: 15px 0;
 }
 
+
 #tabs{
-    top: 20vh;
-    width: 11vw;
+    background-color: white;
+    z-index: 1;
+    top: 30vh;
+    left: -10px;
+    width: 12vw;
     margin: 0;
     padding: 0;
     position: fixed;
@@ -126,13 +134,13 @@ footer{
     width: 100%;
     height: 150px;
     border: 1px solid gray;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding: 0;
     display: table;
 }
 
 .item-name{
-    display: inline-flex;
+    display: table-cell;
     width: 20%;
     height: 100%;
     border-right: 1px solid gray;
@@ -142,7 +150,7 @@ footer{
 }
 
 .item-desc{
-    display: inline-flex;
+    display: table-cell;
     width: 40%;
     height: 100%;
     border-right: 1px solid gray;
@@ -151,9 +159,11 @@ footer{
 }
 
 .item-desc p{
+    overflow-wrap: anywhere;
+    hyphens: manual;
     text-overflow: fade;
     overflow: hidden;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 8;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     margin: 0;
@@ -164,7 +174,7 @@ footer{
     width: 10%;
     margin: 0;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
@@ -173,7 +183,7 @@ footer{
 .item-quantity{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
@@ -184,22 +194,25 @@ footer{
 .item-edit-icon{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     border-right: 1px solid gray;
     padding: 10px;
     justify-content: center;
     margin: 0;
-
 }
 
-.item-delete-icon{
+.item-delete-icon, .item-hide-icon{
     width: 10%;
     height: 100%;
-    display: inline-flex;
+    display: table-cell;
     padding: 10px;
     justify-content: center;
     color: red;
     margin: 0;
+}
+
+.item-delete-icon>p, .item-hide-icon>p, .item-edit-icon>p{
+    cursor: pointer;
 }
 
 /*purchase history page*/
@@ -211,7 +224,6 @@ footer{
 .order-container{
     border: 1px solid gray;
     margin: 20px 0;
-
 }
 
 .order-header{
@@ -247,6 +259,7 @@ footer{
 
 .order-body{
     height: 85%;
+    width: 100%;
 }
 
 .order-item{
@@ -263,6 +276,52 @@ footer{
 }
 
 .order-item-price{
-    width: 20%;
+    width: 10%;
     border-right: none;
+}
+
+/*Items for sale edit and delete*/
+#addItem{
+    position: absolute;
+    top: 2vh;
+    left: 70vw;
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    font-size: 35px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.item input, .item textarea{
+    width: 100%;
+    display: block;
+}
+
+.item-price>input{
+    width: 90%;
+    display: inline;
+}
+
+.item-desc>textarea{
+    resize: none;
+    height: 100%;
+}
+
+#confirm-change, #delete-change{
+    cursor: pointer;
+}
+
+#confirm-change:hover{
+    color: green;
+}
+
+#confirm-change button{
+    border: 0;
+    background-color: transparent;
+    font-weight: bold;
 }

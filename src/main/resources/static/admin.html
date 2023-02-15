@@ -5,6 +5,7 @@
     <title>Admin</title>
     <link rel="stylesheet" href="jason-stylesheet.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="admin-script.js"></script>
 </head>
@@ -151,10 +152,10 @@
                     <form id='addItem-form' onsubmit="addNewItem();return false" hidden>
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="name" required></span>
-                            <span class="item-desc"><textarea id="desc-change" name="desc-change" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
+                            <span class="item-desc"><textarea id="desc-new" name="desc-change" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
                             <span class="item-price">$<input type='text' name="price" required></span>
                             <span class="item-quantity"><input type='text' name="quant" required></span>
-                            <span id="confirm-change" class="item-edit-icon"><button type="submit">&#10003</button></span>
+                            <span id="confirm-change" class="item-change-icon"><button type="submit">&#10003</button></span>
                             <span id="delete-change" class="item-delete-icon" onclick="resetAddItem()">X</span>
                         </div>
                     </form>
@@ -164,32 +165,40 @@
                             <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
                             <span class="item-price">$2000.00</span>
                             <span class="item-quantity">5</span>
-                            <span class="item-edit-icon">!</span>
-                            <span class="item-delete-icon">hide</span>
+                            <span class="item-edit-icon"><p>edit</p></span>
+                            <span class="item-hide-icon"><p>hide</p></span>
                         </div>
                         <div class="item">
                             <span class="item-name"><strong>Food Images Database</strong></span>
                             <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
                             <span class="item-price">$850.00</span>
                             <span class="item-quantity">5</span>
-                            <span class="item-edit-icon">!</span>
-                            <span class="item-delete-icon">hide</span>
+                            <span class="item-edit-icon"><p>edit</p></span>
+                            <span class="item-hide-icon"><p>hide</p></span>
                         </div>
                         <div class="item">
                             <span class="item-name"><strong>Face Recognition AI</strong></span>
                             <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
                             <span class="item-price">$2000.00</span>
                             <span class="item-quantity">5</span>
-                            <span class="item-edit-icon">!</span>
-                            <span class="item-delete-icon">hide</span>
+                            <span class="item-edit-icon"><p>edit</p></span>
+                            <span class="item-hide-icon"><p>hide</p></span>
                         </div>
                         <div class="item">
                             <span class="item-name"><strong>AI</strong></span>
                             <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
                             <span class="item-price">$2000.00</span>
                             <span class="item-quantity">5</span>
-                            <span class="item-edit-icon">!</span>
-                            <span class="item-delete-icon">hide</span>
+                            <span class="item-edit-icon"><p>edit</p></span>
+                            <span class="item-hide-icon"><p>hide</p></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hidden-items">
+                    <div class="col-sm-12">
+                        <div>
+                            <h2>Hidden</h2>
                         </div>
                     </div>
                 </div>
