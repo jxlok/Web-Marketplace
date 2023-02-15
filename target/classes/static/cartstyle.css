@@ -1,0 +1,33 @@
+header{
+    border-bottom: 1px solid black;
+    padding: 50px;
+    margin-bottom: 10px;
+}
+
+body{
+    background-color: rgba(254,216,243,0.75);
+    min-height: 100vh;
+    vertical-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+}
+
+/*That piece of transparent background that stands out on the page*/
+.stands-out-background{
+    margin: auto;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    border: transparent;
+}
+
+.title{
+    margin-bottom: 5vh;
+}
+.cart{
+    padding: 4vh;
+    border-bottom-left-radius: unset;
+    border-top-right-radius: 1rem;
+}
