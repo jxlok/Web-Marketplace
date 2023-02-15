@@ -141,9 +141,13 @@
                     <br>
                 </div>
             </div>
+        </div>
 
+        <div id="sales-section" class="col-sm-12" hidden>
+            <div id="sale-tab" onclick="displayItemForSale()">Sale</div>
+            <div id="hidden-tab" onclick="displayHiddenTab()">Hidden</div>
             <!--Items for sale-->
-            <div id="items-for-sale" class="row" hidden>
+            <div id="items-for-sale" class="row">
                 <div id="addItem" onclick="addItem()">+</div>
                 <div class="col-sm-12">
                     <div>
@@ -194,21 +198,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="hidden-items">
-                    <div class="col-sm-12">
-                        <div>
-                            <h2>Hidden</h2>
-                        </div>
-                    </div>
+            <div id="hidden-items-container" class="row" hidden>
+                <div id="hidden-items" class="col-sm-12">
+                    <div><h2>Hidden Items</h2></div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<footer>
-    <h2>Substitute footer</h2>
-</footer>
+<!--<footer>-->
+<!--    <h2>Substitute footer</h2>-->
+<!--</footer>-->
 </body>
 </html>

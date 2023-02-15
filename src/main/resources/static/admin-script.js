@@ -1,37 +1,74 @@
 
 window.onload = function(){
     activateEditButtons()
+    activateHideButtons()
 }
 
-let listener = function editMode(){
+let Editlistener = function editMode(){
     editItem(this.parentNode);
+}
+
+let HideListener = function editMode(){
+    hideItem(this.parentNode);
 }
 
 function activateEditButtons(){
     let items = document.getElementsByClassName("item-edit-icon")
     for(var i=0;i<items.length;i++){
-        items[i].addEventListener("click", listener);
+        items[i].addEventListener("click", Editlistener);
+    }
+}
+
+function activateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].addEventListener("click", HideListener);
     }
 }
 
 function analytics_tab(){
-    let analytics = document.getElementById('data-analytics');
-    let order_history = document.getElementById("order-history")
-    let items = document.getElementById('items-for-sale');
+    let analytics = document.getElementById('center-info');
+    let items = document.getElementById('sales-section');
 
     analytics.removeAttribute("hidden");
-    order_history.removeAttribute("hidden")
     items.setAttribute("hidden", "hidden");
 }
 
 function items_tab(){
-    let analytics = document.getElementById('data-analytics');
-    let order_history = document.getElementById("order-history")
-    let items = document.getElementById('items-for-sale');
+    let analytics = document.getElementById('center-info');
+    let items = document.getElementById('sales-section');
 
     items.removeAttribute("hidden");
     analytics.setAttribute("hidden", "hidden");
-    order_history.setAttribute("hidden", "hidden");
+}
+
+function displayItemForSale(){
+    let saleSection = document.getElementById('items-for-sale');
+    let hiddenSection = document.getElementById('hidden-items-container');
+
+    saleSection.removeAttribute("hidden");
+    hiddenSection.setAttribute("hidden", "hidden")
+
+    let saleTab = document.getElementById('sale-tab')
+    let hiddenTab = document.getElementById('hidden-tab')
+
+    saleTab.style.borderBottom = 0
+    hiddenTab.style.borderBottom = "1px solid black"
+}
+
+function displayHiddenTab(){
+    let saleSection = document.getElementById('items-for-sale');
+    let hiddenSection = document.getElementById('hidden-items-container');
+
+    hiddenSection.removeAttribute("hidden");
+    saleSection.setAttribute("hidden", "hidden")
+
+    let saleTab = document.getElementById('sale-tab')
+    let hiddenTab = document.getElementById('hidden-tab')
+
+    hiddenTab.style.borderBottom = 0
+    saleTab.style.borderBottom = "1px solid black"
+
 }
 
 function addItem(){
@@ -148,4 +185,12 @@ function undoChange(name, desc, price, quantity){
 
     item.removeAttribute("id")
 
+}
+
+function hideItem(item){
+
+    let hiddenItems = document.getElementById('hidden-items');
+
+    hiddenItems.innerHTML = "<div class='item'>" + item.innerHTML + "</div>" + hiddenItems.innerHTML;
+    item.parentNode.removeChild(item);
 }

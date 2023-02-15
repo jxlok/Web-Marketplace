@@ -22,7 +22,13 @@ footer{
     /*border-left: 1px solid black;*/
     /*border-right: 1px solid black;*/
     border: 1px solid black;
-    margin:10px 0;
+    margin: 10px 0;
+}
+
+#sales-section{
+    border: 1px solid black;
+    margin: 50px 0 20px 0;
+    padding: 0;
 }
 
 #data-analytics{
@@ -126,7 +132,7 @@ footer{
     cursor: pointer;
 }
 
-#items-for-sale{
+#items-for-sale, #hidden-items-container{
     margin: 10px 0;
 }
 
@@ -324,4 +330,33 @@ footer{
     border: 0;
     background-color: transparent;
     font-weight: bold;
+}
+
+#sale-tab, #hidden-tab{
+    width: 70px;
+    height: 40px;
+    background-color: white;
+    z-index: 1;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-radius: 2px;
+    padding: 10px;
+    position: absolute;
+    top: -40px;
+    left:-1px;
+    cursor: pointer;
+}
+
+#hidden-tab{
+    left: 70px;
+    border-bottom: 1px solid black;
+}
+
+#hidden-items-container{
+    min-height: 250px;
+}
+
+#hidden-items{
+    display: table;
 }
