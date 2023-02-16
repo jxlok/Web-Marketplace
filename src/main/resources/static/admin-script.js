@@ -19,10 +19,24 @@ function activateEditButtons(){
     }
 }
 
+function deactivateEditButtons(){
+    let items = document.getElementsByClassName("item-edit-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].removeEventListener("click", Editlistener);
+    }
+}
+
 function activateHideButtons(){
     let items = document.getElementsByClassName("item-hide-icon")
     for(var i=0;i<items.length;i++){
         items[i].addEventListener("click", HideListener);
+    }
+}
+
+function deactivateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].removeEventListener("click", HideListener);
     }
 }
 
@@ -53,7 +67,7 @@ function displayItemForSale(){
     let hiddenTab = document.getElementById('hidden-tab')
 
     saleTab.style.borderBottom = 0
-    hiddenTab.style.borderBottom = "1px solid black"
+    hiddenTab.style.borderBottom = "1px solid silver"
 }
 
 function displayHiddenTab(){
@@ -67,7 +81,7 @@ function displayHiddenTab(){
     let hiddenTab = document.getElementById('hidden-tab')
 
     hiddenTab.style.borderBottom = 0
-    saleTab.style.borderBottom = "1px solid black"
+    saleTab.style.borderBottom = "1px solid silver"
 
 }
 
@@ -78,6 +92,7 @@ function addItem(){
     let addItemButton = document.getElementById("addItem");
     addItemButton.removeAttribute("onclick");
 
+    deactivateEditButtons()
     deactivateEditButtons()
 }
 
@@ -108,6 +123,7 @@ function resetAddItem(){
 
     activateAddButton()
     activateEditButtons()
+    activateHideButtons();
 
 }
 
@@ -116,12 +132,6 @@ function activateAddButton(){
     button.setAttribute("onclick", "addItem()")
 }
 
-function deactivateEditButtons(){
-    let items = document.getElementsByClassName("item-edit-icon")
-    for(var i=0;i<items.length;i++){
-        items[i].removeEventListener("click", listener);
-    }
-}
 
 function editItem(item){
 
@@ -149,6 +159,7 @@ function editItem(item){
     addItemButton.removeAttribute("onclick");
 
     deactivateEditButtons()
+    deactivateHideButtons()
 
 }
 
@@ -167,6 +178,7 @@ function changeItemDetails(form){
 
     activateEditButtons()
     activateAddButton()
+    activateHideButtons()
 }
 
 function undoChange(name, desc, price, quantity){
@@ -182,6 +194,7 @@ function undoChange(name, desc, price, quantity){
 
     activateEditButtons()
     activateAddButton()
+    activateHideButtons()
 
     item.removeAttribute("id")
 
@@ -191,6 +204,29 @@ function hideItem(item){
 
     let hiddenItems = document.getElementById('hidden-items');
 
-    hiddenItems.innerHTML = "<div class='item'>" + item.innerHTML + "</div>" + hiddenItems.innerHTML;
+    let hideDiv = item.getElementsByClassName('item-hide-icon')[0];
+    hideDiv.className = "item-unhide-icon"
+    hideDiv.innerHTML="<p>unhide</p>";
+
+    hiddenItems.innerHTML = hiddenItems.innerHTML + "<div class='item'>" + item.innerHTML + "</div>";
     item.parentNode.removeChild(item);
+
+    activateEditButtons()
+    activateHideButtons()
+}
+
+function unHideItem(item){
+
+    let items = document.getElementById('items')
+
+    let hideDiv = item.getElementsByClassName('item-unhide-icon')[0];
+    hideDiv.className = "item-hide-icon"
+    hideDiv.innerHTML="<p>hide</p>";
+
+    items.innerHTML = "<div class='item'"+item.innerHTML+"</div>" + items.innerHTML;
+    item.parentNode.removeChild(item);
+
+    activateEditButtons()
+    activateHideButtons()
+
 }

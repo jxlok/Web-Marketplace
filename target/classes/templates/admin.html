@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="jason-stylesheet.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/cartstyle.css" th:href="@{cartstyle.css}">
+    <link rel="stylesheet" href="../static/jason-stylesheet.css" th:href="@{jason-stylesheet.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="admin-script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 </head>
 <body>
-<header><h3>Substitute Header</h3></header>
-
+<header>
+    <div class="container">
+        <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top justify-content-center">
+            <a class="navbar-brand" href="#">
+                <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="logo" style="width:40px;">
+            </a>
+            <form class="form-inline" action="?">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Log out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <!--tabs on left-->
 <div id="tabs">
     <ul>
@@ -19,7 +43,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div id="main-container" class="stands-out-background container">
     <div class="row">
         <div id="center-info" class="col-sm-12">
             <div id="data-analytics" class="row">
@@ -34,7 +58,7 @@
                         Best Selling
                     </div>
                     <div id="your-balance">
-                        Balance
+                        Shortage
                     </div>
                 </div>
             </div>
@@ -140,66 +164,53 @@
                     <br>
                 </div>
             </div>
+        </div>
 
+        <div id="sales-section" class="col-sm-12" hidden>
+            <div id="sale-tab" onclick="displayItemForSale()">Sale</div>
+            <div id="hidden-tab" onclick="displayHiddenTab()">Hidden</div>
             <!--Items for sale-->
-            <div id="items-for-sale" class="row" hidden>
+            <div id="items-for-sale" class="row">
                 <div id="addItem" onclick="addItem()">+</div>
-                <div class="col-sm-12">
+                <div id="admin-main-content" class="col-sm-12">
                     <div>
                         <h2>Items for sale</h2>
                     </div>
                     <form id='addItem-form' onsubmit="addNewItem();return false" hidden>
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="name" required></span>
-                            <span class="item-desc"><textarea id="desc-change" name="desc-change" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
+                            <span class="item-desc"><textarea id="desc-new" name="desc-change" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
                             <span class="item-price">$<input type='text' name="price" required></span>
                             <span class="item-quantity"><input type='text' name="quant" required></span>
-                            <span id="confirm-change" class="item-edit-icon"><button type="submit">&#10003</button></span>
+                            <span id="confirm-change" class="item-change-icon"><button type="submit">&#10003</button></span>
                             <span id="delete-change" class="item-delete-icon" onclick="resetAddItem()">X</span>
                         </div>
                     </form>
-                    <div id="items">
+                    <div id="items" th:each="item : ${myItems.values()}">
                         <div class="item">
-                            <span class="item-name"><strong>Language Translator</strong></span>
-                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
-                            <span class="item-price">$2000.00</span>
-                            <span class="item-quantity">5</span>
-                            <span class="item-edit-icon"><p>!</p></span>
-                            <span class="item-hide-icon"><p>hide</p></span>
-                        </div>
-                        <div class="item">
-                            <span class="item-name"><strong>Food Images Database</strong></span>
-                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
-                            <span class="item-price">$850.00</span>
-                            <span class="item-quantity">5</span>
-                            <span class="item-edit-icon"><p>!</p></span>
-                            <span class="item-hide-icon"><p>hide</p></span>
-                        </div>
-                        <div class="item">
-                            <span class="item-name"><strong>Face Recognition AI</strong></span>
-                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
-                            <span class="item-price">$2000.00</span>
-                            <span class="item-quantity">5</span>
-                            <span class="item-edit-icon"><p>!</p></span>
-                            <span class="item-hide-icon"><p>hide</p></span>
-                        </div>
-                        <div class="item">
-                            <span class="item-name"><strong>AI</strong></span>
-                            <span class="item-desc"><p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu magna consequat, consectetur ante vel, feugiat nulla. Mauris at tellus tincidunt, venenatis leo varius, euismod odio. Nunc ligula velit, aliquam sed urna ut, maximus vehicula ipsum. Donec blandit tincidunt diam, a vestibulum ipsum laoreet et. Vivamus non nisl ac dolor tristique egestas in vel odio. Curabitur vel sagittis neque, quis iaculis tortor. Etiam eget suscipit dui, vitae tincidunt massa. Mauris tempus mauris volutpat libero condimentum, sed accumsan ante finibus. Curabitur non posuere erat. Mauris vitae neque et arcu ornare scelerisque. Nulla facilisi. Ut ullamcorper tincidunt risus, sed aliquam massa porttitor eu. Nam mattis eu dui vel commodo. Vivamus est leo, mollis et justo eu, faucibus auctor tortor. Donec mattis neque ligula, quis dignissim elit gravida sit amet. Suspendisse cursus tellus vel scelerisque eleifend.</p></span>
-                            <span class="item-price">$2000.00</span>
-                            <span class="item-quantity">5</span>
-                            <span class="item-edit-icon"><p>!</p></span>
+                            <span class="item-name"><strong th:text="${item.getName}"></strong></span>
+                            <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
+                            <span class="item-price" th:text="'$' + ${item.getPrice}"></span>
+                            <span class="item-quantity" th:text="${item.getQuantity}"></span>
+                            <span class="item-edit-icon"><p>edit</p></span>
                             <span class="item-hide-icon"><p>hide</p></span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div id="hidden-items-container" class="row" hidden>
+                <div id="hidden-items" class="col-sm-12">
+                    <div><h2>Hidden Items</h2></div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<footer>
-    <h2>Substitute footer</h2>
-</footer>
+<!--<footer>-->
+<!--    <h2>Substitute footer</h2>-->
+<!--</footer>-->
 </body>
 </html>
