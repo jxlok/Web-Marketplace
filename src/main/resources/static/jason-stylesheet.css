@@ -29,10 +29,6 @@ footer{
     margin: 0;
 }
 
-#sales-section{
-    /*padding: 0;*/
-}
-
 #data-analytics{
     border-bottom: 1px solid silver;
 }
@@ -352,9 +348,12 @@ footer{
     cursor: pointer;
 }
 
+.xtab{
+    border-bottom: 1px solid silver;
+}
+
 #hidden-tab{
     left: 70px;
-    border-bottom: 1px solid silver;
 }
 
 #hidden-items-container{

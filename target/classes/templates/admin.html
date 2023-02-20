@@ -38,8 +38,8 @@
 <!--tabs on left-->
 <div id="tabs">
     <ul>
-        <li onclick="analytics_tab()">Analytics & Orders</li>
-        <li onclick="items_tab()">Items for sale</li>
+        <li><a th:href="@{admin}">Analytics & Orders</a></li>
+        <li><a th:href="@{manageItems}">Items for sale</a></li>
     </ul>
 </div>
 
@@ -162,47 +162,6 @@
                         </div>
                     </div>
                     <br>
-                </div>
-            </div>
-        </div>
-
-        <div id="sales-section" class="col-sm-12" hidden>
-            <div id="sale-tab" onclick="displayItemForSale()">Sale</div>
-            <div id="hidden-tab" onclick="displayHiddenTab()">Hidden</div>
-            <!--Items for sale-->
-            <div id="items-for-sale" class="row">
-                <div id="addItem" onclick="addItem()">+</div>
-                <div id="admin-main-content" class="col-sm-12">
-                    <div>
-                        <h2>Items for sale</h2>
-                    </div>
-                    <form id='addItem-form' onsubmit="addNewItem();return false" hidden>
-                        <div class="item">
-                            <span class="item-name"><input type='text' placeholder='Enter item title' name="name" required></span>
-                            <span class="item-desc"><textarea id="desc-new" name="desc-change" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
-                            <span class="item-price">$<input type='text' name="price" required></span>
-                            <span class="item-quantity"><input type='text' name="quant" required></span>
-                            <span id="confirm-change" class="item-change-icon"><button type="submit">&#10003</button></span>
-                            <span id="delete-change" class="item-delete-icon" onclick="resetAddItem()">X</span>
-                        </div>
-                    </form>
-                    <div id="items" th:each="item : ${myItems.values()}">
-                        <div class="item">
-                            <span class="item-name"><strong th:text="${item.getName}"></strong></span>
-                            <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
-                            <span class="item-price" th:text="'$' + ${item.getPrice}"></span>
-                            <span class="item-quantity" th:text="${item.getQuantity}"></span>
-                            <span class="item-edit-icon"><p>edit</p></span>
-                            <span class="item-hide-icon"><p>hide</p></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="hidden-items-container" class="row" hidden>
-                <div id="hidden-items" class="col-sm-12">
-                    <div><h2>Hidden Items</h2></div>
-
                 </div>
             </div>
         </div>
