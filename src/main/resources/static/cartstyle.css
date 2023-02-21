@@ -5,7 +5,7 @@ header{
 }
 
 body{
-    background-color: rgba(254,216,243,0.75);
+    background-color: white;
     min-height: 100vh;
     vertical-align: center;
     font-weight: bold;
@@ -78,5 +78,11 @@ input{
 .btn-primary{
     width: 50px;
     height: 40px;
+}
+
+.quantity-button{
+    border: 0px;
+    background-color: transparent;
+    color: rgba(15,76,254,0.91)
 }
 
