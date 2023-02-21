@@ -72,93 +72,24 @@
                             <li id="item"><a>Item Descriptions</a></li>
                             <li id="total"><a>Total</a></li>
                             <li id="date"><a>Date</a></li>
+                            <li id="customer_ID"><a>Customer ID</a></li>
                         </ul>
                     </div>
-                    <div id="order-container">
+                    <div id="order-container" th:each="i : ${#numbers.sequence(orders.values().size() - 1, 0, -1)}" th:with="order=${orders.values()[i]}">
                         <div class="order">
-                            <span class="first-col">0001</span>
+                            <span class="first-col">[(${order.getOrder_id})]</span>
                             <div class="second-col">
-                                <div class="order-body">
+                                <div class="order-body" th:each="i : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[i]}, quantity=${order.getItem_quantities[i]}">
                                      <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Language Translator</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$2000</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Face Recognition AI</a></span>
-                                        <span class="order-body-item order-item-quantity">x2</span>
-                                        <span class="order-body-item order-item-price">$4000</span>
+                                        <span class="order-body-item order-item-name"><a href="#">[(${item.getName})]</a></span>
+                                        <span class="order-body-item order-item-quantity">x[(${quantity})]</span>
+                                        <span class="order-body-item order-item-price">$[(${item.getPrice})]</span>
                                     </div>
                                 </div>
                             </div>
-                            <span class="third-col">$6000.00</span>
-                            <span class="fourth-col">09/02/2023</span>
-                        </div>
-                        <div class="order">
-                            <span class="first-col">0002</span>
-                            <div class="second-col">
-                                <div class="order-body">
-                                     <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Food Image Database</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$850</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="third-col">$850.00</span>
-                            <span class="fourth-col">09/02/2023</span>
-                        </div>
-                        <div class="order">
-                            <span class="first-col">0003</span>
-                            <div class="second-col">
-                                <div class="order-body">
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Face Recognition AI</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$2000</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="third-col">$2000.00</span>
-                            <span class="fourth-col">09/02/2023</span>
-                        </div>
-                        <div class="order">
-                            <span class="first-col">0004</span>
-                            <div class="second-col">
-                                <div class="order-body">
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Language Translator</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$2000</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="third-col">$2000.00</span>
-                            <span class="fourth-col">09/02/2023</span>
-                        </div>
-                        <div class="order">
-                            <span class="first-col">0005</span>
-                            <div class="second-col">
-                                <div class="order-body">
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Language Translator</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$2000</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Food Images Dataset</a></span>
-                                        <span class="order-body-item order-item-quantity">x2</span>
-                                        <span class="order-body-item order-item-price">$1700</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span class="order-body-item order-item-name"><a href="#">Face Recognition AI</a></span>
-                                        <span class="order-body-item order-item-quantity">x1</span>
-                                        <span class="order-body-item order-item-price">$2000</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="third-col">$5700.00</span>
-                            <span class="fourth-col">09/02/2023</span>
+                            <span class="third-col">$[(${order.getTotal_price})]</span>
+                            <span class="fourth-col">[(${order.getDate})]</span>
+                            <span class="fifth-col">[(${order.getCustomer_id})]</span>
                         </div>
                     </div>
                     <br>

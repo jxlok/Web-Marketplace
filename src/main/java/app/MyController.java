@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.*;
@@ -14,6 +13,7 @@ import java.util.*;
 @Controller
 public class MyController {
 
+    //items for sale
     LinkedHashMap<Integer, ItemJ> myItems = new LinkedHashMap<>(){
         {
             put(1, new ItemJ(1, "item1", "description1", 1, 1));
@@ -24,7 +24,44 @@ public class MyController {
     };
     private int count=5;
 
+    //hidden items
     LinkedHashMap<Integer, ItemJ> hiddenItems = new LinkedHashMap<>();
+
+    List<ItemJ> setOne = new ArrayList<>(){{
+        add(new ItemJ(1, "item1", "description1", 1, 1));
+        add(new ItemJ(2, "item2", "description2", 2, 2));
+    }};
+
+    List<Integer> quantityOne = new ArrayList<>(){{
+        add(1);
+        add(2);
+    }};
+
+    List<ItemJ> setTwo = new ArrayList<>(){{
+        add(new ItemJ(3, "item3", "description3", 3, 3));
+    }};
+
+    List<Integer> quantityTwo = new ArrayList<>(){{
+        add(1);
+    }};
+
+    List<ItemJ> setThree = new ArrayList<>(){{
+        add(new ItemJ(4, "item4", "description4", 4, 4));
+    }};
+
+    List<Integer> quantityThree = new ArrayList<>(){{
+        add(1);
+    }};
+
+    LinkedHashMap<Integer, OrderJ> orders = new LinkedHashMap<>(){
+        {
+            put(1, new OrderJ(1, setOne, quantityOne, 6000, "09/02/2023", 100));
+            put(2, new OrderJ(2, setTwo, quantityTwo, 850, "09/02/2023", 100));
+            put(3, new OrderJ(3, setThree, quantityThree, 2000, "09/02/2023", 410));
+            put(4, new OrderJ(4, setOne, quantityOne, 6000, "09/02/2023", 100));
+            put(5, new OrderJ(5, setTwo, quantityTwo, 850, "09/02/2023", 100));
+        }
+    };
 
     @GetMapping("/manageItems")
     public String manageItems(Model model){
@@ -93,7 +130,7 @@ public class MyController {
 
     @GetMapping("/admin")
     public String admin(Model model){
-        model.addAttribute("myItems", myItems);
+        model.addAttribute("orders", orders);
         return "admin.html";
     }
 
@@ -112,8 +149,17 @@ public class MyController {
         return "login.html";
     }
 
-    @GetMapping("/purhcase-history")
-    public String purchasehistory(){
+    @GetMapping("/purchase-history")
+    public String purchasehistory(Model model){
+
+        List<OrderJ> customerOrders = new ArrayList<>();
+        for(OrderJ order: orders.values()){
+            if(order.getCustomer_id()==100){
+                customerOrders.add(order);
+            }
+        }
+
+        model.addAttribute("customerOrders", customerOrders);
         return "purchase-history.html";
     }
 

@@ -100,7 +100,6 @@ function addItem(){
     addItemButton.removeAttribute("onclick");
 
     deactivateEditButtons()
-    deactivateEditButtons()
 }
 //
 // function addNewItem() {
@@ -153,7 +152,7 @@ function editItem(item){
 
     item.innerHTML =
         "<form id='editItem-form' method='POST' th:action='@{/manageItems}'>" +
-        "    <span class=\"item-name\"><input type='text' name='name' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
+        "    <span class=\"item-name\"><input type='text' name='name' placeholder='Enter item title' value='"+name+"' required></span>\n" +
         "    <span class=\"item-desc\"><textarea id=\"desc-changing\" name=\"description\" placeholder='Enter Description' cols='40' rows='6' required>"+desc+"</textarea></span>\n"+
         "    <span class=\"item-price\">$<input type='text' name='price' value='"+price+"' required></span>\n" +
         "    <span class=\"item-quantity\"><input type='text' name='quantity' value='"+quantity+"' required></span>\n" +

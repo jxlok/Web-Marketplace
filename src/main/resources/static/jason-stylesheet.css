@@ -90,11 +90,15 @@ footer{
 }
 
 #total, .third-col{
-    width: 15%;
+    width: 10%;
 }
 
 #date, .fourth-col{
-    width: 15%;
+    width: 10%;
+}
+
+#customer_ID, .fifth-col{
+    width: 10%;
     border-right: none;
 }
 
@@ -389,7 +393,12 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     display: table;
 }
 
-#purchase-history-content, #admin-main-content{
-    padding: 20px
+#purchase-history-content, #admin-main-content, #hidden-items{
+    padding: 20px;
+    min-height: 150px;
+}
+
+#sales-section{
+    padding: 0;
 }
 
