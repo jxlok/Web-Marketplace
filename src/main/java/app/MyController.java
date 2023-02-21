@@ -35,10 +35,18 @@ public class MyController {
     @PostMapping("/manageItems")
     public @ResponseBody void addItem(ItemJ item, HttpServletResponse response) {
 
+        //find item
+        int id=-1;
+        for(ItemJ myItem: myItems.values()) {
+            if(myItem.getName().equals(item.getName())){
+                id=myItem.getId();
+            }
+        }
+
         //replace existing item with updated item details
-        if(myItems.containsKey(item.getId())){
-            System.out.println(1);
-            myItems.replace(item.getId(), item);
+        if(id!=-1){
+            item.setId(id);
+            myItems.replace(id, item);
         }
         //else put new item in hashmap
         else {

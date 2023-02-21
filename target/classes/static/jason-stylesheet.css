@@ -130,6 +130,15 @@ footer{
     cursor: pointer;
 }
 
+#tabs a{
+    text-decoration: none;
+    color: black;
+}
+
+#tabs a:hover{
+    color: gray;
+}
+
 #items-for-sale, #hidden-items-container{
     margin: 10px 0;
 }
@@ -203,9 +212,10 @@ footer{
     padding: 10px;
     justify-content: center;
     margin: 0;
+    color: blue
 }
 
-.item-delete-icon, .item-hide-icon, .item-unhide-icon{
+.item-delete-icon a, .item-hide-icon a, .item-unhide-icon a{
     width: 10%;
     height: 100%;
     display: table-cell;
@@ -215,7 +225,13 @@ footer{
     margin: 0;
 }
 
-.item-delete-icon>p, .item-hide-icon>p, .item-edit-icon>p{
+.item-delete-icon a:hover, .item-hide-icon a:hover, .item-unhide-icon a:hover{
+    text-decoration: none;
+    color: darkred;
+}
+
+
+.item-delete-icon a, .item-hide-icon a, .item-edit-icon>p, .item-unhide-icon a{
     cursor: pointer;
 }
 
@@ -346,6 +362,15 @@ footer{
     top: -30px;
     left:-1px;
     cursor: pointer;
+}
+
+a>#sale-tab, a>#hidden-tab{
+    text-decoration: none;
+    color: black;
+}
+
+a>#sale-tab:hover, a>#hidden-tab:hover{
+    color: gray;
 }
 
 .xtab{
