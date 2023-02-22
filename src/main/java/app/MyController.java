@@ -164,7 +164,43 @@ public class MyController {
 
     @GetMapping("/admin")
     public String admin(Model model){
+        //total-sales statistic
+        float total_sales=0;
+        for(OrderJ order : orders.values()){
+            total_sales+=order.getTotal_price();
+        }
+        model.addAttribute("total_sales", total_sales);
+
+        //best-selling statistic
+        LinkedHashMap<String, Integer> sold_items = new LinkedHashMap<>();
+        for(OrderJ order: orders.values()){
+            for(int i=0; i<order.getItems().size();i++){
+                if(sold_items.containsKey(order.getItems().get(i).getName())) {
+                    sold_items.put(order.getItems().get(i).getName(), sold_items.get(order.getItems().get(i).getName())+ order.getItem_quantities().get(i));
+                }
+                else{
+                    sold_items.put(order.getItems().get(i).getName(), order.getItem_quantities().get(i));
+                }
+            }
+        }
+
+        List<Map.Entry<String, Integer>> list = new LinkedList<>(sold_items.entrySet());
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        model.addAttribute("best_seller", list.get(0).getKey());
+
+        model.addAttribute("sold_count", sold_items);
+
         model.addAttribute("orders", orders);
+
+        //sorted availability
+        HashMap<String, Integer> item_availability = new HashMap<>();
+        for(ItemJ item : myItems.values()){
+            item_availability.put(item.getName(), item.getQuantity());
+        }
+        List<Map.Entry<String, Integer>> availability_list = new LinkedList<>(item_availability.entrySet());
+        availability_list.sort(Map.Entry.comparingByValue());
+        model.addAttribute("availability_list", availability_list);
         return "admin.html";
     }
 

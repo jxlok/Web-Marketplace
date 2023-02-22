@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 <header>
@@ -49,16 +49,25 @@
             <div id="data-analytics" class="row">
                 <div id="graph" class="col-sm-6">
                     Graph
+                    <canvas id="bar-chart"></canvas>
                 </div>
                 <div id="inner-right-statistics" class="col-sm-6">
-                    <div id="total-sales">
+                    <div id="total-sales-container">
                         Total Sales
+                        <div id="total-sales">$[(${#numbers.formatDecimal(total_sales, 3, 2)})]</div>
                     </div>
-                    <div id="top-sellers">
+                    <div id="top-sellers-container">
                         Best Selling
+                        <div id="top-sellers">[(${best_seller})]</div>
                     </div>
-                    <div id="your-balance">
-                        Shortage
+                    <div id="shortage-info">
+                        Stock remaining
+                        <div id="availability-container">
+                            <div class="availability-item" th:each="item : ${availability_list}">
+                                <span class="availability-item-name">[(${item.getKey()})]</span>
+                                <span class="availability-quantity">x[(${item.getValue()})]</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,5 +111,37 @@
 <!--<footer>-->
 <!--    <h2>Substitute footer</h2>-->
 <!--</footer>-->
+
+<script th:inline="javascript">
+
+    // var ctx = $('#bar-chart');
+
+    new Chart("bar-chart", {
+        type: 'bar',
+
+        data: {
+            labels: [[${sold_count.keySet()}]],
+            datasets: [{
+                label: '# sold',
+                data: [[${sold_count.values()}]],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 5,
+                        step: 1
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </body>
 </html>

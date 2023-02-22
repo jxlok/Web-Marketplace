@@ -36,22 +36,39 @@ footer{
 #graph{
     height: 50vh;
     text-align: center;
-    border-right: 1px solid silver
+    border-right: 1px solid silver;
+    padding: 20px
 }
 
-#total-sales{
+#bar-chart{
+    vertical-align: center;
+}
+
+#total-sales-container{
     height: 25vh;
     border-bottom: 1px solid silver;
     text-align: center
 }
 
+#total-sales{
+    font-size: 10vh;
+}
+
+#total-sales, #top-sellers{
+    font-weight: bold;
+    text-align: center;
+}
+
 #top-sellers{
+    font-size: 5vh;
+}
+#top-sellers-container{
     height: 12.5vh;
     border-bottom: 1px solid silver;
     text-align: center
 }
 
-#your-balance{
+#shortage-info{
     height: 12.5vh;
     text-align: center
 }
@@ -410,3 +427,30 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     margin-top: 75px;
 }
 
+.availability-item{
+    border-bottom: 1px solid silver;
+    padding: 5px;
+}
+
+#availability-container{
+    border: 1px solid silver;
+    overflow-y: scroll;
+    height: 70%;
+    padding: 0 10px;
+    width: 95%;
+    margin: 0 2.5%;
+
+}
+
+.availability-item-name{
+    border-right: 1px solid silver;
+    padding: 5px;
+    width: 25vw;
+    text-align: center;
+}
+
+.availability-quantity{
+    width: 25vw;
+    padding: 5px;
+    text-align: center;
+}
