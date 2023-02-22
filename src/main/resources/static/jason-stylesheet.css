@@ -427,6 +427,14 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     margin-top: 75px;
 }
 
+#empty-available-list{
+    text-align: center;
+    color: gray;
+    align-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .availability-item{
     border-bottom: 1px solid silver;
     padding: 5px;
@@ -453,4 +461,16 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     width: 25vw;
     padding: 5px;
     text-align: center;
+}
+
+.status{
+    width: 60px;
+    height: 30px;
+    border: 1px solid silver;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    padding: 5px;
+    margin: 0 10px;
+    font-size: 12px;
 }

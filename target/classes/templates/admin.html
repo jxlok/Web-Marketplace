@@ -63,6 +63,7 @@
                     <div id="shortage-info">
                         Stock remaining
                         <div id="availability-container">
+                            <div id="empty-available-list" th:if="${availability_list.empty}">There is no stock available</div>
                             <div class="availability-item" th:each="item : ${availability_list}">
                                 <span class="availability-item-name">[(${item.getKey()})]</span>
                                 <span class="availability-quantity">x[(${item.getValue()})]</span>
@@ -86,7 +87,7 @@
                     </div>
                     <div id="order-container" th:each="i : ${#numbers.sequence(orders.values().size() - 1, 0, -1)}" th:with="order=${orders.values()[i]}">
                         <div class="order">
-                            <span class="first-col">[(${order.getOrder_id})]</span>
+                            <span class="first-col">[(${order.getOrder_id})]<span class="status">[(${order.getStatus})]</span></span>
                             <div class="second-col">
                                 <div class="order-body" th:each="i : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[i]}, quantity=${order.getItem_quantities[i]}">
                                      <div class="order-item">

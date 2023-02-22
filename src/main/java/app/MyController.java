@@ -59,11 +59,11 @@ public class MyController {
 
     LinkedHashMap<Integer, OrderJ> orders = new LinkedHashMap<>(){
         {
-            put(1, new OrderJ(1, setOne, quantityOne, 6000, "09/02/2023", 100));
-            put(2, new OrderJ(2, setTwo, quantityTwo, 850, "09/02/2023", 100));
-            put(3, new OrderJ(3, setThree, quantityThree, 2000, "09/02/2023", 410));
-            put(4, new OrderJ(4, setOne, quantityOne, 6000, "09/02/2023", 100));
-            put(5, new OrderJ(5, setTwo, quantityTwo, 850, "09/02/2023", 100));
+            put(1, new OrderJ(1, setOne, quantityOne, "new", 6000, "09/02/2023", 100));
+            put(2, new OrderJ(2, setTwo, quantityTwo, "new", 850, "09/02/2023", 100));
+            put(3, new OrderJ(3, setThree, quantityThree, "new", 2000, "09/02/2023", 410));
+            put(4, new OrderJ(4, setOne, quantityOne, "new", 6000, "09/02/2023", 100));
+            put(5, new OrderJ(5, setTwo, quantityTwo, "new", 850, "09/02/2023", 100));
         }
     };
 

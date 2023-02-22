@@ -8,14 +8,16 @@ public class OrderJ implements Serializable {
     private int order_id;
     private List<ItemJ> items;
     private List<Integer> item_quantities;
+    private String status;
     private double total_price;
     private String date;
     private int customer_id;
 
-    public OrderJ(int order_id, List<ItemJ> items, List<Integer> item_quantities, double total_price, String date, int customer_id) {
+    public OrderJ(int order_id, List<ItemJ> items, List<Integer> item_quantities, String status, double total_price, String date, int customer_id) {
         this.order_id = order_id;
         this.items = items;
         this.item_quantities = item_quantities;
+        this.status = status;
         this.total_price = total_price;
         this.date = date;
         this.customer_id = customer_id;
@@ -46,6 +48,14 @@ public class OrderJ implements Serializable {
 
     public void setItem_quantities(List<Integer> item_quantities) {
         this.item_quantities = item_quantities;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public double getTotal_price() {
