@@ -219,7 +219,7 @@ footer{
     color: blue
 }
 
-.item-delete-icon a, .item-hide-icon a, .item-unhide-icon a{
+.item-delete-icon, .item-hide-icon a, .item-unhide-icon a{
     width: 10%;
     height: 100%;
     display: table-cell;
@@ -395,10 +395,18 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 
 #purchase-history-content, #admin-main-content, #hidden-items{
     padding: 20px;
-    min-height: 150px;
+    min-height: 250px;
 }
 
 #sales-section{
     padding: 0;
+}
+
+#empty-hidden, #empty-sale{
+    text-align: center;
+    color: gray;
+    align-content: center;
+    align-items: center;
+    margin-top: 75px;
 }
 

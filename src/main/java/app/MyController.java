@@ -20,9 +20,13 @@ public class MyController {
             put(2,  new ItemJ(2, "item2", "description2", 2, 2));
             put(3, new ItemJ(3, "item3", "description3", 3, 3));
             put(4, new ItemJ(4, "item4", "description4", 4, 4));
+            put(5, new ItemJ(5, "item5", "description1", 1, 1));
+            put(6,  new ItemJ(6, "item6", "description2", 2, 2));
+            put(7, new ItemJ(7, "item7", "description3", 3, 3));
+            put(8, new ItemJ(8, "item8", "description4", 4, 4));
         }
     };
-    private int count=5;
+    private int count=9;
 
     //hidden items
     LinkedHashMap<Integer, ItemJ> hiddenItems = new LinkedHashMap<>();
@@ -126,6 +130,36 @@ public class MyController {
             }
         }
     }
+
+    @PostMapping("/hiddenItems")
+    public @ResponseBody void editHiddenItem(ItemJ item, HttpServletResponse response) {
+
+        //find item
+        int id=-1;
+        for(ItemJ myItem: hiddenItems.values()) {
+            if(myItem.getName().equals(item.getName())){
+                id=myItem.getId();
+            }
+        }
+
+        //replace existing item with updated item details
+        if(id!=-1){
+            item.setId(id);
+            hiddenItems.replace(id, item);
+        }
+        //else put new item in hashmap
+        else {
+            item.setId(count);
+            hiddenItems.put(count++, item);
+        }
+
+        try {
+            response.sendRedirect("/hiddenItems");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     @GetMapping("/admin")

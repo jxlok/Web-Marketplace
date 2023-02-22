@@ -38,7 +38,7 @@
 <div id="tabs">
     <ul>
         <li><a th:href="@{admin}">Analytics & Orders</a></li>
-        <li><a th:href="@{manageItems}">Items for sale</a></li>
+        <li><a th:href="@{manageItems}">Manage Items</a></li>
     </ul>
 </div>
 
@@ -50,9 +50,9 @@
             <div id="hidden-items-container" class="row">
                 <div id="hidden-items" class="col-sm-12">
                     <div><h2>Hidden Items</h2></div>
-
-                    <div id="items" th:each="i : ${#numbers.sequence(hiddenItems.values().size() -1,0,-1)}" th:with="item=${hiddenItems.values()[i]}">
-                        <div class="item">
+                    <div id="empty-hidden" th:if="${hiddenItems.empty}">There are currently no items hidden</div>
+                    <div id="items" onload="activateEditButtons()">
+                        <div class="item" th:each="i : ${#numbers.sequence(hiddenItems.values().size() -1,0,-1)}" th:with="item=${hiddenItems.values()[i]}">
                             <span class="item-name"><strong>[(${item.getName})]</strong></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
                             <span class="item-price">$[(${item.getPrice})]</span>

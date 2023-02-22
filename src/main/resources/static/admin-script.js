@@ -1,16 +1,12 @@
-
 window.onload = function(){
     activateEditButtons()
-    // activateHideButtons()
+
 }
+
 
 let Editlistener = function editMode(){
     editItem(this.parentNode);
 }
-
-// let HideListener = function editMode(){
-//     hideItem(this.parentNode);
-// }
 
 function activateEditButtons(){
     let items = document.getElementsByClassName("item-edit-icon")
@@ -26,20 +22,20 @@ function deactivateEditButtons(){
     }
 }
 
-// function activateHideButtons(){
-//     let items = document.getElementsByClassName("item-hide-icon")
-//     for(var i=0;i<items.length;i++){
-//         items[i].addEventListener("click", HideListener);
-//     }
-// }
-//
-// function deactivateHideButtons(){
-//     let items = document.getElementsByClassName("item-hide-icon")
-//     for(var i=0;i<items.length;i++){
-//         items[i].removeEventListener("click", HideListener);
-//     }
-// }
-//
+function activateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].setAttribute('aria-disabled', "true")
+    }
+}
+
+function deactivateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].removeAttribute('aria-disabled')
+    }
+}
+
 // function activateUnhideButton(){
 //     let items = document.getElementsByClassName("item-unhide-icon")
 //     for(var i=0;i<items.length;i++){
@@ -130,7 +126,7 @@ function resetAddItem(){
 
     activateAddButton()
     activateEditButtons()
-    // activateHideButtons();
+    activateHideButtons();
 
 }
 
@@ -149,15 +145,23 @@ function editItem(item){
     let desc = inputs[1].innerText.slice(13,);
     let price = inputs[2].innerText.slice(1,);
     let quantity = inputs[3].innerText;
+    var action
+
+    if (document.title==="Manage items"){
+        action = "@{manageItems}"
+    }
+    else{
+        action = "@{hiddenItems}"
+    }
 
     item.innerHTML =
-        "<form id='editItem-form' method='POST' th:action='@{/manageItems}'>" +
-        "    <span class=\"item-name\"><input type='text' name='name' placeholder='Enter item title' value='"+name+"' required></span>\n" +
+        "<form id='editItem-form' method=\"POST\" th:action="+action+">" +
+        "    <span class=\"item-name\"><input type='text' name='name' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
         "    <span class=\"item-desc\"><textarea id=\"desc-changing\" name=\"description\" placeholder='Enter Description' cols='40' rows='6' required>"+desc+"</textarea></span>\n"+
-        "    <span class=\"item-price\">$<input type='text' name='price' value='"+price+"' required></span>\n" +
-        "    <span class=\"item-quantity\"><input type='text' name='quantity' value='"+quantity+"' required></span>\n" +
+        "    <span class=\"item-price\">$<input type='number' step='any'  name='price' value='"+price+"' required></span>\n" +
+        "    <span class=\"item-quantity\"><input type='number' step='1' name='quantity' value='"+quantity+"' required></span>\n" +
         "    <span id='confirm-change' class=\"item-change-icon\"><button type=\"submit\">&#10003</button></span>\n" +
-        "    <span id='delete-change' class=\"item-delete-icon\"><a onclick=\"undoChange('"+name+"','"+desc+"',"+price+","+quantity+")\">cancel</span>" +
+        "    <span id='delete-change' class=\"item-delete-icon\"><a onclick='location.reload()'>cancel</span>\n" +
         "</form>"
 
 
@@ -166,7 +170,7 @@ function editItem(item){
     addItemButton.removeAttribute("onclick");
 
     deactivateEditButtons()
-    // deactivateHideButtons()
+    deactivateHideButtons()
 }
 
 
@@ -187,23 +191,35 @@ function editItem(item){
 //     activateHideButtons()
 // }
 //
-function undoChange(name, desc, price, quantity){
-
-    let item = document.getElementById("editing")
-    item.innerHTML =
-        "       <span class=\"item-name\"><strong>"+name+"</strong></span>\n" +
-        "       <span class=\"item-desc\"><p><strong>Description:</strong> "+desc+"</p></span>\n" +
-        "       <span class=\"item-price\">$"+ price +"</span>\n" +
-        "       <span class=\"item-quantity\">"+ quantity +"</span>\n" +
-        "       <span class=\"item-edit-icon\"><p>edit</p></span>\n" +
-        "       <span class=\"item-hide-icon\"><p><a th:href=\"@{hiddenItems}+'/hide/'+${item.getId}\">hide</a></p></span>"
-
-    activateEditButtons()
-    activateAddButton()
-
-    item.removeAttribute("id")
-
-}
+//
+// function undoChange(name, desc, price, quantity){
+//     location.reload()
+//
+//     //
+//     // let item = document.getElementById("editing")
+//     // item.removeAttribute("id")
+//     //
+//     // var hide
+//     // var link
+//     // if(document.title==="Manage Items"){
+//     //     hide="hide"
+//     // }
+//     // else{
+//     //     hide="unhide"
+//     // }
+//     // item.innerHTML =
+//     //     "       <span class=\"item-name\"><strong>"+name+"</strong></span>\n" +
+//     //     "       <span class=\"item-desc\"><p><strong>Description:</strong> "+desc+"</p></span>\n" +
+//     //     "       <span class=\"item-price\">$"+ price +"</span>\n" +
+//     //     "       <span class=\"item-quantity\">"+ quantity +"</span>\n" +
+//     //     "       <span class=\"item-edit-icon\"><p>edit</p></span>\n" +
+//     //     "       <span class=\"item-hide-icon\"><p><a th:href=\""+'@{manageItems}'+'/'+hide+'/'+'${item.getId}'+"\">"+hide+"</a></p></span>"
+//
+//     // document.getElementById("items").innerHTML=" "
+//     // $("#items").load(' #items')
+//     // activateEditButtons()
+//     // activateHideButtons()
+// }
 //
 // function hideItem(item){
 //
