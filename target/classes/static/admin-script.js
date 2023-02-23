@@ -156,10 +156,10 @@ function editItem(item){
 
     item.innerHTML =
         "<form id='editItem-form' method=\"POST\" th:action="+action+">" +
-        "    <span class=\"item-name\"><input type='text' name='name' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
+        "    <span class=\"item-name\"><input type='text' name='itemName' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
         "    <span class=\"item-desc\"><textarea id=\"desc-changing\" name=\"description\" placeholder='Enter Description' cols='40' rows='6' required>"+desc+"</textarea></span>\n"+
-        "    <span class=\"item-price\">$<input type='number' step='any'  name='price' value='"+price+"' required></span>\n" +
-        "    <span class=\"item-quantity\"><input type='number' step='1' name='quantity' value='"+quantity+"' required></span>\n" +
+        "    <span class=\"item-price\">$<input type='number' step='any'  name='trainedPrice' value='"+price+"' required></span>\n" +
+        "    <span class=\"item-quantity\"><input type='number' step='1' name='trainedStock' value='"+quantity+"' required></span>\n" +
         "    <span id='confirm-change' class=\"item-change-icon\"><button type=\"submit\">&#10003</button></span>\n" +
         "    <span id='delete-change' class=\"item-delete-icon\"><a onclick='location.reload()'>cancel</span>\n" +
         "</form>"

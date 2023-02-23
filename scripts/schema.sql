@@ -54,10 +54,10 @@ CREATE TABLE items
     itemId         INTEGER AUTO_INCREMENT,
     itemName       varchar(255)   NOT NULL,
     description    varchar(255)   NOT NULL,
-    trainedPrice   DECIMAL(10, 2) NOT NULL,
-    unTrainedPrice DECIMAL(10, 2) NOT NULL,
-    trainedStock   INTEGER        NOT NULL,
-    unTrainedStock INTEGER        NOT NULL,
+    trainedPrice   DECIMAL(10, 2),
+    unTrainedPrice DECIMAL(10, 2),
+    trainedStock   INTEGER,
+    unTrainedStock INTEGER,
     visibility     TINYINT        NOT NULL,
 
     PRIMARY KEY (itemId)

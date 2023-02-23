@@ -1,5 +1,6 @@
 package app;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.*;
 
 @Controller
 public class MyController {
+
+    @Autowired
+    ItemService itemService;
 
     //items for sale
     LinkedHashMap<Integer, ItemJ> myItems = new LinkedHashMap<>(){
@@ -68,31 +74,43 @@ public class MyController {
     };
 
     @GetMapping("/manageItems")
-    public String manageItems(Model model){
-        model.addAttribute("myItems", myItems);
+    public String manageItems(Model model) throws SQLException, ClassNotFoundException {
+//
+//        Class.forName("com.mysql.jdbc.Driver");
+//        String url = "jdbc:mysql//localhost:3306/pawn";
+//        Connection conn = DriverManager.getConnection(url, "root", "root");
+//        Statement stmt = conn.createStatement();
+
+//        ResultSet rs = stmt.executeQuery("SELECT * FROM items");
+
+
+        model.addAttribute("myItems", itemService.getAllItems());
         return "manageItems.html";
     }
 
     @PostMapping("/manageItems")
-    public @ResponseBody void addItem(ItemJ item, HttpServletResponse response) {
+    public @ResponseBody void addItem(Item item, HttpServletResponse response) {
+
+        item.setVisibility(1);
 
         //find item
         int id=-1;
-        for(ItemJ myItem: myItems.values()) {
-            if(myItem.getName().equals(item.getName())){
-                id=myItem.getId();
+        for(Item myItem: itemService.getAllItems()) {
+            if(myItem.getItemName().equals(item.getItemName())){
+                id=myItem.getItemId();
             }
         }
 
         //replace existing item with updated item details
         if(id!=-1){
-            item.setId(id);
-            myItems.replace(id, item);
+            item.setItemId(id);
+//            myItems.replace(id, item);
         }
         //else put new item in hashmap
         else {
-            item.setId(count);
-            myItems.put(count++, item);
+//            item.setItemId(count);
+            itemService.insertItem(item);
+//            myItems.put(count++, item);
         }
 
         try {
