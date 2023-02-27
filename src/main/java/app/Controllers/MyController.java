@@ -1,4 +1,8 @@
-package app;
+package app.Controllers;
+import app.Entities.Item;
+import app.ItemJ;
+import app.OrderJ;
+import app.Service.ItemService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.sql.*;
 import java.util.*;
 
 @Controller
@@ -74,43 +76,32 @@ public class MyController {
     };
 
     @GetMapping("/manageItems")
-    public String manageItems(Model model) throws SQLException, ClassNotFoundException {
-//
-//        Class.forName("com.mysql.jdbc.Driver");
-//        String url = "jdbc:mysql//localhost:3306/pawn";
-//        Connection conn = DriverManager.getConnection(url, "root", "root");
-//        Statement stmt = conn.createStatement();
-
-//        ResultSet rs = stmt.executeQuery("SELECT * FROM items");
-
-
-        model.addAttribute("myItems", itemService.getAllItems());
+    public String manageItems(Model model){
+        model.addAttribute("myItems", itemService.getUnhiddenItems());
         return "manageItems.html";
     }
 
     @PostMapping("/manageItems")
     public @ResponseBody void addItem(Item item, HttpServletResponse response) {
 
-        item.setVisibility(1);
+        item.setIsTrained(1);
 
         //find item
-        int id=-1;
+        Item existingItem = null;
         for(Item myItem: itemService.getAllItems()) {
             if(myItem.getItemName().equals(item.getItemName())){
-                id=myItem.getItemId();
+                existingItem=myItem;
             }
         }
 
         //replace existing item with updated item details
-        if(id!=-1){
-            item.setItemId(id);
-//            myItems.replace(id, item);
+        if(existingItem!=null){
+            itemService.editItem(existingItem.getItemId(), item);
         }
         //else put new item in hashmap
         else {
-//            item.setItemId(count);
+            item.setVisibility(1);
             itemService.insertItem(item);
-//            myItems.put(count++, item);
         }
 
         try {
@@ -122,7 +113,7 @@ public class MyController {
 
     @GetMapping("/hiddenItems")
     public String hiddenItems(Model model){
-        model.addAttribute("hiddenItems", hiddenItems);
+        model.addAttribute("hiddenItems", itemService.getHiddenItems());
         return "hiddenItems.html";
     }
 
@@ -130,8 +121,7 @@ public class MyController {
     public void hiddenItems(@PathVariable String flag,@PathVariable int id, HttpServletResponse response){
 
         if(flag.equals("hide")){
-            ItemJ temp = myItems.remove(id);
-            hiddenItems.put(temp.getId(), temp);
+            itemService.hideItem(id);
             try {
                 response.sendRedirect("/manageItems");
             } catch (IOException e) {
@@ -139,8 +129,7 @@ public class MyController {
             }
         }
         else{
-            ItemJ temp = hiddenItems.remove(id);
-            myItems.put(temp.getId(), temp);
+            itemService.unhideItem(id);
             try {
                 response.sendRedirect("/hiddenItems");
             } catch (IOException e) {
@@ -150,26 +139,17 @@ public class MyController {
     }
 
     @PostMapping("/hiddenItems")
-    public @ResponseBody void editHiddenItem(ItemJ item, HttpServletResponse response) {
-
+    public @ResponseBody void editHiddenItem(Item item, HttpServletResponse response) {
         //find item
-        int id=-1;
-        for(ItemJ myItem: hiddenItems.values()) {
-            if(myItem.getName().equals(item.getName())){
-                id=myItem.getId();
+        int id = 0;
+        for(Item myItem: itemService.getAllItems()) {
+            if(myItem.getItemName().equals(item.getItemName())){
+                id=myItem.getItemId();
             }
         }
 
         //replace existing item with updated item details
-        if(id!=-1){
-            item.setId(id);
-            hiddenItems.replace(id, item);
-        }
-        //else put new item in hashmap
-        else {
-            item.setId(count);
-            hiddenItems.put(count++, item);
-        }
+        itemService.editItem(id, item);
 
         try {
             response.sendRedirect("/hiddenItems");

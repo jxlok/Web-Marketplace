@@ -52,13 +52,13 @@
                     <div><h2>Hidden Items</h2></div>
                     <div id="empty-hidden" th:if="${hiddenItems.empty}">There are currently no items hidden</div>
                     <div id="items" onload="activateEditButtons()">
-                        <div class="item" th:each="i : ${#numbers.sequence(hiddenItems.values().size() -1,0,-1)}" th:with="item=${hiddenItems.values()[i]}">
-                            <span class="item-name"><strong>[(${item.getName})]</strong></span>
+                        <div class="item" th:each="i : ${#numbers.sequence(hiddenItems.size() -1,0,-1)}" th:with="item=${hiddenItems[i]}">
+                            <span class="item-name"><strong>[(${item.getItemName})]</strong></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
                             <span class="item-price">$[(${item.getPrice})]</span>
-                            <span class="item-quantity">[(${item.getQuantity})]</span>
+                            <span class="item-quantity">x[(${item.getStock})]</span>
                             <span class="item-edit-icon"><p>edit</p></span>
-                            <span class="item-unhide-icon"><p><a th:href="@{hiddenItems}+'/unhide/'+${item.getId}">unhide</a></p></span>
+                            <span class="item-unhide-icon"><p><a th:href="@{hiddenItems}+'/unhide/'+${item.getItemId}">unhide</a></p></span>
                         </div>
                     </div>
                 </div>

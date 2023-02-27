@@ -59,8 +59,8 @@
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="itemName" required></span>
                             <span class="item-desc"><textarea id="desc-new" name="description" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
-                            <span class="item-price">$<input type='number' step="any"  name="trainedPrice" required></span>
-                            <span class="item-quantity"><input type='number' step='1' name="trainedStock" required></span>
+                            <span class="item-price">$<input type='number' step="any"  name="price" required></span>
+                            <span class="item-quantity"><input type='number' step='1' name="stock" required></span>
                             <span id="confirm-change" class="item-change-icon"><button type="submit">&#10003</button></span>
                             <span id="delete-change" class="item-delete-icon" onclick="resetAddItem()">X</span>
                         </div>
@@ -70,8 +70,8 @@
                         <div class="item" th:each="i : ${#numbers.sequence(myItems.size() -1,0,-1)}" th:with="item=${myItems[i]}">
                             <span class="item-name"><strong>[(${item.getItemName})]</strong></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
-                            <span class="item-price">$[(${item.getTrainedPrice})]</span>
-                            <span class="item-quantity">x[(${item.getTrainedStock})]</span>
+                            <span class="item-price">$[(${item.getPrice})]</span>
+                            <span class="item-quantity">x[(${item.getStock})]</span>
                             <span class="item-edit-icon"><p>edit</p></span>
                             <span class="item-hide-icon"><p><a th:href="@{hiddenItems}+'/hide/'+${item.getItemId}">hide</a></p></span>
                         </div>
