@@ -163,3 +163,14 @@ function editItem(item){
     deactivateHideButtons()
 }
 
+function show_status_list(node){
+
+    let parent = node.parentNode
+    let div = parent.getElementsByClassName("status-list")[0];
+    if(div.classList.contains("show")){
+        div.classList.remove("show")
+    }
+    else{
+        div.classList.add("show")
+    }
+}

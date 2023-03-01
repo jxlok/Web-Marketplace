@@ -12,4 +12,6 @@ public interface ItemService {
     void unhideItem(int id);
     List<Item> getHiddenItems();
     List<Item> getUnhiddenItems();
+    List<Item> getSortedUnhiddenItems();
+    Item getItem(int id);
 }

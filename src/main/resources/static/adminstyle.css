@@ -99,11 +99,11 @@ footer{
 }
 
 #order_ID, .first-col{
-    width: 10%;
+    width: 15%;
 }
 
 #item, .second-col{
-    width: 60%;
+    width: 55%;
 }
 
 #total, .third-col{
@@ -473,4 +473,43 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     padding: 5px;
     margin: 0 10px;
     font-size: 12px;
+    cursor: pointer;
+}
+
+.status:hover{
+    color:silver;
+    background-color: darkgreen;
+}
+
+.down-arrow{
+    color: silver;
+}
+
+.status-list{
+    position: absolute;
+    display: none;
+    background-color: silver;
+    z-index: 10;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.status-list>a{
+    display: block;
+    font-size: 15px;
+    background-color: lightpink;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    border-bottom: 1px solid white;
+}
+
+.status-list>a:hover{
+    background-color: pink;
+    color: gray;
+    text-decoration: none;
+}
+
+.show{
+    display: block;
 }

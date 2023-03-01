@@ -8,7 +8,7 @@ public class Item {
     private String itemName;
     private String description;
     private int isTrained;
-    private BigDecimal price;
+    private double price;
     private int stock;
     private int visibility;
 
@@ -44,11 +44,11 @@ public class Item {
         this.isTrained = isTrained;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

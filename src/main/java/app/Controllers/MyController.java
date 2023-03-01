@@ -1,8 +1,11 @@
 package app.Controllers;
 import app.Entities.Item;
+import app.Entities.Order;
+import app.Entities.Order_Details;
 import app.ItemJ;
 import app.OrderJ;
 import app.Service.ItemService;
+import app.Service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -20,6 +24,9 @@ public class MyController {
 
     @Autowired
     ItemService itemService;
+
+    @Autowired
+    OrderService orderService;
 
     //items for sale
     LinkedHashMap<Integer, ItemJ> myItems = new LinkedHashMap<>(){
@@ -163,11 +170,7 @@ public class MyController {
     @GetMapping("/admin")
     public String admin(Model model){
         //total-sales statistic
-        float total_sales=0;
-        for(OrderJ order : orders.values()){
-            total_sales+=order.getTotal_price();
-        }
-        model.addAttribute("total_sales", total_sales);
+        model.addAttribute("total_sales", orderService.getTotalSales());
 
         //best-selling statistic
         LinkedHashMap<String, Integer> sold_items = new LinkedHashMap<>();
@@ -185,21 +188,26 @@ public class MyController {
         List<Map.Entry<String, Integer>> list = new LinkedList<>(sold_items.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        model.addAttribute("best_seller", list.get(0).getKey());
+        model.addAttribute("best_seller", orderService.getBestSeller());
 
-        model.addAttribute("sold_count", sold_items);
+        model.addAttribute("sold_count", orderService.getSoldItemCount());
 
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", orderService.getFullOrderInfo());
 
-        //sorted availability
-        HashMap<String, Integer> item_availability = new HashMap<>();
-        for(ItemJ item : myItems.values()){
-            item_availability.put(item.getName(), item.getQuantity());
-        }
-        List<Map.Entry<String, Integer>> availability_list = new LinkedList<>(item_availability.entrySet());
-        availability_list.sort(Map.Entry.comparingByValue());
-        model.addAttribute("availability_list", availability_list);
+        model.addAttribute("sorted_stock_list", itemService.getSortedUnhiddenItems());
         return "admin.html";
+    }
+
+    @GetMapping("/admin/{status}/{id}")
+    public void changeStatus(@PathVariable String status, @PathVariable int id, HttpServletResponse response){
+
+        orderService.updateOrderStatus(id, status);
+
+        try {
+            response.sendRedirect("/admin");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @GetMapping("/cart")

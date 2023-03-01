@@ -2,6 +2,7 @@ package app.Service;
 
 import app.Dao.ItemDao;
 import app.Entities.Item;
+import org.hibernate.annotations.DialectOverride;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,6 @@ public class ItemServiceImpl implements ItemService{
 
     @Autowired
     ItemDao itemDao;
-
 
     @Override
     public List<Item> getAllItems() {
@@ -47,5 +47,15 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public List<Item> getUnhiddenItems(){
         return itemDao.getUnhiddenItems();
+    }
+
+    @Override
+    public List<Item> getSortedUnhiddenItems(){
+        return itemDao.getSortedUnhiddenItems();
+    }
+
+    @Override
+    public Item getItem(int id){
+        return itemDao.getItem(id);
     }
 }
