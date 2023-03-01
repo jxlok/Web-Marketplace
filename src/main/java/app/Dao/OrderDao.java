@@ -18,5 +18,6 @@ public interface OrderDao {
     String getBestSeller();
     List<FullOrderInfo> getFullOrderInfo();
     void updateOrderStatus(int id, String status);
-
+    List<FullOrderInfo> getFullOrderInfoByCustomer(int id);
+    List<Order> getAllOrdersOfCustomer(int id);
 }

@@ -49,4 +49,12 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void updateOrderStatus(int id, String status){ orderDao.updateOrderStatus(id, status); }
+
+    @Override
+    public List<FullOrderInfo> getFullOrderInfoByCustomer(int id){ return orderDao.getFullOrderInfoByCustomer(id);}
+
+    @Override
+    public List<Order> getAllOrdersOfCustomer(int id) {
+        return orderDao.getAllOrdersOfCustomer(id);
+    }
 }

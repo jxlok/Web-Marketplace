@@ -464,25 +464,25 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 }
 
 .status{
-    width: 60px;
-    height: 30px;
+    display: inline-block;
+    width: 50%;
     border: 1px solid silver;
     border-radius: 20px;
-    background-color: green;
     color: white;
     padding: 5px;
     margin: 0 10px;
     font-size: 12px;
     cursor: pointer;
+
 }
 
 .status:hover{
     color:silver;
-    background-color: darkgreen;
 }
 
 .down-arrow{
     color: silver;
+    float: right;
 }
 
 .status-list{
@@ -512,4 +512,16 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 
 .show{
     display: block;
+}
+
+.status-new{
+    background-color: green;
+}
+
+.status-delivered{
+    background-color: gray;
+}
+
+.status-cancelled{
+    background-color: red;
 }

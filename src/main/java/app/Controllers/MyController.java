@@ -228,14 +228,7 @@ public class MyController {
     @GetMapping("/purchase-history")
     public String purchasehistory(Model model){
 
-        List<OrderJ> customerOrders = new ArrayList<>();
-        for(OrderJ order: orders.values()){
-            if(order.getCustomer_id()==100){
-                customerOrders.add(order);
-            }
-        }
-
-        model.addAttribute("customerOrders", customerOrders);
+        model.addAttribute("customerOrders", orderService.getFullOrderInfoByCustomer(200));
         return "purchase-history.html";
     }
 

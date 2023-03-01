@@ -37,17 +37,17 @@
     <div class="row">
         <div id="purchase-history-content" class="col-sm-12">
             <h3><b>Your Orders</b></h3>
-            <div class="order-container" th:each="order : ${customerOrders}">
+            <div class="order-container" th:each="i : ${#numbers.sequence(customerOrders.size() - 1, 0, -1)}" th:with="order=${customerOrders[i]}">
                 <div class="order-header">
-                    <span class="order-header-item order-number">Order number: [(${order.getOrder_id})]</span>
-                    <span class="order-header-item order-date">[(${order.getDate})]</span>
-                    <span class="order-header-item order-price">Total: $[(${order.total_price})]</span>
+                    <span class="order-header-item order-number">Order number: [(${order.getOrder.getOrderID})]</span>
+                    <span class="order-header-item order-date">[(${order.getOrder.getOrderPlacedTime})]</span>
+                    <span class="order-header-item order-price">Total: $[(${#numbers.formatDecimal(order.getTotalPrice, 1, 2)})]</span>
                 </div>
-                <div class="order-body" th:each="i : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[i]}, quantity=${order.getItem_quantities[i]}">
+                <div class="order-body" th:each="j : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[j]}, order_details=${order.getOrder_details[j]}">
                     <div class="order-item">
-                        <span class="order-body-item order-item-name"><a href="#">[(${item.getName})]</a></span>
-                        <span class="order-body-item order-item-quantity">x[(${quantity})]</span>
-                        <span class="order-body-item order-item-price">$[(${item.getPrice})]</span>
+                        <span class="order-body-item order-item-name"><a href="#">[(${item.getItemName})]</a></span>
+                        <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
+                        <span class="order-body-item order-item-price">$[(${#numbers.formatDecimal(item.getPrice, 1, 2)})]</span>
                     </div>
                 </div>
             </div>

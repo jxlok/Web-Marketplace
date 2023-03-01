@@ -152,5 +152,51 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
         getJdbcTemplate().update(sql, new Object[]{status, id});
     }
 
+    @Override
+    public List<FullOrderInfo> getFullOrderInfoByCustomer(int id){
+        List<Order> orders = getAllOrdersOfCustomer(id);
+
+        List<FullOrderInfo> result = new ArrayList<>();
+        for(Order order: orders){
+            FullOrderInfo fullOrderInfo = new FullOrderInfo();
+
+            List<Order_Details> ordersDetails = getOrderDetails(order);
+            List<Item> items = new ArrayList<>();
+            double totalPrice= 0;
+            for(Order_Details order_details: ordersDetails){
+                Item item = itemDao.getItem(order_details.getItemID());
+                items.add(item);
+                totalPrice += item.getPrice()*order_details.getQuantity();
+            }
+
+            fullOrderInfo.setOrder(order);
+            fullOrderInfo.setOrder_details(ordersDetails);
+            fullOrderInfo.setItems(items);
+            fullOrderInfo.setTotalPrice(totalPrice);
+
+            result.add(fullOrderInfo);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<Order> getAllOrdersOfCustomer(int id) {
+        String sql = "SELECT * FROM orders WHERE customerID="+id;
+        List<Map<String, Object>> orders = getJdbcTemplate().queryForList(sql);
+
+        List<Order> result = new ArrayList<>();
+        for(Map<String, Object> order :  orders){
+            Order newOrder = new Order();
+            newOrder.setOrderID((Integer) order.get("orderID"));
+            newOrder.setOrderPlacedTime((Timestamp) order.get("orderPlacedTime"));
+            newOrder.setOrderStatus((String) order.get("orderStatus"));
+            newOrder.setPaymentID((Integer) order.get("paymentID"));
+            newOrder.setCustomerID((Integer) order.get("customerID"));
+
+            result.add(newOrder);
+        }
+        return result;
+    }
 
 }
