@@ -3,11 +3,16 @@ html{
 }
 
 body{
-    margin: 0;
+    background-color: rgba(254,216,243,0.75);
+    min-height: 100vh;
+    vertical-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: sans-serif;
 }
-header{
-    padding:30px;
-    border-bottom: 1px solid black
+
+#main-container{
+    margin: 10px auto;
 }
 
 footer{
@@ -21,39 +26,49 @@ footer{
 #center-info{
     /*border-left: 1px solid black;*/
     /*border-right: 1px solid black;*/
-    border: 1px solid black;
-    margin: 10px 0;
-}
-
-#sales-section{
-    border: 1px solid black;
-    margin: 50px 0 20px 0;
-    padding: 0;
+    margin: 0;
 }
 
 #data-analytics{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid silver;
 }
 
 #graph{
     height: 50vh;
     text-align: center;
-    border-right: 1px solid black
+    border-right: 1px solid silver;
+    padding: 20px
+}
+
+#bar-chart{
+    vertical-align: center;
+}
+
+#total-sales-container{
+    height: 25vh;
+    border-bottom: 1px solid silver;
+    text-align: center
 }
 
 #total-sales{
-    height: 25vh;
-    border-bottom: 1px solid black;
-    text-align: center
+    font-size: 10vh;
+}
+
+#total-sales, #top-sellers{
+    font-weight: bold;
+    text-align: center;
 }
 
 #top-sellers{
+    font-size: 5vh;
+}
+#top-sellers-container{
     height: 12.5vh;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid silver;
     text-align: center
 }
 
-#your-balance{
+#shortage-info{
     height: 12.5vh;
     text-align: center
 }
@@ -69,7 +84,7 @@ footer{
 
 #order-history-header>ul{
     list-style-type: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid silver;
     margin-top: 10px;
     padding: 0;
     display: table;
@@ -84,24 +99,28 @@ footer{
 }
 
 #order_ID, .first-col{
-    width: 10%;
+    width: 15%;
 }
 
 #item, .second-col{
-    width: 60%;
+    width: 55%;
 }
 
 #total, .third-col{
-    width: 15%;
+    width: 10%;
 }
 
 #date, .fourth-col{
-    width: 15%;
+    width: 10%;
+}
+
+#customer_ID, .fifth-col{
+    width: 10%;
     border-right: none;
 }
 
 .order{
-    border: 1px solid gray;
+    border: 1px solid silver;
     width: 100%;
     display: table;
     margin: 15px 0;
@@ -130,6 +149,15 @@ footer{
     border: 1px solid silver;
     width: 100%;
     cursor: pointer;
+}
+
+#tabs a{
+    text-decoration: none;
+    color: black;
+}
+
+#tabs a:hover{
+    color: gray;
 }
 
 #items-for-sale, #hidden-items-container{
@@ -181,7 +209,7 @@ footer{
     margin: 0;
     height: 100%;
     display: table-cell;
-    border-right: 1px solid gray;
+    border-right: 1px solid silver;
     padding: 10px;
     justify-content: center;
 }
@@ -190,7 +218,7 @@ footer{
     width: 10%;
     height: 100%;
     display: table-cell;
-    border-right: 1px solid gray;
+    border-right: 1px solid silver;
     padding: 10px;
     justify-content: center;
     margin: 0;
@@ -201,13 +229,14 @@ footer{
     width: 10%;
     height: 100%;
     display: table-cell;
-    border-right: 1px solid gray;
+    border-right: 1px solid silver;
     padding: 10px;
     justify-content: center;
     margin: 0;
+    color: blue
 }
 
-.item-delete-icon, .item-hide-icon{
+.item-delete-icon, .item-hide-icon a, .item-unhide-icon a{
     width: 10%;
     height: 100%;
     display: table-cell;
@@ -217,31 +246,38 @@ footer{
     margin: 0;
 }
 
-.item-delete-icon>p, .item-hide-icon>p, .item-edit-icon>p{
+.item-delete-icon a:hover, .item-hide-icon a:hover, .item-unhide-icon a:hover{
+    text-decoration: none;
+    color: darkred;
+}
+
+
+.item-delete-icon a, .item-hide-icon a, .item-edit-icon>p, .item-unhide-icon a{
     cursor: pointer;
 }
 
 /*purchase history page*/
 #orders{
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    margin: 20px auto;
 }
 
 .order-container{
-    border: 1px solid gray;
+    border: 1px solid silver;
     margin: 20px 0;
 }
 
 .order-header{
     height: 15%;
     width: 100%;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid silver;
     display: table;
 }
 
 
 .order-header-item, .order-body-item{
-    border-right: 1px solid gray;
+    border-right: 1px solid silver;
     margin: 0;
     height: 100%;
     display: inline-flex;
@@ -289,15 +325,16 @@ footer{
 /*Items for sale edit and delete*/
 #addItem{
     position: absolute;
-    top: 2vh;
-    left: 70vw;
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
+    top: 1vh;
+    left: 65vw;
+    height: 40px;
+    width: 40px;
+    border: 1px solid silver;
     background-color: white;
     z-index: 1;
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
+    vertical-align: center;
     border-radius: 10px;
     cursor: pointer;
 
@@ -337,20 +374,32 @@ footer{
     height: 40px;
     background-color: white;
     z-index: 1;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
-    border-radius: 2px;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-radius: 3px;
     padding: 10px;
     position: absolute;
-    top: -40px;
+    top: -30px;
     left:-1px;
     cursor: pointer;
 }
 
+a>#sale-tab, a>#hidden-tab{
+    text-decoration: none;
+    color: black;
+}
+
+a>#sale-tab:hover, a>#hidden-tab:hover{
+    color: gray;
+}
+
+.xtab{
+    border-bottom: 1px solid silver;
+}
+
 #hidden-tab{
     left: 70px;
-    border-bottom: 1px solid black;
 }
 
 #hidden-items-container{
@@ -359,4 +408,120 @@ footer{
 
 #hidden-items{
     display: table;
+}
+
+#purchase-history-content, #admin-main-content, #hidden-items{
+    padding: 20px;
+    min-height: 250px;
+}
+
+#sales-section{
+    padding: 0;
+}
+
+#empty-hidden, #empty-sale{
+    text-align: center;
+    color: gray;
+    align-content: center;
+    align-items: center;
+    margin-top: 75px;
+}
+
+#empty-available-list{
+    text-align: center;
+    color: gray;
+    align-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.availability-item{
+    border-bottom: 1px solid silver;
+    padding: 5px;
+}
+
+#availability-container{
+    border: 1px solid silver;
+    overflow-y: scroll;
+    height: 70%;
+    padding: 0 10px;
+    width: 95%;
+    margin: 0 2.5%;
+
+}
+
+.availability-item-name{
+    border-right: 1px solid silver;
+    padding: 5px;
+    width: 25vw;
+    text-align: center;
+}
+
+.availability-quantity{
+    width: 25vw;
+    padding: 5px;
+    text-align: center;
+}
+
+.status{
+    display: inline-block;
+    width: 50%;
+    border: 1px solid silver;
+    border-radius: 20px;
+    color: white;
+    padding: 5px;
+    margin: 0 10px;
+    font-size: 12px;
+    cursor: pointer;
+
+}
+
+.status:hover{
+    color:silver;
+}
+
+.down-arrow{
+    color: silver;
+    float: right;
+}
+
+.status-list{
+    position: absolute;
+    display: none;
+    background-color: silver;
+    z-index: 10;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.status-list>a{
+    display: block;
+    font-size: 15px;
+    background-color: lightpink;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    border-bottom: 1px solid white;
+}
+
+.status-list>a:hover{
+    background-color: pink;
+    color: gray;
+    text-decoration: none;
+}
+
+.show{
+    display: block;
+}
+
+.status-new{
+    background-color: green;
+}
+
+.status-delivered{
+    background-color: gray;
+}
+
+.status-cancelled{
+    background-color: red;
 }
