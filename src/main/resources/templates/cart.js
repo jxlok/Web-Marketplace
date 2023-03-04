@@ -15,5 +15,6 @@ function decrement(container) {
 }
 
 function removeItem(){
-    let item = document.getElementById('');
+    let item = document.getElementById('item1');
+    item.remove();
 }
