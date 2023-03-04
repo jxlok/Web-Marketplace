@@ -13,3 +13,7 @@ function decrement(container) {
         counter.innerText = parseInt(counter.innerText) - 1;
     }
 }
+
+function removeItem(){
+    let item = document.getElementById('');
+}

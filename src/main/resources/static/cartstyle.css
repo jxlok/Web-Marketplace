@@ -86,3 +86,9 @@ input{
     color: rgba(15,76,254,0.91)
 }
 
+.delete-button{
+    border: 0px;
+    background-color: transparent;
+}
+
+
