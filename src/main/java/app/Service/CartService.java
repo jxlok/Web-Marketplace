@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface CartService {
     List<CartDisplayItem> getCart(int customerId);
+    Boolean updateCartItemQuantity(int customerId, int cartItemId, int newQuantity);
 
+    Boolean deleteCartItem(int customerId, int cartItemId);
 }

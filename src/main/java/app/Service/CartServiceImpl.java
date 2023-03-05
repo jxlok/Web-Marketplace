@@ -28,5 +28,13 @@ public class CartServiceImpl implements CartService {
                         .toList();
     }
 
+    public Boolean updateCartItemQuantity(int customerId, int cartItemId, int newQuantity) {
+        var rowAffected = carts.setQuantity(customerId, cartItemId, newQuantity);
+        return rowAffected > 0;
+    }
 
+    public Boolean deleteCartItem(int customerId, int cartItemId) {
+        var rowAffected = carts.deleteCartItem(customerId, cartItemId);
+        return rowAffected > 0;
+    }
 }
