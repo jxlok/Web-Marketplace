@@ -3,16 +3,18 @@ html{
 }
 
 body{
-    background-color: rgba(254,216,243,0.75);
+    background-color: azure;
     min-height: 100vh;
     vertical-align: center;
     font-weight: bold;
     font-size: 0.8rem;
     font-family: sans-serif;
+    color: black;
 }
 
 #main-container{
     margin: 10px auto;
+    background-color: white;
 }
 
 footer{
@@ -47,16 +49,15 @@ footer{
 #total-sales-container{
     height: 25vh;
     border-bottom: 1px solid silver;
-    text-align: center
+    padding: 20px;
+    text-align: center;
 }
 
 #total-sales{
-    font-size: 10vh;
-}
+    font-size: 7vw;}
 
 #total-sales, #top-sellers{
-    font-weight: bold;
-    text-align: center;
+    font-weight: unset;
 }
 
 #top-sellers{
@@ -128,7 +129,7 @@ footer{
 
 
 #tabs{
-    background-color: white;
+    background-color: rgb(138,170,229);
     z-index: 1;
     top: 30vh;
     left: -10px;
@@ -141,6 +142,7 @@ footer{
 #tabs ul{
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 #tabs li{
@@ -153,11 +155,11 @@ footer{
 
 #tabs a{
     text-decoration: none;
-    color: black;
+    color: rgb(238, 242, 238);
 }
 
 #tabs a:hover{
-    color: gray;
+    color: silver;
 }
 
 #items-for-sale, #hidden-items-container{
@@ -257,12 +259,6 @@ footer{
 }
 
 /*purchase history page*/
-#orders{
-    border-left: 1px solid silver;
-    border-right: 1px solid silver;
-    margin: 20px auto;
-}
-
 .order-container{
     border: 1px solid silver;
     margin: 20px 0;
@@ -311,6 +307,14 @@ footer{
 
 .order-item-name{
     width: 70%;
+}
+
+.order-item-name>a{
+   color: black;
+}
+
+.order-item-name>a:hover{
+    color: silver
 }
 
 .order-item-quantity{
@@ -465,7 +469,7 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 
 .status{
     display: inline-block;
-    width: 50%;
+    width: 55%;
     border: 1px solid silver;
     border-radius: 20px;
     color: white;

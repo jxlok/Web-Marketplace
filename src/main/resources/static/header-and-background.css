@@ -1,0 +1,15 @@
+header{
+    padding: 50px;
+    margin-bottom: 10px;
+}
+
+
+/*That piece of transparent background that stands out on the page*/
+.stands-out-background{
+    margin: auto;
+    max-width: 1000px;
+    /*width: 90%;*/
+    box-shadow: 0 6px 20px 0 rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    border: transparent;
+}

@@ -4,37 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="../static/cartstyle.css" th:href="@{cartstyle.css}">
-    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
 </head>
 <body>
-<header>
-    <div class="container">
-        <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top justify-content-center">
-            <a class="navbar-brand" href="#">
-                <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="logo" style="width:40px;">
-            </a>
-            <form class="form-inline" action="?">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-success" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log out</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
+<header th:insert="~{fragments.html :: header}"> </header>
 <!--tabs on left-->
 <div id="tabs">
     <ul>

@@ -7,6 +7,8 @@
     <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="../static/cart.js"></script>
+
 
 </head>
 <body>
@@ -39,55 +41,68 @@
 <div class="stands-out-background container">
     <div class="row">
         <div class="col-md-8 cart">
-            <div class="title">
+            <div class="title" style="border-bottom: dimgrey solid 1px; padding-bottom: 20px;">
                 <div class="row">
                     <div class="col"><h3><b>Shopping Cart</b></h3></div>
                     <div class="col text-right text-muted align-self-center">? items</div>
                 </div>
             </div>
-            <div class="row border-top border-bottom">
-                <div class="row items align-items-center">
+
+            <div class="items-list">
+                <div class="row items align-items-center" id="item1">
                     <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
                                             src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png"></div>
                     <div class="col">
-                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row text-muted"> AI MODEL 1</div>
                         <div class="row"> This a AI model</div>
                     </div>
                     <div class="col">
-                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                        <div class="container">
+                            <button class="quantity-button"  onclick="decrement(this.parentNode)">-</button>
+                            <a style="color: rgba(15,76,254,0.91);" class="counting">1</a>
+                            <button class="quantity-button" onclick="increment(this.parentNode)">+</button>
+                        </div>
                     </div>
                     <div class="col"> &euro; 8.20 <span> &#10006</span></div>
                 </div>
-            </div>
-            <div class="row">
+
                 <div class="row items align-items-center">
                     <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
                                             src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png"></div>
                     <div class="col">
-                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row text-muted"> AI MODEL 2 </div>
                         <div class="row"> This a AI model</div>
                     </div>
                     <div class="col">
-                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                        <div class="container">
+                            <button class="quantity-button"  onclick="decrement(this.parentNode)">-</button>
+                            <a style="color: rgba(15,76,254,0.91);" class="counting">1</a>
+                            <button class="quantity-button" onclick="increment(this.parentNode)">+</button>
+                        </div>
                     </div>
                     <div class="col"> &euro; 8.20 <span> &#10006</span></div>
                 </div>
-            </div>
-            <div class="row border-top border-bottom">
+
                 <div class="row items align-items-center">
                     <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
                                             src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png"></div>
                     <div class="col">
-                        <div class="row text-muted"> AI MODEL</div>
+                        <div class="row text-muted"> AI MODEL 3</div>
                         <div class="row"> This an AI model</div>
                     </div>
                     <div class="col">
-                        <a href="#"> - </a> <a class="border" href="#">1</a> <a href="#">+</a>
+                        <div class="container">
+                            <button class="quantity-button"  onclick="decrement(this.parentNode)">-</button>
+                            <a style="color: rgba(15,76,254,0.91);" class="counting">1</a>
+                            <button class="quantity-button" onclick="increment(this.parentNode)">+</button>
+                        </div>
                     </div>
-                    <div class="col"> &euro; 8.20 <span> &#10006</span></div>
+                    <div class="col"> &euro; 8.20 <span> <button onClick="removeItem()" class="delete-button">&#10006</button></span></div>
                 </div>
             </div>
-            <div class="back-to-shop"><a href="#">&leftarrow; </a><span class="text-muted">Back to shop</span></div>
+
+
+            <div class="back-to-shop" style="border-top: dimgrey solid 1px; padding-top: 50px"><a href="#">&leftarrow; </a><span class="text-muted">Back to shop</span></div>
         </div>
 
         <div class="col-md-4 order-summary">

@@ -1,5 +1,6 @@
 package app.Controllers;
 
+import app.User;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
