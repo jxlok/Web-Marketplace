@@ -83,3 +83,4 @@ INSERT INTO order_details (orderID, itemID, quantity) VALUES (1, 1, 2);
 INSERT INTO order_details (orderID, itemID, quantity) VALUES (1, 2, 1);
 INSERT INTO order_details (orderID, itemID, quantity) VALUES (2, 2, 2);
 
+INSERT INTO admins (email, password) VALUES ("admin@admin.ie", "password")

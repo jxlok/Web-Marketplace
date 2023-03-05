@@ -1,27 +1,30 @@
 package app.Controllers;
 
 import app.Entities.Item;
+import app.Service.AdminService;
 import app.Service.ItemService;
 import app.Service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @Controller
 public class AdminController {
 
+    boolean passwordError=false;
+
     @Autowired
     ItemService itemService;
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    AdminService adminService;
 
     @GetMapping("/manageItems")
     public String manageItems(Model model){
@@ -113,14 +116,13 @@ public class AdminController {
     public String admin(Model model){
         //total-sales statistic
         model.addAttribute("total_sales", orderService.getTotalSales());
-
         model.addAttribute("best_seller", orderService.getBestSeller());
-
         model.addAttribute("sold_count", orderService.getSoldItemCount());
+        model.addAttribute("sorted_stock_list", itemService.getSortedUnhiddenItems());
 
+        //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
 
-        model.addAttribute("sorted_stock_list", itemService.getSortedUnhiddenItems());
         return "admin.html";
     }
 
@@ -133,6 +135,39 @@ public class AdminController {
             response.sendRedirect("/admin");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @GetMapping("/admin-login")
+    public String adminLogin(Model model){
+
+        model.addAttribute("failedAttempt", passwordError);
+
+        return "admin-login.html";
+    }
+
+    @PostMapping("/admin-login")
+    public void validateAdminLogin(
+            @RequestParam(value = "admin-email", required = true) String email,
+            @RequestParam(value = "admin-password", required = true) String password,
+            HttpServletResponse response
+    ){
+
+        if(adminService.validateAdmin(email, password)){
+            passwordError=false;
+            try {
+                response.sendRedirect("/admin");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            passwordError=true;
+            try {
+                response.sendRedirect("/admin-login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
