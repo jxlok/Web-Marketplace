@@ -4,36 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Hidden Items</title>
-    <link rel="stylesheet" href="../static/cartstyle.css" th:href="@{cartstyle.css}">
-    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
 </head>
 <body>
-<header>
-<div class="container">
-    <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top justify-content-center">
-        <a class="navbar-brand" href="#">
-            <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="logo" style="width:40px;">
-        </a>
-        <form class="form-inline" action="?">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Log out</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-</header>
+<header th:insert="~{fragments.html :: header}"> </header>
+
 <!--tabs on left-->
 <div id="tabs">
     <ul>
@@ -55,7 +36,7 @@
                         <div class="item" th:each="i : ${#numbers.sequence(hiddenItems.size() -1,0,-1)}" th:with="item=${hiddenItems[i]}">
                             <span class="item-name"><strong>[(${item.getItemName})]</strong></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
-                            <span class="item-price">$[(${item.getPrice})]</span>
+                            <span class="item-price">$[(${#numbers.formatDecimal(item.getPrice, 1, 2)})]</span>
                             <span class="item-quantity">x[(${item.getStock})]</span>
                             <span class="item-edit-icon"><p>edit</p></span>
                             <span class="item-unhide-icon"><p><a th:href="@{hiddenItems}+'/unhide/'+${item.getItemId}">unhide</a></p></span>
