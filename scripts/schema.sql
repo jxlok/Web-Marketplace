@@ -99,3 +99,4 @@ INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 4, 0, 3
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 7, 1, 4);
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 8, 0, 5);
 
+INSERT INTO admins (email, password) VALUES ("admin@admin.ie", "password")

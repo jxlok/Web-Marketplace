@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
+</head>
+<body>
+
+<header th:insert="~{fragments.html :: header}"> </header>
+
+<div class="container">
+    <div class="row">
+        <div id="admin-login-container" class="col-sm-8 offset-sm-2 stands-out-background ">
+            <div class="row">
+                <div id="admin-login-picture" class="col-sm-5">
+                    <video preload="auto" loop playsinline autoplay muted="muted">
+                        <source th:src="@{media/video.mp4}" src="../static/media/video.mp4">
+                    </video>
+                </div>
+                <div id="admin-container-right" class="col-sm-7">
+                    <form id="admin-login-form" method="post" th:action="@{/admin-login}">
+                        <h1>Admin Login</h1>
+                        <div>
+                            <label for="email">Email address</label>
+                            <input id="email" name="admin-email" type="email" required>
+                        </div>
+                        <div>
+                            <label for="password">Password</label>
+                            <input id="password" name="admin-password" type="password" required>
+                        </div>
+                        <div>
+                            <button type="submit">Login</button>
+                        </div>
+                        <div id="error" th:if="${failedAttempt}">Invalid email or password</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
