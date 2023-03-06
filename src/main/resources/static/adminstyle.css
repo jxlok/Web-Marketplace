@@ -557,26 +557,41 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 #admin-login-form{
     text-align: center;
     font-size: 20px;
-    padding: 20%;
+    padding: 10%;
 }
 
-#admin-login-form label, #admin-login-form button{
-    float: left;
-    margin-top: 20px;
-}
-
-#admin-container-right{
-    background-color: turquoise;
-}
-
-#admin-container-right h1{
-    font-weight: bold;
-}
-
-#admin-container-right input, #admin-container-right button{
+#admin-login-form input, #admin-login-form button{
+    margin-top: 15%;
     border-radius: 5px;
 }
 
+#admin-container-right{
+    background-color: white;
+}
+
+#admin-container-right h1{
+    color: turquoise;
+}
+
+#admin-container-right input{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+#admin-container-right input:focus{
+    outline: none;
+}
+
+#admin-container-right button{
+    border: 2px solid turquoise;
+    width: 80%;
+    background-color: white;
+    border-radius: 15px;
+    color: turquoise;
+}
 #error{
     color: red;
     font-size: 15px;

@@ -28,12 +28,10 @@
                     <form id="admin-login-form" method="post" th:action="@{/admin-login}">
                         <h1>Admin Login</h1>
                         <div>
-                            <label for="email">Email address</label>
-                            <input id="email" name="admin-email" type="email" required>
+                            <input id="email" name="admin-email" type="email" required placeholder="Email address">
                         </div>
                         <div>
-                            <label for="password">Password</label>
-                            <input id="password" name="admin-password" type="password" required>
+                            <input id="password" name="admin-password" type="password" required placeholder="Password">
                         </div>
                         <div>
                             <button type="submit">Login</button>
