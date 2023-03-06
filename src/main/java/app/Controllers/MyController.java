@@ -15,20 +15,11 @@ public class MyController {
     @Autowired
     OrderService orderService;
 
-    @GetMapping("/cart")
-    public String cart(){
-        return "cart.html";
-    }
-
     @GetMapping("/checkout")
     public String checkout(){
         return "checkout.html";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "login.html";
-    }
 
     @GetMapping("/purchase-history")
     public String purchasehistory(Model model){

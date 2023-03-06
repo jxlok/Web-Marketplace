@@ -75,12 +75,28 @@ CREATE TABLE carts
     FOREIGN KEY (itemID) REFERENCES items (itemID)
 );
 
-INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("item1", "description1", 1, 100.00, 10, 1);
-INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("item2", "description2", 2, 200.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Google", "[trained] Hello Google!", 1, 100.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Google", "[untrained] Hello Google!", 0, 40.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("dudu", "[trained] Hi From Baidu!", 1, 200.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("dudu", "[untrained] Hi From Baidu!", 0, 90.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Siri", "[trained] Hi Siir!", 1, 150.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Siri", "[untrained] Hi Siir!", 0, 70.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("ChatGPT", "[trained] the popular chatGPT!", 1, 200.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("ChatGPT", "[untrained] the popular chatGPT!", 0, 120.00, 10, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Alexa", "[trained]Hi Alexa!", 1, 80.00, 15, 1);
+INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Alexa", "[untrained]Hi Alexa!", 0, 35.00, 15, 1);
+
+
 INSERT INTO orders (orderStatus, paymentID, customerID) VALUES ("New", 2, 200);
 INSERT INTO orders (orderStatus, paymentID, customerID) VALUES ("New", 1, 100);
 INSERT INTO order_details (orderID, itemID, quantity) VALUES (1, 1, 2);
 INSERT INTO order_details (orderID, itemID, quantity) VALUES (1, 2, 1);
 INSERT INTO order_details (orderID, itemID, quantity) VALUES (2, 2, 2);
+INSERT INTO customers (customerID, email, password) VALUES (111, "111@gmail.com", "secret");
+INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 1, 1, 1);
+INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 2, 0, 2);
+INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 4, 0, 3);
+INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 7, 1, 4);
+INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 8, 0, 5);
 
 INSERT INTO admins (email, password) VALUES ("admin@admin.ie", "password")

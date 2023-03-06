@@ -3,7 +3,6 @@ window.onload = function(){
 
 }
 
-
 let Editlistener = function editMode(){
     editItem(this.parentNode);
 }
@@ -36,58 +35,6 @@ function deactivateHideButtons(){
     }
 }
 
-// function activateUnhideButton(){
-//     let items = document.getElementsByClassName("item-unhide-icon")
-//     for(var i=0;i<items.length;i++){
-//         items[i].removeEventListener("click", HideListener);
-//     }
-// }
-//
-// function analytics_tab(){
-//     let analytics = document.getElementById('center-info');
-//     let items = document.getElementById('sales-section');
-//
-//     analytics.removeAttribute("hidden");
-//     items.setAttribute("hidden", "hidden");
-// }
-//
-// function items_tab(){
-//     let analytics = document.getElementById('center-info');
-//     let items = document.getElementById('sales-section');
-//
-//     items.removeAttribute("hidden");
-//     analytics.setAttribute("hidden", "hidden");
-// }
-//
-// function displayItemForSale(){
-//     let saleSection = document.getElementById('items-for-sale');
-//     let hiddenSection = document.getElementById('hidden-items-container');
-//
-//     saleSection.removeAttribute("hidden");
-//     hiddenSection.setAttribute("hidden", "hidden")
-//
-//     let saleTab = document.getElementById('sale-tab')
-//     let hiddenTab = document.getElementById('hidden-tab')
-//
-//     saleTab.style.borderBottom = 0
-//     hiddenTab.style.borderBottom = "1px solid silver"
-// }
-//
-// function displayHiddenTab(){
-//     let saleSection = document.getElementById('items-for-sale');
-//     let hiddenSection = document.getElementById('hidden-items-container');
-//
-//     hiddenSection.removeAttribute("hidden");
-//     saleSection.setAttribute("hidden", "hidden")
-//
-//     let saleTab = document.getElementById('sale-tab')
-//     let hiddenTab = document.getElementById('hidden-tab')
-//
-//     hiddenTab.style.borderBottom = 0
-//     saleTab.style.borderBottom = "1px solid silver"
-//
-// }
-
 function addItem(){
     let form = document.getElementById("addItem-form");
     form.removeAttribute("hidden")
@@ -97,26 +44,7 @@ function addItem(){
 
     deactivateEditButtons()
 }
-//
-// function addNewItem() {
-//
-//     let form = document.getElementById("addItem-form");
-//     let items = document.getElementById("items");
-//     let desc = document.getElementById("desc-new");
-//     items.innerHTML =
-//         "   <div class=\"item\">" +
-//         "       <span class=\"item-name\"><strong>"+form.name.value+"</strong></span>\n" +
-//         "       <span class=\"item-desc\"><p><strong>Description:</strong> "+desc.value+"</p></span>\n" +
-//         "       <span class=\"item-price\">$"+ form.price.value +"</span>\n" +
-//         "       <span class=\"item-quantity\">"+ form.quantity.value +"</span>\n" +
-//         "       <span class=\"item-edit-icon\"><p>edit</p></span>\n" +
-//         "       <span class=\"item-hide-icon\"><p>hide</p></span>" +
-//         "   </div>"
-//         + items.innerHTML;
-//
-//     resetAddItem()
-//
-// }
+
 
 function resetAddItem(){
 
