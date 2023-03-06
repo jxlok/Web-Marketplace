@@ -16,6 +16,7 @@ import java.io.IOException;
 public class AdminController {
 
     boolean passwordError=false;
+    boolean customer=true;
 
     @Autowired
     ItemService itemService;
@@ -122,7 +123,7 @@ public class AdminController {
 
         //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
-
+        model.addAttribute("customer", customer);
         return "admin.html";
     }
 
