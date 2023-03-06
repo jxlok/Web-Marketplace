@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../static/cartstyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="../static/loginstyle.css">
 </head>
 <body>
 <header>
@@ -34,50 +35,57 @@
 </header>
 <div id="content" class="flex">
 
-        <div class="page-content page-container" id="page-content">
-            <div class="padding">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header"><strong>Login to your account</strong></div>
-                            <div class="card-body">
-                                <form action="/addlocation" method="post">
-                                    <div class="form-group">
-                                        <label class="text-muted" for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
-                                        <small class="form-text text-muted">We don't share email with anyone</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="text-muted" for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control"  placeholder="Password">
-                                        <small class="form-text text-muted">your password is saved in encrypted form</small>
-                                    </div>
-                                    <button style="width: 100px; height: 50px" type="submit" class="btn btn-primary">Log in</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 stands-out-background">
 
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header"><strong>Register</strong></div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="text-muted" for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        <small id="emailHelp" class="form-text text-muted">We don't share email with anyone</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="text-muted" for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control"  placeholder="Password">
-                                        <small  class="form-text text-muted">your password is saved in encrypted form</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="text-muted" for="exampleInputPassword1">Confirm Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        <small id="passwordHelp" class="form-text text-muted">your password is saved in encrypted form</small>
-                                    </div>
+                <div class="card">
+                    <div class="card-header"><strong>Login to your account</strong></div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" aria-describedby="emailHelp"
+                                       placeholder="Enter email">
+                                <small class="form-text text-muted">We don't share email with anyone</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" placeholder="Password">
+                                <small class="form-text text-muted">your password is saved in encrypted form</small>
+                            </div>
+                            <button style="width: 100px; height: 50px" type="submit" class="btn btn-primary">Log in
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="col-md-6 stands-out-background" >
+                <div class="card">
+                    <div class="card-header"><strong>Register</strong></div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We don't share email with
+                                    anyone</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" placeholder="Password">
+                                <small class="form-text text-muted">your password is saved in encrypted form</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted" for="exampleInputPassword1">Confirm Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                       placeholder="Password">
+                                <small id="passwordHelp" class="form-text text-muted">your password is saved in
+                                    encrypted form</small>
+                            </div>
 
                                     <div class="form-group">
                                         <div class="form-check">
@@ -92,12 +100,9 @@
                     </div>
 
                 </div>
-            </div>
         </div>
-
-<!--right side-->
-
-
+    </div>
 </div>
+
 </body>
 </html>
