@@ -19,3 +19,14 @@ header{
     float: left;
     color: white;
 }
+
+#basket-count{
+    position: fixed;
+    transform: translate(-20px, -10px);
+    background-color: transparent;
+    width: 15px;
+    height: 15px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}

@@ -2,6 +2,7 @@ package app.Controllers;
 
 import app.Entities.Item;
 import app.Service.AdminService;
+import app.Service.CartService;
 import app.Service.ItemService;
 import app.Service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +27,9 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    CartService cartService;
 
     @GetMapping("/manageItems")
     public String manageItems(Model model){
@@ -124,6 +128,10 @@ public class AdminController {
         //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
         model.addAttribute("customer", customer);
+
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
+
         return "admin.html";
     }
 
