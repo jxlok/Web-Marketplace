@@ -152,7 +152,7 @@ public class AdminController {
         return "admin.html";
     }
 
-    @GetMapping("/admin/{status}/{id}")
+    @GetMapping("/admin/orders/{id}/set/{status}")
     public void changeStatus(@PathVariable String status, @PathVariable int id, HttpServletResponse response){
 
         orderService.updateOrderStatus(id, status);

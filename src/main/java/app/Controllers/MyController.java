@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -53,4 +52,9 @@ public class MyController {
         return "item.html";
     }
 
+//    @PostMapping("/search")
+//    public String search(@RequestParam String search_query){
+//
+//
+//    }
 }

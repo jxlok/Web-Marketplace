@@ -71,9 +71,9 @@
                             <span class="first-col">
                                 <span class="status" onclick="show_status_list(this)" th:classappend="${#strings.equals(order.getOrder.getOrderStatus, 'New')} ? 'status-new' : (${#strings.equals(order.getOrder.getOrderStatus, 'Delivered')} ? 'status-delivered' : 'status-cancelled')">[(${order.getOrder.getOrderStatus})]<span class="down-arrow"> v</span></span>
                                 <div class="status-list">
-                                    <a th:href="@{/admin}+'/New/'+${order.getOrder.getOrderID}">New</a>
-                                    <a th:href="@{/admin}+'/Delivered/'+${order.getOrder.getOrderID}">Delivered</a>
-                                    <a th:href="@{/admin}+'/Cancelled/'+${order.getOrder.getOrderID}">Cancelled</a>
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/New'">New</a>
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/Delivered'">Delivered</a>
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/Cancelled'">Cancelled</a>
                                 </div>
                                 <span>
                                     [(${order.getOrder.getOrderID})]
