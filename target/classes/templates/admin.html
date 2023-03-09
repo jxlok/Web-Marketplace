@@ -9,8 +9,8 @@
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
 </head>
 <body>
@@ -59,7 +59,7 @@
                     <div id="order-history-header">
                         <ul>
                             <li id="order_ID"><a>Order ID</a></li>
-                            <li id="item"><a>Item Descriptions</a></li>
+                            <li id="item"><a>Item Details</a></li>
                             <li id="total"><a>Total</a></li>
                             <li id="date"><a>Date/Time</a></li>
                             <li id="customer_ID"><a>Customer ID</a></li>
@@ -82,7 +82,8 @@
                                 <div class="order-body" th:each="j : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[j]}, order_details=${order.getOrder_details[j]}">
                                      <div class="order-item">
                                         <span class="order-body-item order-item-name"><a href="#">[(${item.getItemName})]</a></span>
-                                        <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
+                                         <span class="order-body-item order-item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></span>
+                                         <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
                                         <span class="order-body-item order-item-price" th:with="totalItemPrice=${item.getPrice * order_details.getQuantity}">$[(${#numbers.formatDecimal(totalItemPrice, 1, 2)})]</span>
                                     </div>
                                 </div>

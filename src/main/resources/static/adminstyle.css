@@ -306,7 +306,7 @@ footer{
 }
 
 .order-item-name{
-    width: 70%;
+    width: 50%;
 }
 
 .order-item-name>a{
@@ -317,6 +317,9 @@ footer{
     color: silver
 }
 
+.order-item-type{
+    width: 20%;
+}
 .order-item-quantity{
     width: 10%;
 }
@@ -469,15 +472,14 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 
 .status{
     display: inline-block;
-    width: 55%;
+    width: 50%;
     border: 1px solid silver;
     border-radius: 20px;
     color: white;
     padding: 5px;
     margin: 0 10px;
-    font-size: 12px;
     cursor: pointer;
-
+    font-size: 11px;
 }
 
 .status:hover{

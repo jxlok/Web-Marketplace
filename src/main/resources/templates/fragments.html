@@ -10,38 +10,38 @@
 <body>
 <div th:fragment="header">
     <div class="container">
-        <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top justify-content-center row">
-            <div class="col-sm-2 offset-sm-1">
+        <nav class="navbar navbar-expand-sm text-white bg-info fixed-top row">
+            <div class="col-sm-3 offset-sm-1">
                 <h2 class="text-white">AI Marketplace</h2>
-            </div>
-            <div class="col-sm-1">
-                <a id="company-name" class="navbar-brand" href="#">
-                    <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="logo" style="width:40px;">
-                </a>
             </div>
             <div class="col-sm-4">
                 <form class="form-inline" action="?">
-                    <input class="form-control" type="text" placeholder="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
+                    <span class="col-sm-9">
+                        <input class="form-control w-100" type="text" placeholder="Search">
+                    </span>
+                    <span class="col-sm-3">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </span>
                 </form>
             </div>
             <div class="col-sm-4">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Catalogue</a>
+                    <li class="nav-item" th:if="${!adminLoggedIn}">
+                        <a class="nav-link text-white" th:href="@{/}">Catalogue</a>
                     </li>
-                    <li th:if="${customer}" class="nav-item">
-                        <a class="nav-link" th:href="@{/purchase-history}">My Orders</a>
+                    <li th:if="${!adminLoggedIn}" class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/purchase-history}">My Orders</a>
                     </li>
-                    <li th:if="${customer}" class="nav-item">
-                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    <li th:if="${!customerLoggedIn and !adminLoggedIn}" class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/login}">Login</a>
                     </li>
-                    <li th:if="!${customer}" class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                    <li th:if="${customerLoggedIn or adminLoggedIn}" class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/cart}"><i class="fas fa-shopping-cart" style="font-size: 24px">
-                            <span id="basket-count">[(${basketCount})]</span>
+                    <li class="nav-item"  th:if="${!adminLoggedIn}" >
+                        <a class="nav-link" th:href="@{/cart}">
+                        <i class="fas fa-shopping-cart text-white" style="font-size: 24px">
+                            <span id="basket-count" class="text-dark text-opacity-50">[(${basketCount})]</span>
                         </i></a>
                     </li>
                 </ul>

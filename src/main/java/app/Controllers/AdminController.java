@@ -17,7 +17,8 @@ import java.io.IOException;
 public class AdminController {
 
     boolean passwordError=false;
-    boolean customer=true;
+    boolean customerLoggedIn=false;
+    boolean adminLoggedIn=false;
 
     @Autowired
     ItemService itemService;
@@ -34,6 +35,10 @@ public class AdminController {
     @GetMapping("/manageItems")
     public String manageItems(Model model){
         model.addAttribute("myItems", itemService.getUnhiddenItems());
+        model.addAttribute("customerLoggedIn", customerLoggedIn);
+        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "manageItems.html";
     }
 
@@ -71,6 +76,10 @@ public class AdminController {
     @GetMapping("/hiddenItems")
     public String hiddenItems(Model model){
         model.addAttribute("hiddenItems", itemService.getHiddenItems());
+        model.addAttribute("customerLoggedIn", customerLoggedIn);
+        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "hiddenItems.html";
     }
 
@@ -127,7 +136,8 @@ public class AdminController {
 
         //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
-        model.addAttribute("customer", customer);
+        model.addAttribute("customerLoggedIn", customerLoggedIn);
+        model.addAttribute("adminLoggedIn", adminLoggedIn);
 
         var cartItems = cartService.getCart(111);
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
@@ -151,6 +161,10 @@ public class AdminController {
     public String adminLogin(Model model){
 
         model.addAttribute("failedAttempt", passwordError);
+        model.addAttribute("customerLoggedIn", customerLoggedIn);
+        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
         return "admin-login.html";
     }
@@ -164,6 +178,7 @@ public class AdminController {
 
         if(adminService.validateAdmin(email, password)){
             passwordError=false;
+            adminLoggedIn=true;
             try {
                 response.sendRedirect("/admin");
             } catch (IOException e) {
@@ -177,6 +192,18 @@ public class AdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletResponse response){
+        customerLoggedIn=false;
+        adminLoggedIn=false;
+
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
