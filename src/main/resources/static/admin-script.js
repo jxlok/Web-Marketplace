@@ -70,13 +70,15 @@ function editItem(item){
     let inputs = item.getElementsByTagName("span");
 
     let name = inputs[0].innerText;
-    let desc = inputs[1].innerText.slice(13,);
-    let price = inputs[2].innerText.slice(1,);
-    let quantity = parseInt(inputs[3].innerText.slice(1,));
+    let type = inputs[1].innerText;
+    let desc = inputs[2].innerText.slice(13,);
+    let price = inputs[3].innerText.slice(1,);
+    let quantity = parseInt(inputs[4].innerText.slice(1,));
 
     item.innerHTML =
         "<form id='editItem-form' method=\"POST\"'>" +
         "    <span class=\"item-name\"><input type='text' name='itemName' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
+        "    <span class=\"item-type\"><input type='text' name='itemType' value='"+type+"' readonly></span>\n" +
         "    <span class=\"item-desc\"><textarea id=\"desc-changing\" name=\"description\" placeholder='Enter Description' cols='40' rows='6' required>"+desc+"</textarea></span>\n"+
         "    <span class=\"item-price\">$<input type='number' step='any'  name='price' value='"+price+"' required></span>\n" +
         "    <span class=\"item-quantity\"><input type='number' step='1' name='stock' value='"+quantity+"' required></span>\n" +
