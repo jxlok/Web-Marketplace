@@ -5,6 +5,7 @@ import app.Service.AdminService;
 import app.Service.CartService;
 import app.Service.ItemService;
 import app.Service.OrderService;
+import app.SessionVariables;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,8 @@ import java.io.IOException;
 @Controller
 public class AdminController {
 
-    boolean passwordError=false;
-    boolean customerLoggedIn=false;
-    boolean adminLoggedIn=false;
+    @Autowired
+    SessionVariables sessionVariables;
 
     @Autowired
     ItemService itemService;
@@ -32,11 +32,13 @@ public class AdminController {
     @Autowired
     CartService cartService;
 
+    boolean passwordError=false;
+
     @GetMapping("/manageItems")
     public String manageItems(Model model){
         model.addAttribute("myItems", itemService.getUnhiddenItems());
-        model.addAttribute("customerLoggedIn", customerLoggedIn);
-        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         var cartItems = cartService.getCart(111);
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "manageItems.html";
@@ -83,8 +85,8 @@ public class AdminController {
     @GetMapping("/hiddenItems")
     public String hiddenItems(Model model){
         model.addAttribute("hiddenItems", itemService.getHiddenItems());
-        model.addAttribute("customerLoggedIn", customerLoggedIn);
-        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         var cartItems = cartService.getCart(111);
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "hiddenItems.html";
@@ -143,8 +145,8 @@ public class AdminController {
 
         //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
-        model.addAttribute("customerLoggedIn", customerLoggedIn);
-        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
 
         var cartItems = cartService.getCart(111);
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
@@ -168,8 +170,8 @@ public class AdminController {
     public String adminLogin(Model model){
 
         model.addAttribute("failedAttempt", passwordError);
-        model.addAttribute("customerLoggedIn", customerLoggedIn);
-        model.addAttribute("adminLoggedIn", adminLoggedIn);
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         var cartItems = cartService.getCart(111);
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
@@ -185,7 +187,7 @@ public class AdminController {
 
         if(adminService.validateAdmin(email, password)){
             passwordError=false;
-            adminLoggedIn=true;
+            sessionVariables.setAdminLoggedIn(true);
             try {
                 response.sendRedirect("/admin");
             } catch (IOException e) {
@@ -204,8 +206,8 @@ public class AdminController {
 
     @GetMapping("/logout")
     public void logout(HttpServletResponse response){
-        customerLoggedIn=false;
-        adminLoggedIn=false;
+        sessionVariables.setCustomerLoggedIn(true);
+        sessionVariables.setAdminLoggedIn(false);
 
         try {
             response.sendRedirect("/");
