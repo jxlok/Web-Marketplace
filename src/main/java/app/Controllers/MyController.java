@@ -76,10 +76,7 @@ public class MyController {
         return "purchase-history.html";
     }
 
-    @GetMapping("/item")
-    public String item(){
-        return "item.html";
-    }
+
 
 
 }
