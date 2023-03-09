@@ -6,10 +6,9 @@
     <title>Purchase History</title>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
-
 </head>
 <body>
 <header th:insert="~{fragments.html :: header}"> </header>
@@ -28,7 +27,7 @@
                     <div class="order-item">
                         <span class="order-body-item order-item-name"><a href="#">[(${item.getItemName})]</a></span>
                         <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
-                        <span class="order-body-item order-item-price">$[(${#numbers.formatDecimal(item.getPrice, 1, 2)})]</span>
+                        <span class="order-body-item order-item-price" th:with="totalItemPrice=${item.getPrice * order_details.getQuantity}">$[(${#numbers.formatDecimal(totalItemPrice, 1, 2)})]</span>
                     </div>
                 </div>
             </div>

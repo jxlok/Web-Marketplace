@@ -44,14 +44,12 @@ public class AdminController {
 
     @PostMapping("/manageItems")
     public @ResponseBody
-    void addItem(Item item, HttpServletResponse response) {
-
-        item.setIsTrained(1);
+    void addItem(Item item, @RequestParam int type, HttpServletResponse response) {
 
         //find item
         Item existingItem = null;
         for(Item myItem: itemService.getAllItems()) {
-            if(myItem.getItemName().equals(item.getItemName())){
+            if(myItem.getItemName().equals(item.getItemName()) && myItem.getIsTrained() == item.getIsTrained()){
                 existingItem=myItem;
             }
         }
@@ -63,7 +61,16 @@ public class AdminController {
         //else put new item in hashmap
         else {
             item.setVisibility(1);
-            itemService.insertItem(item);
+
+            if(type==1){
+                item.setIsTrained(1);
+                itemService.insertItem(item);
+            }
+
+            if(type==0) {
+                item.setIsTrained(0);
+                itemService.insertItem(item);
+            }
         }
 
         try {

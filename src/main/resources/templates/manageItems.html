@@ -39,10 +39,10 @@
                     <form id='addItem-form' method="POST" th:action="@{/manageItems}" hidden>
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="itemName" required></span>
-                            <span class="item-type" name="type"><select>
-                                <option value="both" selected>Both</option>
-                                <option value="trained">Trained</option>
-                                <option value="untrained">Untrained</option>
+                            <span class="item-type"><select name="type">
+<!--                                <option value=2 selected>Both</option>-->
+                                <option value=1>Trained</option>
+                                <option value=0>Untrained</option>
                             </select></span>
                             <span class="item-desc"><textarea id="desc-new" name="description" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
                             <span class="item-price">$<input type='number' step="any"  name="price" required></span>

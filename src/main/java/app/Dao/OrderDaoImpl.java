@@ -102,12 +102,22 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
 
     @Override
     public HashMap<String, Integer> getSoldItemCount() {
-        String sql = "SELECT itemName, SUM(quantity) as Count FROM order_details o, items i WHERE o.itemID = i.itemId GROUP BY i.ItemName ORDER BY Count desc";
+        String sql = "SELECT itemName, isTrained, SUM(quantity) as Count FROM order_details o, items i WHERE o.itemID = i.itemId GROUP BY i.ItemName, i.isTrained ORDER BY Count desc";
         List<Map<String, Object>> itemCount = getJdbcTemplate().queryForList(sql);
 
         HashMap<String, Integer> result = new LinkedHashMap<>();
         for(Map<String, Object> item :  itemCount){
-            result.put((String)item.get("itemName"), Integer.valueOf(item.get("Count").toString()));
+
+            String type="";
+            if(((int) item.get("isTrained"))==0){
+                type="Untrained";
+            }
+            else{
+                type="Trained";
+            }
+
+            result.put((String)item.get("itemName")+" ("+type+")", Integer.valueOf(item.get("Count").toString()));
+
         }
         return result;
     }

@@ -45,8 +45,9 @@
                         <div id="availability-container">
                             <div id="empty-available-list" th:if="${sorted_stock_list.empty}">There is no stock available</div>
                             <div class="availability-item" th:each="item : ${sorted_stock_list}">
-                                <span class="availability-item-name">[(${item.getItemName()})]</span>
-                                <span class="availability-quantity">x[(${item.getStock()})]</span>
+                                <div class="availability-item-name">[(${item.getItemName()})]</div>
+                                <div class="availability-item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></div>
+                                <div class="availability-quantity">x[(${item.getStock()})]</div>
                             </div>
                         </div>
                     </div>

@@ -10,9 +10,9 @@
 <body>
 <div th:fragment="header">
     <div class="container">
-        <nav class="navbar navbar-expand-sm text-white bg-info fixed-top row">
+        <nav class="navbar navbar-expand-sm text-white fixed-top row">
             <div class="col-sm-3 offset-sm-1">
-                <h2 class="text-white">AI Marketplace</h2>
+                <h2 class="text-white">Pawn AI Marketplace</h2>
             </div>
             <div class="col-sm-4">
                 <form class="form-inline" action="?">
@@ -41,7 +41,7 @@
                     <li class="nav-item"  th:if="${!adminLoggedIn}" >
                         <a class="nav-link" th:href="@{/cart}">
                         <i class="fas fa-shopping-cart text-white" style="font-size: 24px">
-                            <span id="basket-count" class="text-dark text-opacity-50">[(${basketCount})]</span>
+                            <span id="basket-count" class="">[(${basketCount})]</span>
                         </i></a>
                     </li>
                 </ul>
