@@ -58,4 +58,8 @@ public class ItemServiceImpl implements ItemService{
     public Item getItem(int id){
         return itemDao.getItem(id);
     }
+
+    @Override
+    public List<Item> getSearchedItems(String search_query){ return itemDao.getSearchedItems(search_query);
+    }
 }

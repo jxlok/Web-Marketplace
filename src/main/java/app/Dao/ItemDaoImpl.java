@@ -128,8 +128,30 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         return result;
     }
 
+    @Override
     public List<Item> getSortedUnhiddenItems(){
         String sql = "SELECT * FROM items WHERE visibility=1 ORDER BY stock";
+        List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
+
+        List<Item> result = new ArrayList<>();
+        for(Map<String, Object> item :  items){
+            Item newItem = new Item();
+            newItem.setItemId((Integer) item.get("itemId"));
+            newItem.setItemName((String) item.get("itemName"));
+            newItem.setDescription((String) item.get("description"));
+            newItem.setIsTrained((int) item.get("isTrained"));
+            newItem.setPrice(((BigDecimal) item.get("price")).doubleValue());
+            newItem.setStock((Integer) item.get("stock"));
+            newItem.setVisibility((Integer) item.get("visibility"));
+
+            result.add(newItem);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Item> getSearchedItems(String search_query){
+        String sql = "SELECT * FROM items WHERE itemName LIKE '%"+search_query+"%'";
         List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
 
         List<Item> result = new ArrayList<>();
