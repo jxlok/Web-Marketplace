@@ -75,6 +75,7 @@ CREATE TABLE carts
     FOREIGN KEY (itemID) REFERENCES items (itemID)
 );
 
+
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Google", "[trained] Hello Google!", 1, 100.00, 10, 1);
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Google", "[untrained] Hello Google!", 0, 40.00, 10, 1);
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("dudu", "[trained] Hi From Baidu!", 1, 200.00, 10, 1);
@@ -85,6 +86,7 @@ INSERT INTO items (itemName, description, isTrained, price, stock, visibility) V
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("ChatGPT", "[untrained] the popular chatGPT!", 0, 120.00, 10, 1);
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Alexa", "[trained]Hi Alexa!", 1, 80.00, 15, 1);
 INSERT INTO items (itemName, description, isTrained, price, stock, visibility) VALUES ("Alexa", "[untrained]Hi Alexa!", 0, 35.00, 15, 1);
+
 
 
 INSERT INTO orders (orderStatus, paymentID, customerID) VALUES ("New", 2, 200);
