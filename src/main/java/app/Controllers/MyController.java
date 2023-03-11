@@ -28,11 +28,10 @@ public class MyController {
     @Autowired
     OrderService orderService;
 
-
-    @GetMapping("/checkout")
-    public String checkout(){
-        return "checkout.html";
-    }
+//    @GetMapping("/checkout")
+//    public String checkout(){
+//        return "checkout.html";
+//    }
 
 
     @GetMapping("/purchase-history")
