@@ -46,7 +46,15 @@ public class AdminController {
 
     @PostMapping("/manageItems")
     public @ResponseBody
-    void addItem(Item item, @RequestParam int type, HttpServletResponse response) {
+    void addItem(Item item, @RequestParam String itemType, HttpServletResponse response) {
+
+        if(itemType.equals("Trained"))
+        {
+            item.setIsTrained(1);
+        }
+        else{
+            item.setIsTrained(0);
+        }
 
         //find item
         Item existingItem = null;
@@ -64,15 +72,7 @@ public class AdminController {
         else {
             item.setVisibility(1);
 
-            if(type==1){
-                item.setIsTrained(1);
-                itemService.insertItem(item);
-            }
-
-            if(type==0) {
-                item.setIsTrained(0);
-                itemService.insertItem(item);
-            }
+            itemService.insertItem(item);
         }
 
         try {
@@ -136,7 +136,15 @@ public class AdminController {
 
 
     @GetMapping("/admin")
-    public String admin(Model model){
+    public String admin(Model model, HttpServletResponse response){
+
+        if(!sessionVariables.isAdminLoggedIn()){
+            try {
+                response.sendRedirect("/admin-login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         //total-sales statistic
         model.addAttribute("total_sales", orderService.getTotalSales());
         model.addAttribute("best_seller", orderService.getBestSeller());
@@ -206,7 +214,7 @@ public class AdminController {
 
     @GetMapping("/logout")
     public void logout(HttpServletResponse response){
-        sessionVariables.setCustomerLoggedIn(true);
+        sessionVariables.setCustomerLoggedIn(false);
         sessionVariables.setAdminLoggedIn(false);
 
         try {

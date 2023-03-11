@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class SessionVariables {
 
 
-    private boolean customerLoggedIn=false;
+    private boolean customerLoggedIn=true;
     private boolean adminLoggedIn=false;
     private boolean searching=false;
 

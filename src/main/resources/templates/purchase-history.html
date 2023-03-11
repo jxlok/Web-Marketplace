@@ -13,7 +13,7 @@
 <body>
 <header th:insert="~{fragments.html :: header}"> </header>
 
-<div id="main-container" class="container stands-out-background">
+<div id="main-container" class="stands-out-background container-fluid">
     <div class="row">
         <div id="purchase-history-content" class="col-sm-12">
             <h3><b>Your Orders</b></h3>
@@ -26,6 +26,7 @@
                 <div class="order-body" th:each="j : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[j]}, order_details=${order.getOrder_details[j]}">
                     <div class="order-item">
                         <span class="order-body-item order-item-name"><a href="#">[(${item.getItemName})]</a></span>
+                        <span class="order-body-item order-item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></span>
                         <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
                         <span class="order-body-item order-item-price" th:with="totalItemPrice=${item.getPrice * order_details.getQuantity}">$[(${#numbers.formatDecimal(totalItemPrice, 1, 2)})]</span>
                     </div>

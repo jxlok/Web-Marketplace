@@ -3,10 +3,21 @@ header{
     margin-bottom: 20px;
 }
 
+header a{
+    color: rebeccapurple;
+}
 
+header a:hover{
+    color: rebeccapurple;
+}
+
+.container-fluid{
+    margin: auto 12.5vw;
+    width: 75vw;
+}
 /*That piece of transparent background that stands out on the page*/
 .stands-out-background{
-    margin: auto;
+    /*margin: auto;*/
     /*max-width: 1000px;*/
     /*width: 90%;*/
     box-shadow: 0 6px 20px 0 rgba(0,0,0,0.2);
@@ -16,7 +27,8 @@ header{
 
 .navbar{
     height: 7vh;
-    background-color: skyblue;
+    background-color: white;
+    color: rebeccapurple;
 }
 
 .navbar-nav{
@@ -27,7 +39,6 @@ header{
 
 #company-name{
     float: left;
-    color: white;
 }
 
 #basket-count{
@@ -36,8 +47,8 @@ header{
     background-color: transparent;
     width: 15px;
     height: 15px;
-    -webkit-text-stroke: 1px black;
-    -webkit-text-fill-color: silver;
+    -webkit-text-stroke: 1px mediumvioletred;
+    -webkit-text-fill-color: white;
     text-align: center;
     font-size: 20px;
 
@@ -52,5 +63,37 @@ header{
     border: 1px solid transparent;
 }
 .nav-item:hover{
-    border: 1px solid snow;
+    border: 1px solid rebeccapurple;
+}
+
+#login-button{
+    cursor: pointer;
+}
+
+.login-choice{
+    position: absolute;
+    display: none;
+    background-color: white;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.login-choice>a{
+    display: block;
+    font-size: 15px;
+    background-color: white;
+    text-decoration: none;
+    padding: 10px;
+    color: rebeccapurple;
+    border-bottom: 1px solid mediumvioletred;
+}
+
+.login-choice>a:hover{
+    background-color: silver;
+    color: rebeccapurple;
+    text-decoration: none;
+}
+
+.show{
+    display: block;
 }

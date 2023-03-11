@@ -8,8 +8,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
 </head>
 <body>
@@ -24,7 +24,7 @@
     </ul>
 </div>
 
-<div id="main-container" class="stands-out-background container">
+<div id="main-container" class="stands-out-background container-fluid">
     <div class="row">
         <div id="sales-section" class="col-sm-12">
             <a th:href="@{manageItems}"><div id="sale-tab">Sale</div></a>
@@ -39,10 +39,10 @@
                     <form id='addItem-form' method="POST" th:action="@{/manageItems}" hidden>
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="itemName" required></span>
-                            <span class="item-type"><select name="type">
+                            <span class="item-type"><select name="itemType">
 <!--                                <option value=2 selected>Both</option>-->
-                                <option value=1>Trained</option>
-                                <option value=0>Untrained</option>
+                                <option value="Trained">Trained</option>
+                                <option value="Untrained">Untrained</option>
                             </select></span>
                             <span class="item-desc"><textarea id="desc-new" name="description" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
                             <span class="item-price">$<input type='number' step="any"  name="price" required></span>
