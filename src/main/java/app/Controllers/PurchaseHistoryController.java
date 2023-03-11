@@ -5,16 +5,14 @@ import app.Service.OrderService;
 import app.SessionVariables;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
-public class MyController {
+public class PurchaseHistoryController {
 
     @Autowired
     SessionVariables sessionVariables;
@@ -27,12 +25,6 @@ public class MyController {
 
     @Autowired
     OrderService orderService;
-
-//    @GetMapping("/checkout")
-//    public String checkout(){
-//        return "checkout.html";
-//    }
-
 
     @GetMapping("/purchase-history")
     public String purchasehistory(Model model, HttpServletResponse response){
@@ -53,8 +45,5 @@ public class MyController {
         model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "purchase-history.html";
     }
-
-
-
 
 }

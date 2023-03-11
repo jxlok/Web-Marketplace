@@ -8,8 +8,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
 </head>
 <body>
@@ -23,7 +23,7 @@
     </ul>
 </div>
 
-<div id="main-container" class="stands-out-background container">
+<div id="main-container" class="stands-out-background container-fluid">
     <div class="row">
         <div id="sales-section" class="col-sm-12">
             <a th:href="@{manageItems}"><div id="sale-tab" class="xtab">Sale</div></a>
