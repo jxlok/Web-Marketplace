@@ -1,11 +1,11 @@
 package app.Service;
 
-import app.Dao.ItemDao;
 import app.Dao.OrderDao;
 import app.Entities.FullOrderInfo;
 import app.Entities.Item;
 import app.Entities.Order;
 import app.Entities.Order_Details;
+import app.models.OrderItemIdAndQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +56,15 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getAllOrdersOfCustomer(int id) {
         return orderDao.getAllOrdersOfCustomer(id);
+    }
+    @Override
+    public int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQuantities) {
+        return orderDao.createOrder(customerId, idAndQuantities);
+    }
+
+    @Override
+    public void completeOrderById(int orderId) {
+        orderDao.updateOrderStatus(orderId, "Done");
+        orderDao.updatePaymentIdByOrderId(orderId);
     }
 }

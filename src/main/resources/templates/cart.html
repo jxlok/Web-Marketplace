@@ -34,9 +34,8 @@
             </ul>
         </nav>
     </div>
-
-
 </header>
+
 <div class="stands-out-background container">
     <div class="row">
         <div class="col-md-8 cart">
@@ -54,7 +53,16 @@
                                             th:src="@{/media/Screenshot%202023-02-13%20at%2016.08.55.png}"></div>
                     <div class="col">
                         <div class="row text-muted" th:text="${displayItem.item.itemName}"/>
-                        <div class="row" th:text="${displayItem.item.description}"/>
+
+                        <form action="" id="status-of-item">
+                            <!--                            <label for="type">Choose the type of AI:</label>-->
+                            <select name="type-of-item" id="type">
+                                <option>Trained</option>
+                                <option>Untrained</option>
+                            </select>
+                        </form>
+
+                        <!--                        <div class="row" th:text="${displayItem.item.description}"/>-->
                     </div>
                     <div class="col">
                         <div class="container">
@@ -96,7 +104,7 @@
                 <div class="col">TOTAL PRICE</div>
                 <div class="col text-right">&euro; <span id="order-summary-taxed-total" th:inline="text">[[${#numbers.formatDecimal(cartTaxedTotal, 1, 2)}]]</span></div>
             </div>
-            <button class="button">PAY</button>
+            <button class="button" onclick="createOrderAndCheckout()">PAY</button>
         </div>
     </div>
     <div>
