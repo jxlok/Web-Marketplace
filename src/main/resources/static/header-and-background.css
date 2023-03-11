@@ -1,15 +1,56 @@
 header{
     padding: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 
 /*That piece of transparent background that stands out on the page*/
 .stands-out-background{
     margin: auto;
-    max-width: 1000px;
+    /*max-width: 1000px;*/
     /*width: 90%;*/
     box-shadow: 0 6px 20px 0 rgba(0,0,0,0.2);
     border-radius: 1rem;
     border: transparent;
+}
+
+.navbar{
+    height: 7vh;
+    background-color: skyblue;
+}
+
+.navbar-nav{
+    float: right;
+    margin-right: 5vw;
+}
+
+
+#company-name{
+    float: left;
+    color: white;
+}
+
+#basket-count{
+    position: fixed;
+    transform: translate(-20px, -10px);
+    background-color: transparent;
+    width: 15px;
+    height: 15px;
+    -webkit-text-stroke: 1px black;
+    -webkit-text-fill-color: silver;
+    text-align: center;
+    font-size: 20px;
+
+}
+
+.form-inline .col-sm-9, .form-inline .col-sm-3{
+    padding: 1px;
+}
+
+.nav-item{
+    margin: 5px;
+    border: 1px solid transparent;
+}
+.nav-item:hover{
+    border: 1px solid snow;
 }

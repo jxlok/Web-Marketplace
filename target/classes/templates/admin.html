@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../static/admin-script.js" th:src="@{admin-script.js}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
+    <link rel="stylesheet" href="../static/adminstyle.css" th:href="@{adminstyle.css}">
+</head>
+<body>
+<header th:insert="~{fragments.html :: header}"> </header>
+<!--tabs on left-->
+<div id="tabs">
+    <ul>
+        <li><a th:href="@{admin}">Analytics & Orders</a></li>
+        <li><a th:href="@{manageItems}">Manage Items</a></li>
+    </ul>
+</div>
+
+<div id="main-container" class="stands-out-background container">
+    <div class="row">
+        <div id="center-info" class="col-sm-12">
+            <div id="data-analytics" class="row">
+                <div id="graph" class="col-sm-6">
+                    Graph
+                    <canvas id="bar-chart"></canvas>
+                </div>
+                <div id="inner-right-statistics" class="col-sm-6">
+                    <div id="total-sales-container">
+                        Total Sales
+                        <div id="total-sales">$[(${#numbers.formatDecimal(total_sales, 1, 2)})]</div>
+                    </div>
+                    <div id="top-sellers-container">
+                        Best Selling
+                        <div id="top-sellers">[(${best_seller})]</div>
+                    </div>
+                    <div id="shortage-info">
+                        Stock remaining
+                        <div id="availability-container">
+                            <div id="empty-available-list" th:if="${sorted_stock_list.empty}">There is no stock available</div>
+                            <div class="availability-item" th:each="item : ${sorted_stock_list}">
+                                <div class="availability-item-name">[(${item.getItemName()})]</div>
+                                <div class="availability-item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></div>
+                                <div class="availability-quantity">x[(${item.getStock()})]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Order History-->
+            <div id="order-history" class="row">
+                <div class="col-sm-12">
+                    <div id="order-history-header">
+                        <ul>
+                            <li id="order_ID"><a>Order ID</a></li>
+                            <li id="item"><a>Item Details</a></li>
+                            <li id="total"><a>Total</a></li>
+                            <li id="date"><a>Date/Time</a></li>
+                            <li id="customer_ID"><a>Customer ID</a></li>
+                        </ul>
+                    </div>
+                    <div id="order-container" th:each="i : ${#numbers.sequence(orders.size() - 1, 0, -1)}" th:with="order=${orders[i]}">
+                        <div class="order">
+                            <span class="first-col">
+                                <span class="status" onclick="show_status_list(this)" th:classappend="${#strings.equals(order.getOrder.getOrderStatus, 'New')} ? 'status-new' : (${#strings.equals(order.getOrder.getOrderStatus, 'Delivered')} ? 'status-delivered' : 'status-cancelled')">[(${order.getOrder.getOrderStatus})]<span class="down-arrow"> v</span></span>
+                                <div class="status-list">
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/New'">New</a>
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/Delivered'">Delivered</a>
+                                    <a th:href="@{/admin}+'/orders/'+${order.getOrder.getOrderID}+'/set/Cancelled'">Cancelled</a>
+                                </div>
+                                <span>
+                                    [(${order.getOrder.getOrderID})]
+                                </span>
+                            </span>
+                            <div class="second-col">
+                                <div class="order-body" th:each="j : ${#numbers.sequence(0, order.getItems.size()-1, 1)}" th:with="item=${order.getItems[j]}, order_details=${order.getOrder_details[j]}">
+                                     <div class="order-item">
+                                        <span class="order-body-item order-item-name"><a href="#">[(${item.getItemName})]</a></span>
+                                         <span class="order-body-item order-item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></span>
+                                         <span class="order-body-item order-item-quantity">x[(${order_details.getQuantity})]</span>
+                                        <span class="order-body-item order-item-price" th:with="totalItemPrice=${item.getPrice * order_details.getQuantity}">$[(${#numbers.formatDecimal(totalItemPrice, 1, 2)})]</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="third-col">$[(${#numbers.formatDecimal(order.getTotalPrice, 1, 2)})]</span>
+                            <span class="fourth-col">[(${order.getOrder.getOrderPlacedTime})]</span>
+                            <span class="fifth-col">[(${order.getOrder.getCustomerID})]</span>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<footer>-->
+<!--    <h2>Substitute footer</h2>-->
+<!--</footer>-->
+
+<script th:inline="javascript">
+
+    // var ctx = $('#bar-chart');
+
+    new Chart("bar-chart", {
+        type: 'bar',
+
+        data: {
+            labels: [[${sold_count.keySet()}]],
+            datasets: [{
+                label: '# sold',
+                data: [[${sold_count.values()}]],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>

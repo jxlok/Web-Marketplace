@@ -35,6 +35,7 @@
                     <div id="items" onload="activateEditButtons()">
                         <div class="item" th:each="i : ${#numbers.sequence(hiddenItems.size() -1,0,-1)}" th:with="item=${hiddenItems[i]}">
                             <span class="item-name"><strong>[(${item.getItemName})]</strong></span>
+                            <span class="item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
                             <span class="item-price">$[(${#numbers.formatDecimal(item.getPrice, 1, 2)})]</span>
                             <span class="item-quantity">x[(${item.getStock})]</span>

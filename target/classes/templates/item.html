@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../static/indexStyle.css" th:href="@{indexStyle.css}">
+</head>
+
+<body>
+
+<header th:insert="~{fragments.html :: header}"> </header>
+
+<main>
+    <div class="stands-out-background container">
+        <div class="row item-top">
+            <div class="col-sm">
+                <img class="item-image" th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="img">
+            </div>
+            <div class="col-sm">
+                <h1>[(${item.getItemName})]</h1>
+                <h1 class="price">[(${item.getPrice})]€</h1>
+                <div style="margin-top: 100px">
+                    <button type="button" class="btn btn-outline-success active" >Untrained</button>
+                    <button type="button" class="btn btn-outline-success">Trained</button>
+                </div>
+                <div style="margin-top: 50px">
+                    <button class="btn btn-success btn-lg" href="/cart">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row item-bot">
+            <div class="col-sm-12">
+                <h2>Description</h2>
+                <p>[(${item.getDescription})]</p>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

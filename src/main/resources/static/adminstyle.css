@@ -15,6 +15,7 @@ body{
 #main-container{
     margin: 10px auto;
     background-color: white;
+    width: 100vw;
 }
 
 footer{
@@ -54,7 +55,7 @@ footer{
 }
 
 #total-sales{
-    font-size: 7vw;}
+    font-size: 10vh;}
 
 #total-sales, #top-sellers{
     font-weight: unset;
@@ -177,7 +178,27 @@ footer{
 
 .item-name{
     display: table-cell;
-    width: 20%;
+    width: 15%;
+    height: 100%;
+    border-right: 1px solid gray;
+    padding: 10px;
+    margin: 0;
+    justify-content: center;
+}
+
+#editItem-form>.item-name>input, #editItem-form>.item-type>input{
+    border: none;
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    font-weight: inherit;
+}
+
+
+.item-type{
+    display: table-cell;
+    width: 10%;
     height: 100%;
     border-right: 1px solid gray;
     padding: 10px;
@@ -187,7 +208,7 @@ footer{
 
 .item-desc{
     display: table-cell;
-    width: 40%;
+    width: 35%;
     height: 100%;
     border-right: 1px solid gray;
     margin: 0;
@@ -306,7 +327,7 @@ footer{
 }
 
 .order-item-name{
-    width: 70%;
+    width: 50%;
 }
 
 .order-item-name>a{
@@ -317,6 +338,9 @@ footer{
     color: silver
 }
 
+.order-item-type{
+    width: 20%;
+}
 .order-item-quantity{
     width: 10%;
 }
@@ -329,8 +353,7 @@ footer{
 /*Items for sale edit and delete*/
 #addItem{
     position: absolute;
-    top: 1vh;
-    left: 65vw;
+    right: 5%;
     height: 40px;
     width: 40px;
     border: 1px solid silver;
@@ -442,6 +465,8 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 .availability-item{
     border-bottom: 1px solid silver;
     padding: 5px;
+    display: table;
+    width: 100%;
 }
 
 #availability-container{
@@ -451,33 +476,44 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
     padding: 0 10px;
     width: 95%;
     margin: 0 2.5%;
-
 }
 
 .availability-item-name{
     border-right: 1px solid silver;
     padding: 5px;
-    width: 25vw;
+    width: 40%;
     text-align: center;
+    display: inline-block;
+
+}
+
+.availability-item-type{
+    border-right: 1px solid silver;
+    padding: 5px;
+    width: 40%;
+    text-align: center;
+    display: inline-block;
+
 }
 
 .availability-quantity{
-    width: 25vw;
+    width: 20%;
     padding: 5px;
     text-align: center;
+    display: inline-block;
+
 }
 
 .status{
     display: inline-block;
-    width: 55%;
+    width: 50%;
     border: 1px solid silver;
     border-radius: 20px;
     color: white;
     padding: 5px;
     margin: 0 10px;
-    font-size: 12px;
     cursor: pointer;
-
+    font-size: 11px;
 }
 
 .status:hover{
@@ -557,26 +593,41 @@ a>#sale-tab:hover, a>#hidden-tab:hover{
 #admin-login-form{
     text-align: center;
     font-size: 20px;
-    padding: 20%;
+    padding: 10%;
 }
 
-#admin-login-form label, #admin-login-form button{
-    float: left;
-    margin-top: 20px;
-}
-
-#admin-container-right{
-    background-color: turquoise;
-}
-
-#admin-container-right h1{
-    font-weight: bold;
-}
-
-#admin-container-right input, #admin-container-right button{
+#admin-login-form input, #admin-login-form button{
+    margin-top: 15%;
     border-radius: 5px;
 }
 
+#admin-container-right{
+    background-color: white;
+}
+
+#admin-container-right h1{
+    color: turquoise;
+}
+
+#admin-container-right input{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+#admin-container-right input:focus{
+    outline: none;
+}
+
+#admin-container-right button{
+    border: 2px solid turquoise;
+    width: 80%;
+    background-color: white;
+    border-radius: 15px;
+    color: turquoise;
+}
 #error{
     color: red;
     font-size: 15px;

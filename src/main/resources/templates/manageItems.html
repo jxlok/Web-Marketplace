@@ -39,6 +39,11 @@
                     <form id='addItem-form' method="POST" th:action="@{/manageItems}" hidden>
                         <div class="item">
                             <span class="item-name"><input type='text' placeholder='Enter item title' name="itemName" required></span>
+                            <span class="item-type"><select name="type">
+<!--                                <option value=2 selected>Both</option>-->
+                                <option value=1>Trained</option>
+                                <option value=0>Untrained</option>
+                            </select></span>
                             <span class="item-desc"><textarea id="desc-new" name="description" placeholder='Enter Description' cols='40' rows='6' required></textarea></span>
                             <span class="item-price">$<input type='number' step="any"  name="price" required></span>
                             <span class="item-quantity"><input type='number' step='1' name="stock" required></span>
@@ -50,6 +55,7 @@
                     <div id="items" onload="activateEditButtons()">
                         <div class="item" th:each="i : ${#numbers.sequence(myItems.size() -1,0,-1)}" th:with="item=${myItems[i]}">
                             <span class="item-name"><strong>[(${item.getItemName})]</strong></span>
+                            <span class="item-type" th:text="${item.getIsTrained==1} ? 'Trained' : 'Untrained'"></span>
                             <span class="item-desc"><p><strong>Description: </strong>[(${item.getDescription})]</p></span>
                             <span class="item-price">$[(${#numbers.formatDecimal(item.getPrice, 1, 2)})]</span>
                             <span class="item-quantity">x[(${item.getStock})]</span>

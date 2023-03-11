@@ -20,17 +20,18 @@
 
 }
 .underVideo{
-    margin-top: 110vh;
+    margin-top: 100vh;
 }
 
 .item-block{
-    margin-top: 100px;
+    margin-top: 50px;
     width: 300px;
     height: 300px;
 }
 
 .item-top{
     margin-top: 10vh;
+    padding-top: 30px;
 }
 .item-bot{
     margin-top: 50px;
@@ -41,9 +42,15 @@
     height: 500px;
 }
 .item-name{
-    text-align: center;
+    padding-top: 5px;
+    font-size: 30px;
 }
 .price{
     margin-top: 100px;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
