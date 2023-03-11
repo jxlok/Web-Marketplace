@@ -1,11 +1,14 @@
 package app.Entities;
 
+import java.util.Optional;
+
 public class Order {
 
     private int orderID;
     private java.sql.Timestamp OrderPlacedTime;
     private String orderStatus;
     private int paymentID;
+//    private Optional<Integer> paymentID;//unpaid order ID can be null
     private int customerID;
 
     public int getOrderID() {

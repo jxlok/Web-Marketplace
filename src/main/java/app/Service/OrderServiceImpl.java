@@ -1,6 +1,5 @@
 package app.Service;
 
-import app.Dao.ItemDao;
 import app.Dao.OrderDao;
 import app.Entities.FullOrderInfo;
 import app.Entities.Item;
@@ -58,14 +57,13 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> getAllOrdersOfCustomer(int id) {
         return orderDao.getAllOrdersOfCustomer(id);
     }
-
     @Override
     public int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQuantities) {
         return orderDao.createOrder(customerId, idAndQuantities);
     }
 
     @Override
-    public void finishOrderById(int orderId) {
+    public void completeOrderById(int orderId) {
         orderDao.updateOrderStatus(orderId, "Done");
         orderDao.updatePaymentIdByOrderId(orderId);
     }

@@ -78,3 +78,17 @@ function updateOrderSummary(pretaxPriceChange, taxRate) {
     let newTaxedTotal = newPretax + newTax;
     taxedTotalSpan.innerText = newTaxedTotal.toFixed(2);
 }
+
+function createOrderAndCheckout() {
+    $.ajax({
+        method: "POST",
+        url: `/orders`,
+        dataType: 'text',
+        success: function (orderId) {
+            location.href = `/checkout?orderId=${orderId}`;
+        },
+        error: function (error) {
+            console.log("failure, " + JSON.stringify(error));
+        }
+    });
+}

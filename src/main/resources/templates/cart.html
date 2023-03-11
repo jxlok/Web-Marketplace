@@ -55,14 +55,14 @@
                         <div class="row text-muted" th:text="${displayItem.item.itemName}"/>
 
                         <form action="" id="status-of-item">
-<!--                            <label for="type">Choose the type of AI:</label>-->
+                            <!--                            <label for="type">Choose the type of AI:</label>-->
                             <select name="type-of-item" id="type">
                                 <option>Trained</option>
                                 <option>Untrained</option>
                             </select>
                         </form>
 
-<!--                        <div class="row" th:text="${displayItem.item.description}"/>-->
+                        <!--                        <div class="row" th:text="${displayItem.item.description}"/>-->
                     </div>
                     <div class="col">
                         <div class="container">
@@ -104,7 +104,7 @@
                 <div class="col">TOTAL PRICE</div>
                 <div class="col text-right">&euro; <span id="order-summary-taxed-total" th:inline="text">[[${#numbers.formatDecimal(cartTaxedTotal, 1, 2)}]]</span></div>
             </div>
-            <button class="button">PAY</button>
+            <button class="button" onclick="createOrderAndCheckout()">PAY</button>
         </div>
     </div>
     <div>

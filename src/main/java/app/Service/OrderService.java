@@ -23,5 +23,5 @@ public interface OrderService {
 
     int createOrder(int customerId, List<OrderItemIdAndQuantity> orderRequest);
 
-    void finishOrderById(int id);
+    void completeOrderById(int id);
 }

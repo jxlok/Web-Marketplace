@@ -22,7 +22,20 @@ public class CheckoutController {
         if (orderId.isPresent()) {
             return "checkout.html";
         } else {
-            return "redirect:/";
+            model.addAttribute("redirectReason", "Sorry, you don't have an valid order id.");
+            return "redirect.html";
         }
+    }
+    @PostMapping("/checkout")
+    public String completeOrder(
+            Model model,
+            @RequestParam(name = "orderId") Optional<Integer> orderId) {
+        if (orderId.isPresent()) {
+            orderService.completeOrderById(orderId.get());
+            model.addAttribute("redirectReason", "Congratulations, your payment went through!");
+        } else {
+            model.addAttribute("redirectReason", "Sorry, you don't have an valid order id.");
+        }
+        return "redirect.html";
     }
 }

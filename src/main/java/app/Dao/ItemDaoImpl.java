@@ -128,7 +128,6 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         return result;
     }
 
-    @Override
     public List<Item> getSortedUnhiddenItems(){
         String sql = "SELECT * FROM items WHERE visibility=1 ORDER BY stock";
         List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
