@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <title>Catalogue</title>
 
-    <!--For shopping cart-->
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -28,7 +25,7 @@
 
 <header>
     <div th:insert="~{fragments.html :: header}"></div>
-    <div th:if="${!searching}"  class="video-container">
+    <div class="video-container">
 
         <div class="container">
             <video id="backgroundVideo" preload="auto" loop playsinline autoplay src="../static/media/video.mp4" th:src="@{media/video.mp4}" tabindex="-1" muted="muted"></video>
@@ -38,10 +35,7 @@
 </header>
 
 
-
-
-
-<main th:classappend="${!searching ? 'underVideo' : ''}" >
+<main class="underVideo">
 
     <div class="container">
         <div class="row searchFilter" >
@@ -93,6 +87,7 @@
                     <a th:href="@{/item(id=${item.getItemId()})}">
                     <div class="stands-out-background">
                         <div class="item-block card-body">
+
                                 <span> <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" style="width:260px;"></span>
                                 <div class="item-name">
                                     <span><strong>[(${item.getItemName})]</strong></span>
@@ -104,7 +99,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </div>
 
