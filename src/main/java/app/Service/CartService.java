@@ -9,4 +9,6 @@ public interface CartService {
     Boolean updateCartItemQuantity(int customerId, int cartItemId, int newQuantity);
 
     Boolean deleteCartItem(int customerId, int cartItemId);
+
+    Boolean clearCart(int customerId);
 }

@@ -13,11 +13,11 @@ function completeOrder() {
         cvv: cvv
     })
 
-    let orderId = (new URL(window.location)).searchParams.get("orderId")
+    let customerId = (new URL(window.location)).searchParams.get("customerId")
 
     $.ajax({
         method: "POST",
-        url: `/checkout?orderId=${orderId}`,
+        url: `/checkout?customerId=${customerId}`,
         contentType: "application/json; charset=utf-8",
         body: requestBody,
         complete: function(data) {

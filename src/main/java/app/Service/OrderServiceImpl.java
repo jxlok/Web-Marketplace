@@ -61,10 +61,4 @@ public class OrderServiceImpl implements OrderService{
     public int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQuantities) {
         return orderDao.createOrder(customerId, idAndQuantities);
     }
-
-    @Override
-    public void completeOrderById(int orderId) {
-        orderDao.updateOrderStatus(orderId, "Done");
-        orderDao.updatePaymentIdByOrderId(orderId);
-    }
 }

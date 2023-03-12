@@ -13,6 +13,7 @@ public class CartDaoImpl implements CartDao {
     final static String SELECT_BY_CUSTOMER_ID_QUERY = "SELECT * FROM carts WHERE customerID = ?";
     final static String UPDATE_QUANTITY_BY_CUSTOMER_ID_AND_CART_ITEM_ID_QUERY = "UPDATE carts SET quantity= ? WHERE customerID = ? and id = ?";
     final static String DELETE_CART_ITEM_BY_ITEM_ID = "DELETE FROM carts WHERE customerID = ? and id = ?";
+    final static String DELETE_CART_ITEM_BY_CUSTOMER_ID = "DELETE FROM carts WHERE customerID = ?";
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -48,6 +49,15 @@ public class CartDaoImpl implements CartDao {
                 DELETE_CART_ITEM_BY_ITEM_ID,
                 customerId,
                 id
+        );
+    }
+
+    @Override
+    public int deleteAllCartItems(int customerId) {
+
+        return jdbcTemplate.update(
+                DELETE_CART_ITEM_BY_CUSTOMER_ID,
+                customerId
         );
     }
 }
