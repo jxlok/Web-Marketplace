@@ -79,16 +79,8 @@ function updateOrderSummary(pretaxPriceChange, taxRate) {
     taxedTotalSpan.innerText = newTaxedTotal.toFixed(2);
 }
 
-function createOrderAndCheckout() {
-    $.ajax({
-        method: "POST",
-        url: `/orders`,
-        dataType: 'text',
-        success: function (orderId) {
-            location.href = `/checkout?orderId=${orderId}`;
-        },
-        error: function (error) {
-            console.log("failure, " + JSON.stringify(error));
-        }
-    });
+function checkout() {
+    let customerId = window.sessionStorage.getItem("customerId");
+    if (customerId == null) customerId = 111;
+    window.location.href=`/checkout?customerId=${customerId}`
 }
