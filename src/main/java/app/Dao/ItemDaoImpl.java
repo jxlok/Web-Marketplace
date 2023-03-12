@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Repository
 public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
@@ -149,8 +149,23 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         return result;
     }
 
+    @Override
+    public List<Item> getSearchedItems(String search_query){
+        String sql = "SELECT * FROM items WHERE LOWER(itemName) LIKE LOWER('%"+search_query+"%')";
+        List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
+        List<Item> result = new ArrayList<>();
+        for(Map<String, Object> item :  items){
+            Item newItem = new Item();
+            newItem.setItemId((Integer) item.get("itemId"));
+            newItem.setItemName((String) item.get("itemName"));
+            newItem.setDescription((String) item.get("description"));
+            newItem.setIsTrained((int) item.get("isTrained"));
+            newItem.setPrice(((BigDecimal) item.get("price")).doubleValue());
+            newItem.setStock((Integer) item.get("stock"));
+            newItem.setVisibility((Integer) item.get("visibility"));
 
-
-
-
+            result.add(newItem);
+        }
+        return result;
+    }
 }

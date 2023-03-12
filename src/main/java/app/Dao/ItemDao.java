@@ -14,4 +14,5 @@ public interface ItemDao {
     List<Item> getUnhiddenItems();
     List<Item> getSortedUnhiddenItems();
     Item getItem(int id);
+    List<Item> getSearchedItems(String search_query);
 }

@@ -1,80 +1,106 @@
-function increment(container, displayCartItem, taxRate) {
-    let counter = container.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
+window.onload = function(){
+    activateEditButtons()
 
-    $.ajax({
-        contentType: "application/json",
-        data: JSON.stringify({ "quantity": parseInt(counter.innerText) + 1 }),
-        dataType: "text", // because response is not json type, so ajax will try to parse it to json and fail
-        method: "PATCH",
-        url: `/cart/items/${displayCartItem.cartItem.id}`,
-        success: function() {
-            counter.innerText = parseInt(counter.innerText) + 1;
-            updateTotalItemCount(1);
-            updateOrderSummary(parseFloat(displayCartItem.item.price), taxRate);
-        },
-        error: function(resp, error) {
-            console.log(`operation failed, status code: ${resp.status}, error: ${error}`);
-        }
-    });
 }
 
-function decrement(container, displayCartItem, taxRate) {
-    let counter = container.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
+let Editlistener = function editMode(){
+    editItem(this.parentNode);
+}
 
-    // we don't allow customer to reduce quantity of any cart item down to zero, so 1 is minimum quantity a customer can buy
-    if (parseInt(counter.innerText) > 1) {
-        $.ajax({
-            contentType: "application/json",
-            data: JSON.stringify({ "quantity": parseInt(counter.innerText) - 1 }),
-            dataType: "text", // because response is not json type, so ajax will try to parse it to json and fail
-            method: "PATCH",
-            url: `/cart/items/${displayCartItem.cartItem.id}`,
-            success: function() {
-                counter.innerText = parseInt(counter.innerText) - 1;
-                updateTotalItemCount(-1);
-                updateOrderSummary(parseFloat(displayCartItem.item.price) * -1, taxRate);
-            },
-            error: function(resp, error) {
-                console.log(`operation failed, status code: ${resp.status}, error: ${error}`);
-            }
-        });
+function activateEditButtons(){
+    let items = document.getElementsByClassName("item-edit-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].addEventListener("click", Editlistener);
     }
 }
 
-function removeItem(displayCartItem, taxRate){
-    let item = document.getElementById(`cart-item-${displayCartItem.cartItem.id}`);
-    let counter = item.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
-
-    $.ajax({
-        method: "DELETE",
-        url: `/cart/items/${displayCartItem.cartItem.id}`,
-        error: function(resp, error) {
-            console.log(`operation failed, status code: ${resp.status}, error: ${error}`);
-        }
-    });
-    item.remove();
-    updateTotalItemCount(parseInt(counter.innerText) * -1);
-    updateOrderSummary(parseInt(counter.innerText) * parseFloat(displayCartItem.item.price) * -1, taxRate);
+function deactivateEditButtons(){
+    let items = document.getElementsByClassName("item-edit-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].removeEventListener("click", Editlistener);
+    }
 }
 
-function updateTotalItemCount(itemChange) {
-    let totalCounter = document.getElementById("total-items-count");
-    totalCounter.innerText = String(parseInt(totalCounter.innerText) + parseInt(itemChange));
+function activateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].setAttribute('aria-disabled', "true")
+    }
 }
-function updateOrderSummary(pretaxPriceChange, taxRate) {
-    let pretaxSpan = document.getElementById("order-summary-pretax-total");
-    let pretax = parseFloat(pretaxSpan.innerText);
-    let newPretax = pretax + parseFloat(pretaxPriceChange);
-    pretaxSpan.innerText = newPretax.toFixed(2);
 
-    let taxSpan = document.getElementById("order-summary-tax");
-    let newTax = newPretax * parseFloat(taxRate);
-    taxSpan.innerText = newTax.toFixed(2);
+function deactivateHideButtons(){
+    let items = document.getElementsByClassName("item-hide-icon")
+    for(var i=0;i<items.length;i++){
+        items[i].removeAttribute('aria-disabled')
+    }
+}
 
-    let taxedTotalSpan = document.getElementById("order-summary-taxed-total");
-    let newTaxedTotal = newPretax + newTax;
-    taxedTotalSpan.innerText = newTaxedTotal.toFixed(2);
+function addItem(){
+    let form = document.getElementById("addItem-form");
+    form.removeAttribute("hidden")
+
+    let addItemButton = document.getElementById("addItem");
+    addItemButton.removeAttribute("onclick");
+
+    deactivateEditButtons()
+}
+
+
+function resetAddItem(){
+
+    let addform = document.getElementById("addItem-form");
+    addform.reset();
+    addform.setAttribute("hidden", "hidden");
+
+    activateAddButton()
+    activateEditButtons()
+    activateHideButtons();
+
+}
+
+function activateAddButton(){
+    let button = document.getElementById("addItem");
+    button.setAttribute("onclick", "addItem()")
+}
+
+
+function editItem(item){
+
+    item.setAttribute("id", "editing")
+    let inputs = item.getElementsByTagName("span");
+
+    let name = inputs[0].innerText;
+    let type = inputs[1].innerText;
+    let desc = inputs[2].innerText.slice(13,);
+    let price = inputs[3].innerText.slice(1,);
+    let quantity = parseInt(inputs[4].innerText.slice(1,));
+
+    item.innerHTML =
+        "<form id='editItem-form' method=\"POST\"'>" +
+        "    <span class=\"item-name\"><input type='text' name='itemName' placeholder='Enter item title' value='"+name+"' readonly></span>\n" +
+        "    <span class=\"item-type\"><input type='text' name='itemType' value='"+type+"' readonly></span>\n" +
+        "    <span class=\"item-desc\"><textarea id=\"desc-changing\" name=\"description\" placeholder='Enter Description' cols='40' rows='6' required>"+desc+"</textarea></span>\n"+
+        "    <span class=\"item-price\">$<input type='number' step='any'  name='price' value='"+price+"' required></span>\n" +
+        "    <span class=\"item-quantity\"><input type='number' step='1' name='stock' value='"+quantity+"' required></span>\n" +
+        "    <span id='confirm-change' class=\"item-change-icon\"><button type=\"submit\">&#10003</button></span>\n" +
+        "    <span id='delete-change' class=\"item-delete-icon\"><a onclick='location.reload()'>cancel</span>\n" +
+        "</form>"
+
+    let addItemButton = document.getElementById("addItem");
+    addItemButton.removeAttribute("onclick");
+
+    deactivateEditButtons()
+    deactivateHideButtons()
+}
+
+function show_status_list(node){
+
+    let parent = node.parentNode
+    let div = parent.getElementsByClassName("status-list")[0];
+    if(div.classList.contains("show")){
+        div.classList.remove("show")
+    }
+    else{
+        div.classList.add("show")
+    }
 }

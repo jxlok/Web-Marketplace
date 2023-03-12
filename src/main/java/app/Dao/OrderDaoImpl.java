@@ -4,19 +4,26 @@ import app.Entities.FullOrderInfo;
 import app.Entities.Item;
 import app.Entities.Order;
 import app.Entities.Order_Details;
+import app.models.OrderItemIdAndQuantity;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Repository
 public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
-
+    static final String CREATE_ORDER_QUERY = "INSERT INTO orders (orderPlacedTime, orderStatus, customerId) VALUES (?, ?, ?)";
+    static final String GET_LATEST_UNFINISHED_ORDER_QUERY = "SELECT orderId FROM orders WHERE customerId=? AND orderStatus='New' ORDER BY orderId DESC LIMIT 1";
+    static final String CREATE_ORDER_DETAIL_QUERY = "INSERT INTO order_details (orderId, itemID, quantity) VALUES (?, ?, ?)";
+    static final String UPDATE_ORDER_PAYMENT_ID_QUERY = "UPDATE orders SET paymentId=? WHERE orderID = ?";
     @Autowired
     DataSource dataSource;
 
@@ -197,6 +204,43 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
             result.add(newOrder);
         }
         return result;
+    }
+
+    /**
+     *  create a new order as well as order details, and return created order id.
+     **/
+    @Override
+    @Transactional
+    public int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQtys) {
+        getJdbcTemplate().update(
+                CREATE_ORDER_QUERY,
+                Timestamp.from(ZonedDateTime.now().toInstant()),
+                "New",
+                customerId
+        );
+
+        Integer latestOrderId = getJdbcTemplate().queryForList(
+                GET_LATEST_UNFINISHED_ORDER_QUERY,
+                Integer.class,
+                customerId
+        ).get(0);
+
+        idAndQtys.forEach(idAndQty -> getJdbcTemplate().update(
+                CREATE_ORDER_DETAIL_QUERY,
+                latestOrderId,
+                idAndQty.getItemId(),
+                idAndQty.getQuantity()
+        ));
+
+        return latestOrderId;
+    }
+
+    public int updatePaymentIdByOrderId(int orderId) {
+        // generate an epoch timestamp as paymentId when we mark a transaction as `Done`, since we don't have real payment provider.
+        return getJdbcTemplate().update(
+                UPDATE_ORDER_PAYMENT_ID_QUERY,
+                Instant.now().getEpochSecond(),
+                orderId);
     }
 
 }

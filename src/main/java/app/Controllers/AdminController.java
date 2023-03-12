@@ -2,8 +2,10 @@ package app.Controllers;
 
 import app.Entities.Item;
 import app.Service.AdminService;
+import app.Service.CartService;
 import app.Service.ItemService;
 import app.Service.OrderService;
+import app.SessionVariables;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,8 @@ import java.io.IOException;
 @Controller
 public class AdminController {
 
-    boolean passwordError=false;
+    @Autowired
+    SessionVariables sessionVariables;
 
     @Autowired
     ItemService itemService;
@@ -26,22 +29,37 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    CartService cartService;
+
+    boolean passwordError=false;
+
     @GetMapping("/manageItems")
     public String manageItems(Model model){
         model.addAttribute("myItems", itemService.getUnhiddenItems());
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "manageItems.html";
     }
 
     @PostMapping("/manageItems")
     public @ResponseBody
-    void addItem(Item item, HttpServletResponse response) {
+    void addItem(Item item, @RequestParam String itemType, HttpServletResponse response) {
 
-        item.setIsTrained(1);
+        if(itemType.equals("Trained"))
+        {
+            item.setIsTrained(1);
+        }
+        else{
+            item.setIsTrained(0);
+        }
 
         //find item
         Item existingItem = null;
         for(Item myItem: itemService.getAllItems()) {
-            if(myItem.getItemName().equals(item.getItemName())){
+            if(myItem.getItemName().equals(item.getItemName()) && myItem.getIsTrained() == item.getIsTrained()){
                 existingItem=myItem;
             }
         }
@@ -53,6 +71,7 @@ public class AdminController {
         //else put new item in hashmap
         else {
             item.setVisibility(1);
+
             itemService.insertItem(item);
         }
 
@@ -66,6 +85,10 @@ public class AdminController {
     @GetMapping("/hiddenItems")
     public String hiddenItems(Model model){
         model.addAttribute("hiddenItems", itemService.getHiddenItems());
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
         return "hiddenItems.html";
     }
 
@@ -113,7 +136,15 @@ public class AdminController {
 
 
     @GetMapping("/admin")
-    public String admin(Model model){
+    public String admin(Model model, HttpServletResponse response){
+
+        if(!sessionVariables.isAdminLoggedIn()){
+            try {
+                response.sendRedirect("/admin-login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         //total-sales statistic
         model.addAttribute("total_sales", orderService.getTotalSales());
         model.addAttribute("best_seller", orderService.getBestSeller());
@@ -122,11 +153,16 @@ public class AdminController {
 
         //order history
         model.addAttribute("orders", orderService.getFullOrderInfo());
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
         return "admin.html";
     }
 
-    @GetMapping("/admin/{status}/{id}")
+    @GetMapping("/admin/orders/{id}/set/{status}")
     public void changeStatus(@PathVariable String status, @PathVariable int id, HttpServletResponse response){
 
         orderService.updateOrderStatus(id, status);
@@ -142,6 +178,10 @@ public class AdminController {
     public String adminLogin(Model model){
 
         model.addAttribute("failedAttempt", passwordError);
+        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+        var cartItems = cartService.getCart(111);
+        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
         return "admin-login.html";
     }
@@ -155,6 +195,7 @@ public class AdminController {
 
         if(adminService.validateAdmin(email, password)){
             passwordError=false;
+            sessionVariables.setAdminLoggedIn(true);
             try {
                 response.sendRedirect("/admin");
             } catch (IOException e) {
@@ -168,6 +209,18 @@ public class AdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletResponse response){
+        sessionVariables.setCustomerLoggedIn(false);
+        sessionVariables.setAdminLoggedIn(false);
+
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
