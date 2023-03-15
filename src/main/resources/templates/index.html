@@ -31,7 +31,7 @@
     <div th:if="${!searching}"  class="video-container">
 
         <div class="container">
-            <video id="backgroundVideo" preload="auto" loop playsinline autoplay src="../static/media/video.mp4" th:src="@{media/video.mp4}" tabindex="-1" muted="muted"></video>
+            <video id="backgroundVideo" preload="auto" loop playsinline autoplay src="../static/media/video1.mp4" th:src="@{media/video1.mp4}" tabindex="-1" muted="muted"></video>
             <h1 class="video-title">Welcome to AI Market</h1>
         </div>
     </div>
@@ -52,7 +52,7 @@
 
 
                         <div class="dropdown">
-                            <button id="filterButton" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" >Filter
+                            <button id="filterButton" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: rebeccapurple; border-color: rebeccapurple" >Filter
                                 <span class="caret"></span></button>
                             <ul id="filter-checkboxes" class="dropdown-menu dropdown-menu-end">
                                 <li>
@@ -84,7 +84,7 @@
     </div>
 
 
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center" style="margin-bottom: 30px">
         <div id="block-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 ">
 
 
@@ -110,8 +110,12 @@
 
 
 
-
 </main>
 
 </body>
+<footer>
+    <div th:insert="~{fragments.html :: footer}"></div>
+</footer>
+
+
 </html>
