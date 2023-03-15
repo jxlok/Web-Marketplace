@@ -52,6 +52,7 @@
                             <button type="button" class="btn btn-outline-primary btn-lg custom-outline-purple" th:classappend="${buttonStatus == 'Trained'} ? 'active' : ''">Trained</button>
                         </div>
                     </div>
+
                     <div th:if="${anotherVersion == false&&buttonStatus == 'unTrained'}">
                         <button type="button" class="btn btn-outline-primary btn-lg custom-outline-purple" th:classappend="${buttonStatus == 'unTrained'} ? 'active' : ''">Untrained</button>
                     </div>
@@ -60,12 +61,12 @@
                     </div>
                 </div>
 
-                <div th:if="${stock == 0}">
+                <div th:if="${stock != 0}">
                     <div style="margin-top: 50px">
                         <button class="btn btn-outline-primary btn-lg custom-outline-purple active" href="/cart" style="position: absolute;bottom: 0;" >Add to Cart</button>
                     </div>
                 </div>
-                <div th:if="${stock != 0}">
+                <div th:if="${stock == 0}">
                     <div style="margin-top: 50px">
                         <button class="btn btn-outline-primary btn-lg active"style="position: absolute;bottom: 0; background-color: gray;color: white;border-color: gray" >Out of Stock</button>
                     </div>
