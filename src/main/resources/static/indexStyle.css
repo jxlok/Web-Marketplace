@@ -27,6 +27,7 @@
     margin-top: 50px;
     width: 300px;
     height: 300px;
+    overflow: hidden;
 }
 
 .item-top{
@@ -44,6 +45,7 @@
 .item-name{
     padding-top: 5px;
     font-size: 30px;
+    overflow: hidden;
 }
 .price{
     margin-top: 100px;
@@ -54,3 +56,21 @@ a {
     text-decoration: inherit;
 }
 
+main{
+    min-height: 90vh;
+}
+.custom-outline-purple {
+    border-color: rebeccapurple !important;
+    color: rebeccapurple !important;
+}
+.custom-outline-purple.active {
+    background-color: rebeccapurple !important;
+    color: white !important;
+}
+.custom-outline-purple:not(.active) {
+    background-color: transparent !important;
+}
+.custom-outline-purple:hover {
+    background-color: purple !important;
+    color: white !important;
+}
