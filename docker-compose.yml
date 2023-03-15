@@ -17,3 +17,16 @@ services:
     #  (initial with data)
     environment:
       MYSQL_ROOT_PASSWORD: root
+
+
+  pawn:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: mysql
