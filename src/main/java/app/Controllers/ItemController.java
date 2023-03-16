@@ -47,7 +47,6 @@ public class ItemController {
         model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         model.addAttribute("searching", sessionVariables.isSearching());
         model.addAttribute("basketCount", sessionVariables.getBasketCount());
-        sessionVariables.setSearching(false);
 
         Item item = itemService.getItem(id);
 
