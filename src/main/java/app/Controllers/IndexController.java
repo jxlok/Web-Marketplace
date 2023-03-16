@@ -38,7 +38,7 @@ public class IndexController {
     List<Item> searchedItems = new LinkedList<>();
     @GetMapping("/")
     public String index(
-            @CookieValue(name = "customerid") String customerId,
+            @CookieValue(name = "customerid",required = false) String customerId,
             Model model){
         if(sessionVariables.isSearching()){
             model.addAttribute("myItems", searchedItems);

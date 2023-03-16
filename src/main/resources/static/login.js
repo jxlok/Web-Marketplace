@@ -37,6 +37,7 @@ function register() {
                 success: function (response) {
                     window.sessionStorage.setItem("customerId", response.customerId)
                     window.sessionStorage.setItem("token", response.token)
+                    document.cookie=`customerid=${response.customerId}`
                     location.href=response.redirectUrl
                 },
                 error: function () {
