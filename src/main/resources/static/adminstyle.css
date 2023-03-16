@@ -351,9 +351,6 @@ footer{
    color: mediumvioletred;
 }
 
-.order-item-name>a:hover{
-    color: yellow;
-}
 
 .order-item-type{
     width: 20%;
