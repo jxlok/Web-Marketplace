@@ -58,19 +58,35 @@ public class CheckoutController {
             List<OrderItemIdAndQuantity> itemIdsAndQuantities = getItemIdAndQuantities(cartService.getCart(customerId.get()));
             orderService.createOrder(customerId.get(),itemIdsAndQuantities);
             // deduct stock
-            itemIdsAndQuantities.forEach(idQty -> itemService.updateStock(idQty.getItemId(), -1 * idQty.getQuantity()));
-            // clear items from cart
-            cartService.clearCart(customerId.get());
-            model.addAttribute("redirectReason", "Congratulations, your payment went through!");
-            model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn(customerId.get()));
-            model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
-            model.addAttribute("basketCount", sessionVariables.getBasketCount());
-            return "redirect.html";
+            var itemIdsAndQuantitiesAfterDeduction =
+                    itemIdsAndQuantities.stream()
+                            .map(idQty ->
+                                    new OrderItemIdAndQuantity(
+                                            idQty.getItemId(),
+                                            itemService.getItem(idQty.getItemId()).getStock() - idQty.getQuantity())
+                            ).toList();
+            if (itemIdsAndQuantitiesAfterDeduction.stream().anyMatch(idQty -> idQty.getQuantity() < 0)) {
+                // if there is at least one item oversold, fail this checkout, show error and redirect customer to index page.
+                model.addAttribute("redirectReason", "Checkout Failed! Not enough items in stock, please reduce amount of AI models in your cart!");
+                model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn(customerId.get()));
+                model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+                model.addAttribute("basketCount", sessionVariables.getBasketCount());
+                return "redirect.html";
+            } else {
+                // deduct stock
+                itemIdsAndQuantitiesAfterDeduction.forEach(idQty -> itemService.updateStock(idQty.getItemId(), idQty.getQuantity()));
+                // clear items from cart
+                cartService.clearCart(customerId.get());
+                model.addAttribute("redirectReason", "Congratulations, your payment went through!");
+                model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn(customerId.get()));
+                model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+                model.addAttribute("basketCount", sessionVariables.getBasketCount());
+                return "redirect.html";
+            }
         } else {
             return "redirect:/login";
         }
     }
-
     private List<OrderItemIdAndQuantity> getItemIdAndQuantities(List<CartDisplayItem> displayItems) {
         return displayItems
                 .stream()
