@@ -28,8 +28,12 @@ public class CartController {
     @Autowired
     ItemService itemService;
 
+
     @Autowired
     SessionVariables sessionVariables;
+
+
+    
 
     @GetMapping("/cart")
     //collect card information and order information
