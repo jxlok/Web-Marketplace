@@ -43,11 +43,7 @@ public class ItemController {
         model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
         model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         model.addAttribute("searching", sessionVariables.isSearching());
-        var cartItems = cartService.getCart(111);
-        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));        sessionVariables.setSearching(false);
-
-
-
+        model.addAttribute("basketCount", sessionVariables.getBasketCount());
 
         Item item = itemService.getItem(id);
 
