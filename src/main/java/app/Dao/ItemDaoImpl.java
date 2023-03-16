@@ -160,7 +160,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 
     @Override
     public List<Item> getSearchedItems(String search_query){
-        String sql = "SELECT * FROM items WHERE LOWER(itemName) LIKE LOWER('%"+search_query+"%')";
+        String sql = "SELECT * FROM items WHERE visibility=1 and LOWER(itemName) LIKE LOWER('%"+search_query+"%')";
         List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
 
         List<Item> result = new ArrayList<>();
