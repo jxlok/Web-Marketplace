@@ -1,5 +1,6 @@
 package app.Controllers;
 
+import app.Entities.Item;
 import app.Service.CartService;
 import app.Service.ItemService;
 import app.SessionVariables;
@@ -29,13 +30,15 @@ public class CartController {
     @Autowired
     ItemService itemService;
 
-    @Autowired
-    HashMap<Integer, Integer> imageID;
+
     @Autowired
     SessionVariables sessionVariables;
 
+    @Autowired
+    ItemService itemService;
 
-    
+    HashMap<Integer, Integer> imageID = new HashMap<Integer,Integer>();
+
 
     @GetMapping("/cart")
     //collect card information and order information
@@ -62,6 +65,24 @@ public class CartController {
             model.addAttribute("cartTaxedTotal", cartTaxedTotal);
             model.addAttribute("taxRate", TAX_RATE);
             model.addAttribute("taxRateInPercentage", TAX_RATE * 100);
+            int count = 1;
+            Map<String, Integer> itemNumberMap = new HashMap<>();
+            for (Item item : itemService.getAllItems()) {
+                if (itemNumberMap.containsKey(item.getItemName())) {
+                    // item with the same name already has a number assigned
+                    int itemNumber = itemNumberMap.get(item.getItemName());
+                    imageID.put(item.getItemId(), itemNumber);
+                } else {
+                    // item with the same name doesn't have a number assigned yet
+                    imageID.put(item.getItemId(), count);
+                    itemNumberMap.put(item.getItemName(), count);
+                    count++;
+                    if (count > 10) {
+                        count = 1;
+                    }
+                }
+            }
+
             model.addAttribute("imageID", imageID);
             return "cart.html";
         } else {
