@@ -111,3 +111,5 @@ INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 1, 1, 1
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 3, 0, 2);
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 2, 0, 3);
 
+
+

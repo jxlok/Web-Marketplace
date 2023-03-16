@@ -69,7 +69,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public void switchCartItemStatus(int cartItemId){
-        itemDao.switchCartItemStatus(cartItemId);
+    public String switchCartItemStatus(int cartItemId){
+        return itemDao.switchCartItemStatus(cartItemId);
     }
 }
