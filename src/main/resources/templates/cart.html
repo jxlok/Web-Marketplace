@@ -26,9 +26,10 @@
 
             <div class="items-list" th:each="displayItem : ${cartDisplayItems}">
                 <div class="row items align-items-center" th:id="|cart-item-${displayItem.cartItem.id}|">
-                    <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
-                                            th:src="@{'/images/' + ${imageID.get(displayItem.getItem().getItemId())} + '.png'}"
-                                            ></div>
+                    <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px" th:src="@{'/images/' + ${imageID.get(displayItem.item.itemId)} + '.png'}"  src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png"></div>
+
+
+
                     <div class="col">
                         <div class="row text-muted" th:text="${displayItem.item.itemName}"/>
 
