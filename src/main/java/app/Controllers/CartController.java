@@ -80,6 +80,7 @@ public class CartController {
             }
 
             model.addAttribute("imageID", imageID);
+            model.addAttribute("imageID", imageID);
             return "cart.html";
         } else {
             return "redirect:/login";
