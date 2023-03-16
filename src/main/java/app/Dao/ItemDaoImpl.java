@@ -24,6 +24,9 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         setDataSource(dataSource);
     }
 
+    @Autowired
+    CartDao cartDao;
+
     @Override
     public List<Item> getAllItems() {
         String sql = "SELECT * FROM items";
@@ -182,7 +185,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         List<Map<String, Object>> item = getJdbcTemplate().queryForList(sql);
 
         if(item.isEmpty()){
-            return new Item();
+            return null;
         }
         else{
             Item newItem = new Item();
@@ -231,28 +234,43 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
     }
 
     @Override
-    public boolean switchCartItemStatus(int cartItemId){
+    public String switchCartItemStatus(int cartItemId){
+        //get cardItem
         CartItem cartItem = getByCartID(cartItemId);
-        String name = getItem(cartItem.getItemID()).getItemName();
+        Item myItem = getItem(cartItem.getItemID());
+        String name = myItem.getItemName();
         int isTrained = getItem(cartItem.getItemID()).getIsTrained();
         Item opposite_item = getOppositeItem(name, isTrained);
 
+        if(opposite_item==null){
+            return "Different version of AI is not available.";
+        }
+
+        //customer's cart
         List<CartItem> items = getCustomerCart(cartItem.getCustomerID());
+
+        //check items for match, if match merge
         for (CartItem item: items ) {
             if (item.getItemID() == opposite_item.getItemId()) {
                 String sql = "UPDATE carts SET quantity=? WHERE id = ?";
-                getJdbcTemplate().update(sql, new Object[]{opposite_item.getStock() + item.getQuantity(), item.getItemID()});
-                return true;
-            }
-
-            else if (cartItem.getQuantity() <= opposite_item.getStock() && !opposite_item.equals(new Item())) {
-                String sql = "UPDATE carts SET itemID=? WHERE id = ?";
-                getJdbcTemplate().update(sql, new Object[]{opposite_item.getItemId(), cartItemId});
-
-                return true;
+                getJdbcTemplate().update(sql, new Object[]{cartItem.getQuantity() + item.getQuantity(), item.getItemID()});
+                cartDao.deleteCartItem(cartItem.getCustomerID(), cartItemId);
+                return "SUCCESS";
             }
         }
-        return false;
+
+        //no item match, so ensure change is possible
+        if (cartItem.getQuantity() <= opposite_item.getStock() && !opposite_item.equals(new Item())) {
+            String sql = "UPDATE carts SET itemID=? WHERE id = ?";
+            getJdbcTemplate().update(sql, new Object[]{opposite_item.getItemId(), cartItemId});
+
+            return "SUCCESS";
+        }
+        else if(cartItem.getQuantity() <= opposite_item.getStock()){
+                return "Invalid quantity conversion.";
+        }
+
+        return "FAILURE";
     }
 
 }

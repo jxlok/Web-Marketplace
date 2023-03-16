@@ -17,5 +17,5 @@ public interface ItemService {
     Item getItem(int id);
     List<Item> getSearchedItems(String search_query);
 
-    void switchCartItemStatus(int cartItemId);
+    String switchCartItemStatus(int cartItemId);
 }

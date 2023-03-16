@@ -125,9 +125,12 @@ public class CartController {
 
     @GetMapping("/cart/items/{cartItemId}")
     public String switchCartItemStatus(@PathVariable(name="cartItemId") int cartItemId,
-                                       HttpServletResponse response){
+                                       @CookieValue(name = "customerid",required = false) String customerId){
 
-        itemService.switchCartItemStatus(cartItemId);
-
-        return "redirect:/cart";    }
+        String msg = itemService.switchCartItemStatus(cartItemId);
+        if(!msg.equals("SUCCESS")){
+            System.out.println(msg);
+        }
+        return "redirect:/cart?customerId="+Integer.parseInt(customerId);
+    }
 }
