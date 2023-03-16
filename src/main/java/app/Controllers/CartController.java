@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-
+    @Autowired
+    HashMap<Integer, Integer> imageID;
     @Autowired
     SessionVariables sessionVariables;
 
@@ -56,7 +58,7 @@ public class CartController {
             model.addAttribute("cartTaxedTotal", cartTaxedTotal);
             model.addAttribute("taxRate", TAX_RATE);
             model.addAttribute("taxRateInPercentage", TAX_RATE * 100);
-
+            model.addAttribute("imageID", imageID);
             return "cart.html";
         } else {
             return "redirect:/login";

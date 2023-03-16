@@ -27,15 +27,22 @@
             <div class="items-list" th:each="displayItem : ${cartDisplayItems}">
                 <div class="row items align-items-center" th:id="|cart-item-${displayItem.cartItem.id}|">
                     <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
-                                            src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png"
-                                            th:src="@{/media/Screenshot%202023-02-13%20at%2016.08.55.png}"></div>
+                                            th:src="@{'/images/' + ${imageID.get(displayItem.getItem().getItemId())} + '.png'}"
+                                            ></div>
                     <div class="col">
                         <div class="row text-muted" th:text="${displayItem.item.itemName}"/>
 
                         <form method="get" th:action="|/cart/items/${displayItem.cartItem.id}|" id="status-of-item">
                             <select id="model-selection" name="isTrained" onchange="alert();this.form.submit()">
-                                <option value="true">Trained</option>
-                                <option value="false">Untrained</option>
+                                <span th:if="${displayItem.item.isTrained == 1}">
+                                    <option value="true">Trained</option>
+                                    <option value="false">Untrained</option>
+                                </span>
+                                <span th:if="${displayItem.item.isTrained == 0}">
+                                     <option value="true">Untrained</option>
+                                    <option value="false">Trained</option>
+                                </span>
+
                             </select>
                         </form>
 
