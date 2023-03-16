@@ -8,6 +8,7 @@ import app.models.CartDisplayItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,7 @@ public class ItemController {
         model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         model.addAttribute("searching", sessionVariables.isSearching());
         model.addAttribute("basketCount", sessionVariables.getBasketCount());
+
 
         Item item = itemService.getItem(id);
 

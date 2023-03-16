@@ -16,4 +16,6 @@ public interface ItemDao {
     List<Item> getSortedUnhiddenItems();
     Item getItem(int id);
     List<Item> getSearchedItems(String search_query);
+    Item getOppositeItem(String name, int isTrained);
+    boolean switchCartItemStatus(int cartItemId);
 }

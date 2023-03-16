@@ -1,5 +1,6 @@
 package app.Dao;
 
+import app.Entities.CartItem;
 import app.Entities.Item;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,4 +175,57 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         }
         return result;
     }
+
+    @Override
+    public Item getOppositeItem(String name, int isTrained){
+        String sql = "SELECT * FROM items WHERE itemName ='"+ name+"' and isTrained!="+isTrained;
+        List<Map<String, Object>> item = getJdbcTemplate().queryForList(sql);
+
+        if(item.isEmpty()){
+            return new Item();
+        }
+        else{
+            Item newItem = new Item();
+            newItem.setItemId((Integer) item.get(0).get("itemId"));
+            newItem.setItemName((String) item.get(0).get("itemName"));
+            newItem.setDescription((String) item.get(0).get("description"));
+            newItem.setIsTrained((int) item.get(0).get("isTrained"));
+            newItem.setPrice(((BigDecimal) item.get(0).get("price")).doubleValue());
+            newItem.setStock((Integer) item.get(0).get("stock"));
+            newItem.setVisibility((Integer) item.get(0).get("visibility"));
+            return newItem;
+        }
+    }
+
+    public CartItem getByCartID(int cartID){
+        String sql = "SELECT * FROM carts WHERE id ="+cartID;
+        List<Map<String, Object>> item = getJdbcTemplate().queryForList(sql);
+
+        CartItem cartItem = new CartItem();
+        cartItem.setId((Integer) item.get(0).get("id"));
+        cartItem.setCustomerID((Integer) item.get(0).get("customerID"));
+        cartItem.setItemID((Integer) item.get(0).get("itemID"));
+        cartItem.setTrained((Integer)item.get(0).get("isTrained")==1 ? Boolean.TRUE : Boolean.FALSE);
+        cartItem.setQuantity(((Integer) item.get(0).get("quantity")));
+        return cartItem;
+
+    }
+
+    @Override
+    public boolean switchCartItemStatus(int cartItemId){
+        CartItem cartItem = getByCartID(cartItemId);
+        String name = getItem(cartItem.getItemID()).getItemName();
+        int isTrained = getItem(cartItem.getItemID()).getIsTrained();
+        Item opposite_item = getOppositeItem(name, isTrained);
+
+        if(cartItem.getQuantity() <= opposite_item.getStock() && !opposite_item.equals(new Item())){
+            String sql = "UPDATE carts SET itemID=? WHERE id = ?";
+            getJdbcTemplate().update(sql, new Object[]{opposite_item.getItemId(), cartItemId});
+
+            return true;
+        }
+
+        return false;
+    }
+
 }
