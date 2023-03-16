@@ -26,6 +26,8 @@
 
             <div class="items-list" th:each="displayItem : ${cartDisplayItems}">
                 <div class="row items align-items-center" th:id="|cart-item-${displayItem.cartItem.id}|">
+
+
                     <div class="col-2"><img class="img-fluid img-thumbnail" width="200px" height="200px"
                                             th:src="@{'/images/' + ${imageID.get(displayItem.getItem().getItemId())} + '.png'}"
                                             ></div>
