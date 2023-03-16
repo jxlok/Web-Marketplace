@@ -35,6 +35,9 @@ public class ItemController {
     List<Item> searchedItems = new LinkedList<>();
     @GetMapping("/item")
     public String item(@RequestParam("id") int id,@RequestParam(name = "customerId", required = false) Integer customerId, Model model) {
+    public String item(@RequestParam("id") int id, @CookieValue(name="customerid", required = false) String customerId, Model model) {
+        var cartItems = cartService.getCart(Integer.parseInt(customerId));
+        sessionVariables.setBasketCount(cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
         if(sessionVariables.isSearching()){
             model.addAttribute("myItems", searchedItems);
@@ -47,6 +50,7 @@ public class ItemController {
         model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         model.addAttribute("searching", sessionVariables.isSearching());
         model.addAttribute("basketCount", sessionVariables.getBasketCount());
+        sessionVariables.setSearching(false);
 
 
         Item item = itemService.getItem(id);
