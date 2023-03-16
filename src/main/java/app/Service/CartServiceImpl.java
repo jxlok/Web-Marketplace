@@ -2,6 +2,7 @@ package app.Service;
 
 import app.Dao.CartDao;
 import app.Dao.ItemDao;
+import app.Entities.CartItem;
 import app.models.CartDisplayItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,20 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     ItemDao items;
+
+    @Override
+    public Boolean addToCart(int customerId, int itemId) {
+        var item = items.getItem(itemId);
+        var maybeInCart = carts.getByCustomerId(customerId).stream().filter(it -> it.getItemID() == itemId).findFirst();
+        var rowAffected = 0;
+        if (maybeInCart.isPresent()){
+            rowAffected = carts.setQuantity(customerId, maybeInCart.get().getId(), maybeInCart.get().getQuantity() + 1);
+        } else {
+            rowAffected = carts.addItemToCart(customerId, item.getItemId(), item.getIsTrained());
+        }
+
+        return rowAffected > 0;
+    }
 
     @Override
     public List<CartDisplayItem> getCart(int customerId) {

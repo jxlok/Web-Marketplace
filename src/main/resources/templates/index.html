@@ -37,10 +37,6 @@
     </div>
 </header>
 
-
-
-
-
 <main th:classappend="${!searching ? 'underVideo' : ''}" >
 
     <div class="container">
@@ -91,16 +87,16 @@
             <div id="item-list" th:each="i : ${#numbers.sequence(myItems.size() -1,0,-1)}" th:with="item=${myItems[i]}">
                 <div class="col">
                     <a th:href="@{/item(id=${item.getItemId()})}">
-                    <div class="stands-out-background">
-                        <div class="item-block card-body">
+                        <div class="stands-out-background">
+                            <div class="item-block card-body">
                                 <span> <img th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" style="width:260px;"></span>
                                 <div class="item-name">
                                     <span><strong>[(${item.getItemName})]</strong></span>
-                                <div><strong th:text="${item.getIsTrained == 1 ? '(Trained)' : '(Untrained)'}"></strong></div>
+                                    <div><strong th:text="${item.getIsTrained == 1 ? '(Trained)' : '(Untrained)'}"></strong></div>
                                 </div>
 
+                            </div>
                         </div>
-                    </div>
                     </a>
                 </div>
             </div>

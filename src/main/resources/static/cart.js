@@ -1,10 +1,13 @@
 function increment(container, displayCartItem, taxRate) {
-    let counter = container.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
+    let counter = container.getElementsByClassName("counting")[0]
 
     $.ajax({
         contentType: "application/json",
         data: JSON.stringify({ "quantity": parseInt(counter.innerText) + 1 }),
+        headers: {
+            "customerId": `${sessionStorage.getItem("customerId")}`,
+            "token": `${sessionStorage.getItem("token")}`
+        },
         dataType: "text", // because response is not json type, so ajax will try to parse it to json and fail
         method: "PATCH",
         url: `/cart/items/${displayCartItem.cartItem.id}`,
@@ -21,12 +24,15 @@ function increment(container, displayCartItem, taxRate) {
 
 function decrement(container, displayCartItem, taxRate) {
     let counter = container.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
 
     // we don't allow customer to reduce quantity of any cart item down to zero, so 1 is minimum quantity a customer can buy
     if (parseInt(counter.innerText) > 1) {
         $.ajax({
             contentType: "application/json",
+            headers: {
+                "customerId": `${sessionStorage.getItem("customerId")}`,
+                "token": `${sessionStorage.getItem("token")}`
+            },
             data: JSON.stringify({ "quantity": parseInt(counter.innerText) - 1 }),
             dataType: "text", // because response is not json type, so ajax will try to parse it to json and fail
             method: "PATCH",
@@ -44,43 +50,48 @@ function decrement(container, displayCartItem, taxRate) {
 }
 
 function removeItem(displayCartItem, taxRate){
-    let item = document.getElementById(`cart-item-${displayCartItem.cartItem.id}`);
-    let counter = item.getElementsByClassName("counting")[0];
-    let totalCounter = document.getElementById("total-items-count");
+    let item = document.getElementById(`cart-item-${displayCartItem.cartItem.id}`)
+    let counter = item.getElementsByClassName("counting")[0]
+    let totalCounter = document.getElementById("total-items-count")
 
     $.ajax({
         method: "DELETE",
+        headers: {
+            "customerId": `${sessionStorage.getItem("customerId")}`,
+            "token": `${sessionStorage.getItem("token")}`
+        },
         url: `/cart/items/${displayCartItem.cartItem.id}`,
         error: function(resp, error) {
-            console.log(`operation failed, status code: ${resp.status}, error: ${error}`);
+            console.log(`operation failed, status code: ${resp.status}, error: ${error}`)
         }
     });
     item.remove();
-    updateTotalItemCount(parseInt(counter.innerText) * -1);
-    updateOrderSummary(parseInt(counter.innerText) * parseFloat(displayCartItem.item.price) * -1, taxRate);
+    updateTotalItemCount(parseInt(counter.innerText) * -1)
+    updateOrderSummary(parseInt(counter.innerText) * parseFloat(displayCartItem.item.price) * -1, taxRate)
 }
 
 function updateTotalItemCount(itemChange) {
-    let totalCounter = document.getElementById("total-items-count");
-    totalCounter.innerText = String(parseInt(totalCounter.innerText) + parseInt(itemChange));
+    let totalCounter = document.getElementById("total-items-count")
+    totalCounter.innerText = String(parseInt(totalCounter.innerText) + parseInt(itemChange))
+    let cartCount = document.getElementById("basket-count")
+    cartCount.innerText = String(parseInt(cartCount.innerText) + parseInt(itemChange))
 }
 function updateOrderSummary(pretaxPriceChange, taxRate) {
-    let pretaxSpan = document.getElementById("order-summary-pretax-total");
-    let pretax = parseFloat(pretaxSpan.innerText);
-    let newPretax = pretax + parseFloat(pretaxPriceChange);
-    pretaxSpan.innerText = newPretax.toFixed(2);
+    let pretaxSpan = document.getElementById("order-summary-pretax-total")
+    let pretax = parseFloat(pretaxSpan.innerText)
+    let newPretax = pretax + parseFloat(pretaxPriceChange)
+    pretaxSpan.innerText = newPretax.toFixed(2)
 
-    let taxSpan = document.getElementById("order-summary-tax");
-    let newTax = newPretax * parseFloat(taxRate);
-    taxSpan.innerText = newTax.toFixed(2);
+    let taxSpan = document.getElementById("order-summary-tax")
+    let newTax = newPretax * parseFloat(taxRate)
+    taxSpan.innerText = newTax.toFixed(2)
 
-    let taxedTotalSpan = document.getElementById("order-summary-taxed-total");
-    let newTaxedTotal = newPretax + newTax;
-    taxedTotalSpan.innerText = newTaxedTotal.toFixed(2);
+    let taxedTotalSpan = document.getElementById("order-summary-taxed-total")
+    let newTaxedTotal = newPretax + newTax
+    taxedTotalSpan.innerText = newTaxedTotal.toFixed(2)
 }
 
 function checkout() {
     let customerId = window.sessionStorage.getItem("customerId");
-    if (customerId == null) customerId = 111;
     window.location.href=`/checkout?customerId=${customerId}`
 }

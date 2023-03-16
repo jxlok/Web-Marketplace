@@ -3,12 +3,16 @@ package app;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 @Scope
 public class SessionVariables {
 
-
-    private boolean customerLoggedIn=true;
+    private Map<Integer, String> inMemCustomerLoginCache = new HashMap<>();
+    private Map<Integer, String> inMemAdminLoginCache = new HashMap<>();
+    private boolean customerLoggedIn=false;
     private boolean adminLoggedIn=false;
     private boolean searching=false;
 
@@ -44,5 +48,29 @@ public class SessionVariables {
 
     public void setSearching(boolean searching) {
         this.searching = searching;
+    }
+
+    public void addCustomerLogin(int customerId, String token) {
+        inMemCustomerLoginCache.put(customerId, token);
+    }
+
+    public boolean isCustomerLoggedIn(int customerId) {
+        return inMemCustomerLoginCache.containsKey(customerId);
+    }
+
+    public void removeCustomerLogin(int customerId) {
+        inMemCustomerLoginCache.remove(customerId);
+    }
+
+    public void addAdminLogin(int adminId, String token) {
+        inMemAdminLoginCache.put(adminId, token);
+    }
+
+    public boolean isAdminLoggedIn(int adminId) {
+        return inMemAdminLoginCache.containsKey(adminId);
+    }
+
+    public void removeAdminLogin(int adminId) {
+        inMemAdminLoginCache.remove(adminId);
     }
 }
