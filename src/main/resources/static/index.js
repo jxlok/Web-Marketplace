@@ -35,4 +35,14 @@ $(document).ready(function() {
             }
         });
     });
+
+
 });
+
+function toItem(itemId) {
+    if(sessionStorage.getItem("customerId")!=null){
+        window.location.href = "/item?id="+itemId+"&customerId="+sessionStorage.getItem("customerId")
+    }else{
+        window.location.href = "/item?id="+itemId
+    }
+}
