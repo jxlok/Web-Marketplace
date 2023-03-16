@@ -64,9 +64,6 @@ public class IndexController {
         model.addAttribute("basketCount", sessionVariables.getBasketCount());
         sessionVariables.setSearching(false);
 
-        var cartItems = cartService.getCart(111);
-        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));        sessionVariables.setSearching(false);
-
         int count = 1;
         Map<String, Integer> itemNumberMap = new HashMap<>();
         for (Item item : itemService.getAllItems()) {
