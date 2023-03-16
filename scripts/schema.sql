@@ -111,3 +111,7 @@ INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 1, 1, 1
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 3, 0, 2);
 INSERT INTO carts (customerID, itemID, isTrained, quantity) VALUES (111, 2, 0, 3);
 
+-- admin for admin login
+INSERT INTO admins (adminId, email, password) VALUES (410, "admin@admin.ie", "password");
+-- customer for default customer to hide basket count
+INSERT INTO customers (customerID, email, password) VALUES (999, '1331313131@gmail.com', 'f5a5207a8729b1f709cb710311751eb2fc8acad5a1fb8ac991b736e69b6529a3');
