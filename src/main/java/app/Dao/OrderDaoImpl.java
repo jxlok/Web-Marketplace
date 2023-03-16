@@ -97,6 +97,9 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
         double totalSales=0;
 
         for(Order order : getAllOrders()){
+            if(order.getOrderStatus().equals("Cancelled")){
+                continue;
+            }
             List<Order_Details> details = getOrderDetails(order);
             for(Order_Details detail: details){
                 totalSales += getItem(detail).getPrice() * detail.getQuantity();
@@ -108,12 +111,22 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
 
     @Override
     public HashMap<String, Integer> getSoldItemCount() {
-        String sql = "SELECT itemName, SUM(quantity) as Count FROM order_details o, items i WHERE o.itemID = i.itemId GROUP BY i.ItemName ORDER BY Count desc";
+        String sql = "SELECT itemName, isTrained, SUM(quantity) as Count FROM orders ord, order_details o, items i WHERE o.itemID = i.itemId  and o.orderID = ord.orderID and ord.orderStatus != 'Cancelled' GROUP BY i.ItemName, i.isTrained ORDER BY Count desc";
         List<Map<String, Object>> itemCount = getJdbcTemplate().queryForList(sql);
 
         HashMap<String, Integer> result = new LinkedHashMap<>();
         for(Map<String, Object> item :  itemCount){
-            result.put((String)item.get("itemName"), Integer.valueOf(item.get("Count").toString()));
+
+            String type="";
+            if(((int) item.get("isTrained"))==0){
+                type="Untrained";
+            }
+            else{
+                type="Trained";
+            }
+
+            result.put(item.get("itemName")+" ("+type+")", Integer.valueOf(item.get("Count").toString()));
+
         }
         return result;
     }
@@ -121,7 +134,8 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
     @Override
     public String getBestSeller(){
         List<String> items = getSoldItemCount().keySet().stream().toList();
-        return items.get(0);
+
+        return items.isEmpty() ? "" : items.get(0);
     }
 
     @Override
