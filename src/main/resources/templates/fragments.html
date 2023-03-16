@@ -39,14 +39,19 @@
                             <a th:href="@{/admin-login}">Admin</a>
                         </div>
                     </li>
-                    <li th:if="${customerLoggedIn or adminLoggedIn}" class="nav-item">
+                    <!-- for admin logout-->
+                    <li th:if="${!customerLoggedIn and adminLoggedIn}" class="nav-item">
                         <a class="nav-link " th:href="@{/logout}">Logout</a>
                     </li>
+                    <!-- for customer logout-->
+                    <li th:if="${customerLoggedIn and !adminLoggedIn}" class="nav-item">
+                        <a  onclick="logout()" class="nav-link" href="#">Logout</a>
+
                     <li class="nav-item"  th:if="${!adminLoggedIn}" >
-                        <a class="nav-link" th:href="@{/cart}">
-                        <i class="fas fa-shopping-cart " style="font-size: 24px">
-                            <span id="basket-count" class="">[(${basketCount})]</span>
-                        </i></a>
+                        <a class="nav-link" onclick="getCart()" href="#">
+                            <i class="fas fa-shopping-cart " style="font-size: 24px">
+                                <span id="basket-count" class="">[(${basketCount})]</span>
+                            </i></a>
                     </li>
                 </ul>
             </div>
@@ -60,6 +65,31 @@
             function hide_login_list(){
                 let login_choices = document.getElementsByClassName("login-choice")[0]
                 login_choices.classList.remove("show")
+            }
+
+            function getCart() {
+                if (sessionStorage.getItem("customerId") === null) {
+                    window.location.href="/login"
+                } else {
+                    window.location.href=`/cart?customerId=${sessionStorage.getItem("customerId")}`
+                }
+            }
+
+            function logout() {
+                console.log("here")
+                $.ajax({
+                    method: "GET",
+                    headers: {
+                        "customerId": `${sessionStorage.getItem("customerId")}`,
+                        "token": `${sessionStorage.getItem("token")}`
+                    },
+                    url: `/customer-logout?customerId=${sessionStorage.getItem("customerId")}`,
+                    success: function(data) {
+                        sessionStorage.removeItem("customerId")
+                        sessionStorage.removeItem("token")
+                        window.location.href="/"
+                    }
+                })
             }
         </script>
     </div>

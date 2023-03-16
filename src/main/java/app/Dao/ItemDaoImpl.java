@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 @Repository
 public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 
@@ -72,6 +71,12 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
     public void editItem(int id, Item item){
         String sql = "UPDATE items SET itemName=?, description=?, isTrained=?, price=?, stock=? WHERE itemId = ?";
         getJdbcTemplate().update(sql, new Object[]{item.getItemName(), item.getDescription(), item.getIsTrained(), item.getPrice(), item.getStock(), id});
+    }
+
+    @Override
+    public void updateStock(int id, int delta){
+        String sql = "UPDATE items SET stock = stock + ? WHERE itemId = ?";
+        getJdbcTemplate().update(sql, delta, id);
     }
 
     @Override
@@ -153,6 +158,7 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
     public List<Item> getSearchedItems(String search_query){
         String sql = "SELECT * FROM items WHERE LOWER(itemName) LIKE LOWER('%"+search_query+"%')";
         List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
+
         List<Item> result = new ArrayList<>();
         for(Map<String, Object> item :  items){
             Item newItem = new Item();

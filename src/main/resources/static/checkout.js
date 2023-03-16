@@ -1,9 +1,9 @@
 function completeOrder() {
-    let cardHolderName = document.getElementById("card-name").innerText
-    let cardNum = document.getElementById("card-number").innerText
-    let cardType = document.getElementById("card-type").innerText
-    let date = document.getElementById("expiry-date").innerText
-    let cvv = document.getElementById("cvv").innerText
+    let cardHolderName = document.getElementById("card-name").value
+    let cardNum = document.getElementById("card-number").value
+    let cardType = document.getElementById("card-type").value
+    let date = document.getElementById("expiry-date").value
+    let cvv = document.getElementById("cvv").value
 
     let requestBody = JSON.stringify({
         cardHolderName: cardHolderName,
@@ -17,9 +17,13 @@ function completeOrder() {
 
     $.ajax({
         method: "POST",
+        headers: {
+            "customerId": `${sessionStorage.getItem("customerId")}`,
+            "token": `${sessionStorage.getItem("token")}`
+        },
         url: `/checkout?customerId=${customerId}`,
         contentType: "application/json; charset=utf-8",
-        body: requestBody,
+        data: requestBody,
         complete: function(data) {
             document.write(data.responseText)
         }

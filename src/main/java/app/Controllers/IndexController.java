@@ -14,15 +14,12 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.LinkedList;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -40,20 +37,26 @@ public class IndexController {
 
     List<Item> searchedItems = new LinkedList<>();
     @GetMapping("/")
-    public String index(Model model){
-
+    public String index(
+            @CookieValue(name = "customerid",required = false) String customerId,
+            Model model){
         if(sessionVariables.isSearching()){
             model.addAttribute("myItems", searchedItems);
         }
         else {
             model.addAttribute("myItems", itemService.getUnhiddenItems());
         }
+        sessionVariables.setCustomerLoggedIn(null != customerId && sessionVariables.isCustomerLoggedIn(Integer.parseInt(customerId)));
 
+        var basketCount = sessionVariables.isCustomerLoggedIn() ?
+                cartService.getCart(Integer.parseInt(customerId)).stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum) :
+                0;
+        sessionVariables.setBasketCount(basketCount);
         model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
         model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
         model.addAttribute("searching", sessionVariables.isSearching());
-        var cartItems = cartService.getCart(111);
-        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));        sessionVariables.setSearching(false);
+        model.addAttribute("basketCount", sessionVariables.getBasketCount());
+        sessionVariables.setSearching(false);
         return "index.html";
     }
 

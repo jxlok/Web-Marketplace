@@ -18,18 +18,19 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../static/item.js" th:src="@{item.js}"></script>
 
 
     <link rel="stylesheet" href="../static/header-and-background.css" th:href="@{header-and-background.css}">
     <link rel="stylesheet" href="../static/indexStyle.css" th:href="@{indexStyle.css}">
 </head>
 
-
-<header> <div th:insert="~{fragments.html :: header}"></div></header>
 <body>
-<main>
 
-    <div class="stands-out-background container ">
+<header th:insert="~{fragments.html :: header}"> </header>
+
+<main>
+    <div class="stands-out-background container">
         <div class="row item-top">
             <div class="col-sm">
                 <img class="item-image" th:src="@{media/Screenshot%202023-02-13%20at%2016.08.55.png}" src="../static/media/Screenshot%202023-02-13%20at%2016.08.55.png" alt="img">
@@ -63,7 +64,7 @@
 
                 <div th:if="${stock != 0}">
                     <div style="margin-top: 50px">
-                        <button class="btn btn-outline-primary btn-lg custom-outline-purple active" href="/cart" style="position: absolute;bottom: 0;" >Add to Cart</button>
+                        <button class="btn btn-outline-primary btn-lg custom-outline-purple active"  th:onclick="addToCart([[${item.getItemId}]])" style="position: absolute;bottom: 0;" >Add to Cart</button>
                     </div>
                 </div>
                 <div th:if="${stock == 0}">

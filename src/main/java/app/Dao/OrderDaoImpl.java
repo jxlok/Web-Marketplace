@@ -20,10 +20,9 @@ import java.util.*;
 
 @Repository
 public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
-    static final String CREATE_ORDER_QUERY = "INSERT INTO orders (orderPlacedTime, orderStatus, customerId) VALUES (?, ?, ?)";
+    static final String CREATE_ORDER_QUERY = "INSERT INTO orders (orderPlacedTime, orderStatus, paymentID, customerId) VALUES (?, ?, ?, ?)";
     static final String GET_LATEST_UNFINISHED_ORDER_QUERY = "SELECT orderId FROM orders WHERE customerId=? AND orderStatus='New' ORDER BY orderId DESC LIMIT 1";
     static final String CREATE_ORDER_DETAIL_QUERY = "INSERT INTO order_details (orderId, itemID, quantity) VALUES (?, ?, ?)";
-    static final String UPDATE_ORDER_PAYMENT_ID_QUERY = "UPDATE orders SET paymentId=? WHERE orderID = ?";
     @Autowired
     DataSource dataSource;
 
@@ -226,10 +225,12 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
     @Override
     @Transactional
     public int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQtys) {
+        // generate an epoch timestamp as paymentId when create an order, since we don't have real payment provider.
         getJdbcTemplate().update(
                 CREATE_ORDER_QUERY,
                 Timestamp.from(ZonedDateTime.now().toInstant()),
                 "New",
+                Instant.now().getEpochSecond(),
                 customerId
         );
 
@@ -248,13 +249,4 @@ public class OrderDaoImpl extends JdbcDaoSupport implements OrderDao{
 
         return latestOrderId;
     }
-
-    public int updatePaymentIdByOrderId(int orderId) {
-        // generate an epoch timestamp as paymentId when we mark a transaction as `Done`, since we don't have real payment provider.
-        return getJdbcTemplate().update(
-                UPDATE_ORDER_PAYMENT_ID_QUERY,
-                Instant.now().getEpochSecond(),
-                orderId);
-    }
-
 }

@@ -27,23 +27,24 @@ public class PurchaseHistoryController {
     OrderService orderService;
 
     @GetMapping("/purchase-history")
-    public String purchasehistory(Model model, HttpServletResponse response){
+    public String purchasehistory(
+            @CookieValue(name="customerid", required = false) String customerId,
+            Model model,
+            HttpServletResponse response){
 
-        if(!sessionVariables.isCustomerLoggedIn()){
+        if (null != customerId && sessionVariables.isCustomerLoggedIn(Integer.parseInt(customerId))) {
+            sessionVariables.setCustomerLoggedIn(true);
+            var cartItems = cartService.getCart(Integer.parseInt(customerId));
+            sessionVariables.setBasketCount(cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
 
-            try {
-                response.sendRedirect("/login");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
+            model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
+            model.addAttribute("customerOrders", orderService.getFullOrderInfoByCustomer(Integer.parseInt(customerId)));
+            model.addAttribute("basketCount", sessionVariables.getBasketCount());
+
+            return "purchase-history.html";
         }
-        model.addAttribute("customerLoggedIn", sessionVariables.isCustomerLoggedIn());
-        model.addAttribute("adminLoggedIn", sessionVariables.isAdminLoggedIn());
-        model.addAttribute("customerOrders", orderService.getFullOrderInfoByCustomer(200));
-
-        var cartItems = cartService.getCart(111);
-        model.addAttribute("basketCount", cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
-        return "purchase-history.html";
+        return "redirect:/login";
     }
 
 }
