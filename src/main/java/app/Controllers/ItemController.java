@@ -4,6 +4,7 @@ import app.Entities.Item;
 import app.Service.CartService;
 import app.Service.ItemService;
 import app.SessionVariables;
+import app.models.CartDisplayItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -32,9 +34,7 @@ public class ItemController {
 
     List<Item> searchedItems = new LinkedList<>();
     @GetMapping("/item")
-    public String item(@RequestParam("id") int id, @CookieValue(name="customerid", required = false) String customerId, Model model) {
-        var cartItems = cartService.getCart(Integer.parseInt(customerId));
-        sessionVariables.setBasketCount(cartItems.stream().map(ci -> ci.getCartItem().getQuantity()).reduce(0, Integer::sum));
+    public String item(@RequestParam("id") int id,@RequestParam(name = "customerId", required = false) Integer customerId, Model model) {
 
         if(sessionVariables.isSearching()){
             model.addAttribute("myItems", searchedItems);
@@ -50,10 +50,24 @@ public class ItemController {
 
         Item item = itemService.getItem(id);
 
-        if(item.getStock()==0){
-            model.addAttribute("stock",0);
-        }else{
-            model.addAttribute("stock",item.getStock());
+
+        if (item.getStock() == 0) {
+            model.addAttribute("stock", 0);
+        } else {
+            // check if the customer is logged in and has this item in their cart
+            if (customerId != null && sessionVariables.isCustomerLoggedIn(customerId)) {
+                var cartItems = cartService.getCart(customerId);
+                for (CartDisplayItem itemInCart : cartItems) {
+                    if (itemInCart.getItem().getItemId() == item.getItemId()) {
+                        if (item.getStock() - itemInCart.getCartItem().getQuantity() <= 0) {
+                            model.addAttribute("stock", 0);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                model.addAttribute("stock", item.getStock());
+            }
         }
 
         String itemName = item.getItemName();
@@ -71,9 +85,6 @@ public class ItemController {
         if(item.getIsTrained()==1){
             String buttonStatus = "Trained";
             model.addAttribute("buttonStatus", buttonStatus);
-
-
-
         }else {
             String buttonStatus = "unTrained";
             model.addAttribute("buttonStatus", buttonStatus);

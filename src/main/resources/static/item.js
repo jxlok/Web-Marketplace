@@ -10,6 +10,7 @@ function addToCart(itemId) {
         success: function () {
             let currentCount = parseInt(cartCount.innerText)
             cartCount.innerText = `${currentCount + 1}`
+            window.location.href = "/item?id="+itemId+"&customerId="+sessionStorage.getItem("customerId")
         },
         error: function () {
             window.location.href="/login"
