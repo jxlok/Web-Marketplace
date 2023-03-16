@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class ItemController {
     ItemService itemService;
     @Autowired
     CartService cartService;
+    @Autowired
+    HashMap<Integer,Integer> imageID;
 
     List<Item> searchedItems = new LinkedList<>();
     @GetMapping("/item")
@@ -76,7 +79,7 @@ public class ItemController {
             String buttonStatus = "unTrained";
             model.addAttribute("buttonStatus", buttonStatus);
         }
-
+        model.addAttribute("imageID", imageID);
         model.addAttribute("item", item);
         return "item.html";
     }

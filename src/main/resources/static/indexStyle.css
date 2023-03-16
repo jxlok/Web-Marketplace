@@ -28,6 +28,7 @@
     width: 300px;
     height: 300px;
     overflow: hidden;
+
 }
 
 .item-top{
@@ -42,10 +43,21 @@
     width: 500px;
     height: 500px;
 }
+
+
+.block-image{
+    width: 265px;
+    height: 180px;
+}
+
+
 .item-name{
     padding-top: 5px;
     font-size: 30px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
 }
 .price{
     margin-top: 100px;
