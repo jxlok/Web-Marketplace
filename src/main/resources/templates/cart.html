@@ -33,9 +33,9 @@
                         <div class="row text-muted" th:text="${displayItem.item.itemName}"/>
 
                         <form method="get" th:action="|/cart/items/${displayItem.cartItem.id}|" id="status-of-item">
-                            <select id="model-selection" name="isTrained"  onchange="alert();this.form.submit()">
-                                <option value=1>Trained</option>
-                                <option value=0>Untrained</option>
+                            <select class="model-selection" name="isTrained"  onchange="alert();this.form.submit()">
+                                <option th:attr="selected=${displayItem.getItem.getIsTrained == 1 ? 'selected' : null}">Trained</option>
+                                <option th:attr="selected=${displayItem.getItem.getIsTrained == 0 ? 'selected' : null}">Untrained</option>
                             </select>
                         </form>
 

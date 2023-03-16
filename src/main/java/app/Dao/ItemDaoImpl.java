@@ -211,6 +211,25 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
 
     }
 
+    public List<CartItem> getCustomerCart(int customer_id){
+        String sql = "SELECT * FROM carts WHERE customerID ="+customer_id;
+        List<Map<String, Object>> items = getJdbcTemplate().queryForList(sql);
+
+        List<CartItem> result = new ArrayList<>();
+        for(Map<String, Object> item :  items){
+            CartItem cartItem = new CartItem();
+            cartItem.setId((Integer) item.get("id"));
+            cartItem.setCustomerID((Integer) item.get("customerID"));
+            cartItem.setItemID((Integer) item.get("itemID"));
+            cartItem.setTrained((Integer) item.get("isTrained")==1 ? Boolean.TRUE : Boolean.FALSE);
+            cartItem.setQuantity(((Integer) item.get("quantity")));
+
+            result.add(cartItem);
+        }
+        return result;
+
+    }
+
     @Override
     public boolean switchCartItemStatus(int cartItemId){
         CartItem cartItem = getByCartID(cartItemId);
@@ -218,13 +237,21 @@ public class ItemDaoImpl extends JdbcDaoSupport implements ItemDao {
         int isTrained = getItem(cartItem.getItemID()).getIsTrained();
         Item opposite_item = getOppositeItem(name, isTrained);
 
-        if(cartItem.getQuantity() <= opposite_item.getStock() && !opposite_item.equals(new Item())){
-            String sql = "UPDATE carts SET itemID=? WHERE id = ?";
-            getJdbcTemplate().update(sql, new Object[]{opposite_item.getItemId(), cartItemId});
+        List<CartItem> items = getCustomerCart(cartItem.getCustomerID());
+        for (CartItem item: items ) {
+            if (item.getItemID() == opposite_item.getItemId()) {
+                String sql = "UPDATE carts SET quantity=? WHERE id = ?";
+                getJdbcTemplate().update(sql, new Object[]{opposite_item.getStock() + item.getQuantity(), item.getItemID()});
+                return true;
+            }
 
-            return true;
+            else if (cartItem.getQuantity() <= opposite_item.getStock() && !opposite_item.equals(new Item())) {
+                String sql = "UPDATE carts SET itemID=? WHERE id = ?";
+                getJdbcTemplate().update(sql, new Object[]{opposite_item.getItemId(), cartItemId});
+
+                return true;
+            }
         }
-
         return false;
     }
 
