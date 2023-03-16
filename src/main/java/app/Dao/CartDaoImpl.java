@@ -1,11 +1,15 @@
 package app.Dao;
 
 import app.Entities.CartItem;
+import app.Entities.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -77,4 +81,5 @@ public class CartDaoImpl implements CartDao {
                 1
         );
     }
+
 }

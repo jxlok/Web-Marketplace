@@ -67,4 +67,9 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public List<Item> getSearchedItems(String search_query){ return itemDao.getSearchedItems(search_query);
     }
+
+    @Override
+    public String switchCartItemStatus(int cartItemId){
+        return itemDao.switchCartItemStatus(cartItemId);
+    }
 }

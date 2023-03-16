@@ -101,6 +101,7 @@ public class IndexController {
         filterValues.add(sort);
         filterValues.add(trained);
         filterValues.add(untrained);
+        System.out.println(filterValues);
         // Filter the list of items based on the checked checkboxes
         List<Item> items = itemService.getUnhiddenItems();
         if (filterValues != null && !filterValues.isEmpty()) {

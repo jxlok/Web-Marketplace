@@ -63,7 +63,7 @@ footer{
 }
 
 #top-sellers{
-    font-size: 5vh;
+    font-size: 3vh;
 }
 #top-sellers-container{
     height: 12.5vh;
@@ -351,9 +351,6 @@ footer{
    color: mediumvioletred;
 }
 
-.order-item-name>a:hover{
-    color: yellow;
-}
 
 .order-item-type{
     width: 20%;
