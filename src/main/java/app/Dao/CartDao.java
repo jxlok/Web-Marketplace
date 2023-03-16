@@ -15,4 +15,6 @@ public interface CartDao {
     int deleteCartItem(int customerId, int id);
 
     int deleteAllCartItems(int customerId);
+
+    int addItemToCart(int customerId, int itemId, int isTrained);
 }

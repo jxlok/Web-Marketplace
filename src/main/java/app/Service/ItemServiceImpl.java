@@ -30,6 +30,11 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
+    public void updateStock(int id, int delta) {
+        itemDao.updateStock(id, delta);
+    }
+
+    @Override
     public void hideItem(int id){
         itemDao.hideItem(id);
     }

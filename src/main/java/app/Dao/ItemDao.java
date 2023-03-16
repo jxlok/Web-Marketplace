@@ -8,6 +8,7 @@ public interface ItemDao {
     List<Item> getAllItems();
     void insertItem(Item item);
     void editItem(int id, Item item);
+    void updateStock(int id, int delta);
     void hideItem(int id);
     void unhideItem(int id);
     List<Item> getHiddenItems();

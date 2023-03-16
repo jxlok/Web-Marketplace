@@ -24,6 +24,4 @@ public interface OrderDao {
     List<Order> getAllOrdersOfCustomer(int id);
 
     int createOrder(int customerId, List<OrderItemIdAndQuantity> idAndQtys);
-
-    int updatePaymentIdByOrderId(int id);
 }
