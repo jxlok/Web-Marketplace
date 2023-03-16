@@ -34,9 +34,6 @@ public class CartController {
     @Autowired
     SessionVariables sessionVariables;
 
-    @Autowired
-    ItemService itemService;
-
     HashMap<Integer, Integer> imageID = new HashMap<Integer,Integer>();
 
 

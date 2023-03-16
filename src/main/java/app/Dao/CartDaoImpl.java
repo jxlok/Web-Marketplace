@@ -26,6 +26,8 @@ public class CartDaoImpl implements CartDao {
     public static final String QUANTITY = "quantity";
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    ItemDao itemDao;
 
 
     public List<CartItem> getByCustomerId(int customerId) {
