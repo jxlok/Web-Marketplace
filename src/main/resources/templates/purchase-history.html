@@ -20,7 +20,7 @@
     <div class="row">
         <div id="purchase-history-content" class="col-sm-12">
             <h3><b>Your Orders</b></h3>
-            <div id="empty-sale" th:if="${order.getItems.size()==0}">You currently have no orders.</div>
+            <div id="empty-sale" th:if="${customerOrders.size()==0}">You currently have no orders.</div>
             <div class="order-container" th:each="i : ${#numbers.sequence(customerOrders.size() - 1, 0, -1)}" th:with="order=${customerOrders[i]}">
                 <div class="order-header">
                     <span class="order-header-item order-number">Order number: [(${order.getOrder.getOrderID})]</span>
