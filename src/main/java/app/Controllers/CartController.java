@@ -1,8 +1,10 @@
 package app.Controllers;
 
 import app.Service.CartService;
+import app.Service.ItemService;
 import app.SessionVariables;
 import app.models.CartItemQuantityUpdateRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class CartController {
     // 2. In tests, you can create dummy implementation of dependencies for testing purpose
     @Autowired
     CartService cartService;
+    @Autowired
+    ItemService itemService;
 
     @Autowired
     SessionVariables sessionVariables;
@@ -118,4 +122,12 @@ public class CartController {
         return headers.containsKey(CUSTOMER_ID_HEADER) && headers.containsKey(TOKEN_HEADER) &&
                 sessionVariables.isCustomerLoggedIn(Integer.parseInt(headers.get(CUSTOMER_ID_HEADER)));
     }
+
+    @GetMapping("/cart/items/{cartItemId}")
+    public String switchCartItemStatus(@PathVariable(name="cartItemId") int cartItemId,
+                                       HttpServletResponse response){
+
+        itemService.switchCartItemStatus(cartItemId);
+
+        return "redirect:/cart";    }
 }
